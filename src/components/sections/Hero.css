@@ -1,32 +1,198 @@
+/* -------------------------------------------------
+   PREMIUM HERO SECTION — EXTENDED INTERACTIVE EDITION
+   Includes: Mouse Parallax · Gradient Text · Aurora Noise BG · GSAP Entry Motion
+-------------------------------------------------- */
+
+:root {
+    --hero-glow-1: rgba(255, 255, 255, 0.09);
+    --hero-glow-2: rgba(255, 255, 255, 0.06);
+    --text-white: #ffffff;
+    --text-highlight: #a0c4ff;
+    --text-dim: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 24px;
+    --space-lg: 48px;
+    --space-xl: 80px;
+}
+
 .hero-section {
     position: relative;
     overflow: hidden;
     padding-top: var(--space-xl);
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .hero-container {
     text-align: center;
-    z-index: 2;
+    z-index: 10;
     position: relative;
-}
-
-.hero-title {
-    font-size: clamp(4rem, 15vw, 12rem);
-    line-height: 0.9;
-    letter-spacing: -0.06em;
-    margin-bottom: var(--space-md);
-    mix-blend-mode: difference;
-}
-
-.hero-subtitle-wrapper {
-    max-width: 600px;
+    width: 100%;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
+.title-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* behind glows/aurora but above background */
+    background-image:
+        linear-gradient(to right, rgba(128, 128, 128, 0.3) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(128, 128, 128, 0.3) 1px, transparent 1px);
+    background-size: 50px 50px;
+    /* adjust grid spacing */
+    pointer-events: none;
+    opacity: 0.7;
+    /* more visible */
+}
+
+
+.hero-title {
+    font-size: clamp(4rem, 15vw, 12rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+    margin-bottom: var(--space-md);
+    background: linear-gradient(90deg, #ffffff, #ffffff, #ffffff, #ffffff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.12);
+    position: relative;
+    z-index: 3;
+    animation: gradientFlow 7s ease-in-out infinite, fadeUp 1.3s ease forwards;
+}
+
+.title-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130%;
+    height: 130%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 75%);
+    filter: blur(50px);
+    z-index: 1;
+    pointer-events: none;
+    animation: pulseGlow 5s infinite ease-in-out;
+}
+
+.hero-subtitle-wrapper {
+    max-width: 650px;
+    margin: 0 auto var(--space-lg);
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 1.7s ease forwards;
+}
+
 .hero-subtitle {
-    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-size: clamp(1.1rem, 2.3vw, 1.6rem);
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 0.95;
+    letter-spacing: 0.025em;
     color: var(--text-highlight);
+}
+
+.cta-wrapper {
+    margin-top: var(--space-md);
+    animation: fadeUp 2s ease forwards;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border-radius: 50px;
+    color: var(--text-white);
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    transition: 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--text-white);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+    animation: float 6s infinite ease-in-out;
+}
+
+.orb-1 {
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, var(--hero-glow-1) 0%, transparent 72%);
+    top: -18%;
+    left: -10%;
+}
+
+.orb-2 {
+    width: 42vw;
+    height: 42vw;
+    background: radial-gradient(circle, var(--hero-glow-2) 0%, transparent 75%);
+    bottom: -15%;
+    right: -12%;
+    animation-delay: 1.5s;
+}
+
+.aurora {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(0, 200, 255, 0.23), transparent 60%),
+        radial-gradient(circle at 70% 50%, rgba(255, 0, 200, 0.25), transparent 60%);
+    mix-blend-mode: screen;
+    filter: blur(80px);
+    animation: auroraMove 15s infinite ease-in-out alternate;
+    z-index: 0;
+}
+
+.particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+    width: 2.5px;
+    height: 2.5px;
+    background: var(--text-white);
+    border-radius: 50%;
     opacity: 0.8;
+    animation: sparkle 3s infinite linear;
 }
 
 .scroll-indicator {
@@ -38,87 +204,123 @@
     flex-direction: column;
     align-items: center;
     gap: var(--space-xs);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
     color: var(--text-dim);
+    z-index: 10;
+    animation: fadeUp 2.3s ease forwards;
 }
 
 .mouse {
-    width: 24px;
-    height: 40px;
-    border: 1px solid var(--text-dim);
-    border-radius: 12px;
+    width: 26px;
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 14px;
     position: relative;
 }
 
 .wheel {
-    width: 2px;
-    height: 6px;
+    width: 3px;
+    height: 8px;
     background: var(--text-white);
+    border-radius: 3px;
     position: absolute;
-    top: 6px;
+    top: 7px;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 2px;
-    animation: scrollWheel 2s infinite;
+    animation: scrollWheel 2s infinite ease-out;
 }
 
+/* KEYFRAMES */
 @keyframes scrollWheel {
     0% {
-        top: 6px;
+        top: 7px;
         opacity: 1;
     }
 
     100% {
-        top: 20px;
+        top: 22px;
         opacity: 0;
     }
 }
 
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.glow-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.4;
-}
-
-.orb-1 {
-    width: 40vw;
-    height: 40vw;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
-    top: -10%;
-    left: -10%;
-    animation: float 10s ease-in-out infinite;
-}
-
-.orb-2 {
-    width: 30vw;
-    height: 30vw;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
-    bottom: 10%;
-    right: -5%;
-    animation: float 15s ease-in-out infinite reverse;
-}
-
 @keyframes float {
-
-    0%,
-    100% {
-        transform: translate(0, 0);
+    0% {
+        transform: translateY(0);
     }
 
     50% {
-        transform: translate(30px, -30px);
+        transform: translateY(-35px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.2;
+    }
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes auroraMove {
+    0% {
+        background-position: 0% 0%, 100% 100%;
+    }
+
+    50% {
+        background-position: 50% 50%, 50% 50%;
+    }
+
+    100% {
+        background-position: 0% 0%, 100% 100%;
     }
 }

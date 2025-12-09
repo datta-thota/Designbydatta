@@ -92,13 +92,15 @@ const About = () => {
                         ))}
                     </div>
 
-                    <motion.button
+                    <motion.a
+                        href={encodeURI("/Purushothama Datta.pdf")} // encode spaces in the filename
+                        download="Purushothama Datta.pdf" // sets downloaded filename
                         className="download-btn"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
                         Download Resume
-                    </motion.button>
+                    </motion.a>
                 </div>
             </div>
         </section>

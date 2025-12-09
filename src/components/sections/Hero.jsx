@@ -35,21 +35,11 @@ const Hero = () => {
                         </p>
                     </motion.div>
                 </motion.div>
-
-                <motion.div
-                    className="scroll-indicator"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                >
-                    <div className="mouse">
-                        <div className="wheel"></div>
-                    </div>
-                    <span>Scroll</span>
-                </motion.div>
             </div>
 
             <div className="hero-background">
+                <div className="hero-grid"></div>
+
                 <div className="glow-orb orb-1"></div>
                 <div className="glow-orb orb-2"></div>
             </div>
