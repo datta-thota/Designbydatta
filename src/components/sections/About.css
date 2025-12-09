@@ -1,0 +1,135 @@
+.about-section {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+.about-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    max-width: 500px;
+}
+
+.about-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    filter: grayscale(100%) contrast(1.2);
+    transition: filter 0.5s ease;
+}
+
+.about-image-wrapper:hover .about-image {
+    filter: grayscale(0%) contrast(1);
+}
+
+.glowing-frame {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--text-white);
+    z-index: -1;
+    opacity: 0.3;
+    transition: transform 0.5s ease;
+}
+
+.about-image-wrapper:hover .glowing-frame {
+    transform: translate(10px, 10px);
+    opacity: 0.6;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.about-bio {
+    font-size: 1.2rem;
+    color: var(--text-highlight);
+    margin-bottom: var(--space-md);
+    max-width: 600px;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.skill-tag {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    border-color: var(--text-white);
+    color: var(--text-white);
+    background: var(--glass-bg);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.experience-timeline {
+    margin-bottom: var(--space-md);
+    border-left: 1px solid var(--glass-border);
+    padding-left: var(--space-md);
+}
+
+.timeline-item {
+    margin-bottom: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+}
+
+.year {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 0.2rem;
+}
+
+.role {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.company {
+    font-size: 1rem;
+    color: var(--text-highlight);
+}
+
+.download-btn {
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 1px solid var(--text-white);
+    color: var(--text-white);
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    background: var(--text-white);
+    color: var(--bg-black);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+}

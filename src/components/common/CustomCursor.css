@@ -1,0 +1,25 @@
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--text-white);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    backdrop-filter: invert(1);
+}
+
+.custom-cursor.hover {
+    background-color: var(--text-white);
+    border-color: transparent;
+    mix-blend-mode: difference;
+}
+
+@media (max-width: 768px) {
+    .custom-cursor {
+        display: none;
+    }
+}

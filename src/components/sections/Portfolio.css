@@ -1,0 +1,34 @@
+.portfolio-section {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+.portfolio-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.project-count {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--text-dim);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-md);
+    row-gap: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
