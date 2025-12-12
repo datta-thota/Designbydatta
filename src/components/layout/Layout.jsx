@@ -3,14 +3,14 @@ import Navbar from './Navbar';
 import CustomCursor from '../common/CustomCursor';
 import { useLocation } from 'react-router-dom';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, context = 'design' }) => {
     const location = useLocation();
 
     return (
         <>
             <CustomCursor />
             <div className="grain-overlay"></div>
-            <Navbar />
+            <Navbar context={context} />
             <main key={location.pathname}>
                 {children}
             </main>

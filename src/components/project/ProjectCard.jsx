@@ -28,7 +28,7 @@ const ProjectCard = ({ project }) => {
     const rotateY = useTransform(mouseX, [-0.5, 0.5], [-7, 7]);
 
     return (
-        <Link to={`/project/${project.id}`} className="project-card-link">
+        <Link to={`/design/project/${project.id}`} className="project-card-link">
             <motion.div
                 ref={ref}
                 className="project-card"

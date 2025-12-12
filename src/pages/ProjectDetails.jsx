@@ -114,11 +114,11 @@ const ProjectDetails = () => {
                 </div>
 
                 <div className="project-navigation container">
-                    <Link to={`/project/${prevProject.id}`} className="nav-btn prev">
+                    <Link to={`/design/project/${prevProject.id}`} className="nav-btn prev">
                         <span className="nav-label">Previous Project</span>
                         <span className="nav-title">{prevProject.title}</span>
                     </Link>
-                    <Link to={`/project/${nextProject.id}`} className="nav-btn next">
+                    <Link to={`/design/project/${nextProject.id}`} className="nav-btn next">
                         <span className="nav-label">Next Project</span>
                         <span className="nav-title">{nextProject.title}</span>
                     </Link>

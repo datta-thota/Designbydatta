@@ -72,7 +72,9 @@ const Contact = () => {
                     {[
                         { name: "Instagram", url: "https://instagram.com/the_raydsign" },
                         { name: "Behance", url: "https://behance.net/dattathota" },
+                        { name: "Dribbble", url: "https://dribbble.com/datta-thota" },
                         { name: "LinkedIn", url: "https://linkedin.com/in/purushothama-datta" },
+
                     ].map((social) => (
                         <a
                             key={social.name}
