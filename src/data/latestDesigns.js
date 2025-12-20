@@ -22,5 +22,35 @@ export const latestDesigns = [
         "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1765541137/Artboard4_mmhh8p.png",
         "description": "A vibrant birthday tribute edit celebrating a superstar with dazzling visuals and dynamic compositions.",
         "date": "2025"
+    },
+    {
+        "id": 4,
+        "title": "Samudram- Ocean Poster Edit",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1766237802/Artboard11_vzwgxo.png",
+        "description": "A visually driven ocean poster edit that explores depth, movement, and calm through fluid compositions, layered textures, and a cinematic palette inspired by the mood of the sea.",
+        "date": "2025"
+    },
+    {
+        "id": 5,
+        "title": "Aureate",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1766237804/Artboard13_bj7fqd.png",
+        "description": "Aureate blends the golden essence of time with the iconic presence of Big Ben, symbolizing heritage, precision, and timeless design.",
+        "date": "2025"
+    },
+    {
+        "id": 6,
+        "title": "Poster Of Takkari Donga",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1766237802/Artboard7_fwqk1d.png",
+        "description": "Celebrating Mahesh Babu’s iconic presence in Takkari Donga, this poster emphasizes action, energy, and sleek Tollywood aesthetics.",
+        "date": "2025"
+    },
+    {
+        "id": 7,
+        "title": "Spider Man Tollywood Edition",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1766237804/Artboard15_x6ym8g.png",
+        "description": "A creative poster imagining Mahesh Babu as Spider-Man, blending Tollywood charisma with the iconic superhero style in a visually striking edit.",
+        "date": "2025"
     }
+
+
 ];

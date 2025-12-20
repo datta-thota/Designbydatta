@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { latestDesigns } from '../data/latestDesigns';
 import PageTransition from '../components/common/PageTransition';
+import ImageModal from '../components/common/ImageModal';
+import { Maximize2 } from 'lucide-react'; // Optional: icon to hint clickability
 
 const DesignDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const [selectedImage, setSelectedImage] = useState(null);
     const design = latestDesigns.find(d => d.id === parseInt(id));
 
     if (!design) {
@@ -24,7 +27,7 @@ const DesignDetails = () => {
         <PageTransition>
             <div className="design-details-page" style={{ paddingTop: '100px', minHeight: '100vh' }}>
                 <div className="container">
-                    <Link to="/" className="back-link" style={{
+                    <Link to="/design" className="back-link" style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         marginBottom: '2rem',
@@ -51,19 +54,52 @@ const DesignDetails = () => {
                             <span>{design.date}</span>
                         </div>
 
-                        <div className="design-full-image" style={{
-                            width: '100%',
-                            marginBottom: '3rem',
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            border: '1px solid rgba(255,255,255,0.1)'
-                        }}>
+                        <div
+                            className="design-full-image"
+                            style={{
+                                width: '100%',
+                                marginBottom: '3rem',
+                                borderRadius: '12px',
+                                overflow: 'hidden',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                cursor: 'zoom-in',
+                                position: 'relative'
+                            }}
+                            onClick={() => setSelectedImage(design.image)}
+                        >
+                            <div style={{
+                                position: 'absolute',
+                                top: '1rem',
+                                right: '1rem',
+                                background: 'rgba(0,0,0,0.5)',
+                                color: 'white',
+                                padding: '0.5rem',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                opacity: 0,
+                                transition: 'opacity 0.3s'
+                            }} className="zoom-hint">
+                                <Maximize2 size={20} />
+                            </div>
                             <img
                                 src={design.image}
                                 alt={design.title}
-                                style={{ width: '100%', height: 'auto', display: 'block' }}
+                                style={{ width: '100%', height: 'auto', display: 'block', transition: 'transform 0.3s' }}
                             />
+                            <style>{`
+                                .design-full-image:hover .zoom-hint { opacity: 1; }
+                                .design-full-image:hover img { transform: scale(1.01); }
+                            `}</style>
                         </div>
+
+                        <ImageModal
+                            isOpen={!!selectedImage}
+                            onClose={() => setSelectedImage(null)}
+                            imageSrc={selectedImage}
+                            altText={design.title}
+                        />
 
                         <div className="design-description" style={{
                             maxWidth: '800px',
