@@ -44,7 +44,7 @@ const TechHome = () => {
                     >
                         <h1 className="tech-title">
                             <span className="code-bracket">&lt;</span>
-                            Datta Thota
+                            <span className="typewriter-effect" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>Datta Thota</span>
                             <span className="code-bracket">/&gt;</span>
                         </h1>
                         <p className="tech-subtitle">

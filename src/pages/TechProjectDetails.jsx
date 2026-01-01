@@ -20,7 +20,7 @@ const TechProjectDetails = () => {
             <div className="tech-details-page">
                 <div className="tech-details-container">
                     <Link to="/tech" className="tech-back-btn">
-                        &lt; Back to Terminal
+                        <span className="cmd-prompt">&gt;</span> cd ..
                     </Link>
 
                     <div className="project-header">
