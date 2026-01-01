@@ -13,7 +13,7 @@ const LatestDesigns = () => {
             </div>
 
             <div className="designs-grid">
-                {latestDesigns.map((design, index) => (
+                {[...latestDesigns].reverse().map((design, index) => (
                     <Link to={`/design/${design.id}`} key={design.id} className="design-card-link">
                         <motion.div
                             className="design-card"
