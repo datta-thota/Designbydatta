@@ -98,15 +98,6 @@ const TechHome = () => {
                             </div>
                         </div>
 
-                        <div className="tech-profile-container">
-                            <div className="tech-profile-glitch"></div>
-
-                            <img
-                                src="https://res.cloudinary.com/dl75qwr19/image/upload/v1765253706/WhatsApp_Image_2025-12-09_at_09.44.48_d3681d32_faiq4y.jpg"
-                                alt="Profile"
-                                className="tech-profile-img"
-                            />
-                        </div>
                     </div>
                 </section>
                 <br />

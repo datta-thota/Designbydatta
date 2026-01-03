@@ -14,6 +14,8 @@ const DesignHome = () => {
             <Portfolio />
             <div style={{ height: 'var(--space-xl)' }}></div>
             <About />
+            <br />
+            <br />
             <Contact />
         </PageTransition>
     );

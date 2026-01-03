@@ -125,10 +125,13 @@
 
 /* About Section */
 .tech-about-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 4rem;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .tech-about-text p {
@@ -150,8 +153,7 @@
     border: 1px solid var(--tech-primary);
     padding: 0.3rem 0.8rem;
     font-size: 0.9rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin: 0.25rem;
     display: inline-block;
 }
 

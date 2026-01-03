@@ -23,16 +23,6 @@ const About = () => {
     return (
         <section className="about-section container">
             <div className="about-content">
-                <motion.div
-                    className="about-image-wrapper"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <div className="about-image" style={{ backgroundImage: 'url("https://res.cloudinary.com/dl75qwr19/image/upload/v1765253706/WhatsApp_Image_2025-12-09_at_09.44.48_d3681d32_faiq4y.jpg?q=80&w=2574&auto=format&fit=crop")' }}></div>
-                    <div className="glowing-frame"></div>
-                </motion.div>
 
                 <div className="about-text">
                     <motion.h2

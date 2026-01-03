@@ -726,7 +726,7 @@
         order: 3;
         grid-column: span 1;
         grid-row: auto !important;
-        aspect-ratio: 1/1;
+        aspect-ratio: 4/5;
         height: auto;
         padding: 1rem;
     }
@@ -740,7 +740,7 @@
         order: 4;
         grid-column: span 1;
         grid-row: auto !important;
-        aspect-ratio: 1/1;
+        aspect-ratio: 4/5;
         height: auto;
         padding: 1rem;
     }
@@ -754,32 +754,30 @@
         font-size: 0.6rem;
     }
 
-    /* 5. Dino: Order 5 */
+    /* 7. Dino: Order 7 (Decreased Priority) */
     .card-dino {
-        order: 5;
+        order: 7;
         grid-column: 1 / -1;
         grid-row: auto !important;
         height: auto;
-        min-height: 180px;
-        /* Give it room to breathe */
+        min-height: 140px;
+        /* More compact */
         padding: 1rem;
     }
 
-    /* 6. Location: Order 6 */
+    /* 5. Location: Order 5 */
     .card-location {
-        order: 6;
+        order: 5;
         grid-column: span 1;
         grid-row: auto !important;
-        /* Fixed: Was missing reset */
         height: 120px;
     }
 
-    /* 7. Utility: Order 7 */
+    /* 6. Utility: Order 6 */
     .card-utility {
-        order: 7;
+        order: 6;
         grid-column: span 1;
         grid-row: auto !important;
-        /* Fixed: Was missing reset */
         height: 120px;
         padding: 0.8rem;
     }
