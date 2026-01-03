@@ -2,20 +2,27 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
-    border: 1px solid var(--text-white);
-    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    background: #000;
+    border: 2px solid #fff;
+    border-radius: 0;
+    /* Boxy cursor for bento grid */
     pointer-events: none;
     z-index: 9999;
-    mix-blend-mode: difference;
-    backdrop-filter: invert(1);
+    /* Normal blend mode for this bold style */
+    transition: transform 0.1s ease, width 0.2s ease;
+    box-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
 }
 
 .custom-cursor.hover {
-    background-color: var(--text-white);
-    border-color: transparent;
-    mix-blend-mode: difference;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    border: 3px solid #000;
+    border-radius: 50%;
+    /* Circle on hover */
+    transform: translate(-15px, -15px);
 }
 
 @media (max-width: 768px) {

@@ -1,324 +1,790 @@
-/* Gen Z Vibe Reset */
+/* -------------------------------------------------
+   FUNCTIONAL BENTO DASHBOARD
+   Theme: Single Page, Widgets, Fixed Layout
+-------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=VT323&display=swap');
+
+:root {
+    --c-yellow: #FFD600;
+    --c-orange: #FF5200;
+    --c-green: #00C853;
+    --c-blue: #2962FF;
+    --c-off-white: #F4F4F0;
+    --c-dark: #121212;
+    --c-text-main: #121212;
+
+    --f-main: 'Space Grotesk', sans-serif;
+    --f-tech: 'VT323', monospace;
+
+    --shadow-hard: 6px 6px 0px var(--c-dark);
+    --border-thick: 3px solid var(--c-dark);
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+    --c-off-white: #1A1A1A;
+    --c-text-main: #F4F4F0;
+    --c-dark: #F4F4F0;
+    /* Invert border color */
+    --shadow-hard: 6px 6px 0px #000;
+    /* Shadow stays black or dark grey */
+}
+
 .landing-page {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
     height: 100vh;
+    width: 100%;
+    background-color: #121212;
+    /* Always dark bg outside grid */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    padding: 2rem;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #000000;
-    /* PURE BLACK */
-    color: #eee;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--f-main);
+    color: var(--c-text-main);
     overflow: hidden;
+    /* Lock scroll on desktop */
 }
 
-/* --- TEXTURES & ATMOSPHERE --- */
-
-/* Grain Overlay */
-.landing-page::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 5;
-    mix-blend-mode: overlay;
+/* --- THE BENTO GRID --- */
+.bento-grid {
+    display: grid;
+    /* 4 Columns, 3 Rows (12 Slots) */
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    max-width: 1400px;
+    max-height: 900px;
 }
 
-/* Aura Blobs */
-.aura-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.6;
-    animation: floatBlob 10s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
-    z-index: 0;
-}
-
-.blob-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, #7b2cbf, transparent 70%);
-    top: -20%;
-    left: -10%;
-    animation-delay: 0s;
-}
-
-.blob-2 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, #00b4d8, transparent 70%);
-    bottom: -10%;
-    right: -5%;
-    animation-delay: -5s;
-}
-
-@keyframes floatBlob {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    100% {
-        transform: translate(30px, 50px) scale(1.1);
-    }
-}
-
-/* --- IMAGE STICKERS --- */
-.stickers-layer {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    /* Lowest z-index for background */
+/* --- CARD GENERIC STYLES --- */
+.bento-card {
+    position: relative;
+    background: var(--c-off-white);
+    border: var(--border-thick);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.2s;
     overflow: hidden;
-}
-
-.img-sticker {
-    position: absolute;
-    width: 250px;
-    height: auto;
-    opacity: 0.9;
-    mix-blend-mode: lighten;
-    filter: grayscale(10%) contrast(1.1);
-    /* Float animation is applied individually via style prop in JSX or generalized here if preferred, but we want random drift */
-    animation: drift 20s infinite ease-in-out alternate;
-}
-
-@keyframes drift {
-    0% {
-        transform: translate(0, 0) rotate(var(--rot-start, 0deg));
-    }
-
-    100% {
-        transform: translate(var(--x-move, 20px), var(--y-move, 20px)) rotate(var(--rot-end, 5deg));
-    }
-}
-
-/* Base Positions */
-.pos-1 {
-    top: 5%;
-    left: 5%;
-    --rot-start: -15deg;
-    --rot-end: -5deg;
-    --x-move: 50px;
-    --y-move: 30px;
-    animation-duration: 25s;
-}
-
-.pos-2 {
-    bottom: 10%;
-    right: 5%;
-    --rot-start: 10deg;
-    --rot-end: 20deg;
-    --x-move: -40px;
-    --y-move: -50px;
-    width: 300px;
-    animation-duration: 22s;
-}
-
-.pos-3 {
-    top: 15%;
-    right: 15%;
-    --rot-start: 8deg;
-    --rot-end: 0deg;
-    --x-move: -60px;
-    --y-move: 40px;
-    width: 200px;
-    animation-duration: 28s;
-}
-
-.pos-4 {
-    bottom: 15%;
-    left: 10%;
-    --rot-start: -5deg;
-    --rot-end: -15deg;
-    --x-move: 30px;
-    --y-move: -40px;
-    width: 280px;
-    animation-duration: 24s;
-}
-
-.pos-5 {
-    top: 40%;
-    left: -5%;
-    --rot-start: 20deg;
-    --rot-end: 30deg;
-    --x-move: 70px;
-    --y-move: 20px;
-    width: 350px;
-    opacity: 0.6;
-    animation-duration: 30s;
-}
-
-.pos-6 {
-    bottom: -5%;
-    left: 40%;
-    --rot-start: -10deg;
-    --rot-end: 0deg;
-    --x-move: 20px;
-    --y-move: -60px;
-    width: 300px;
-    animation-duration: 26s;
-}
-
-.pos-7 {
-    top: -10%;
-    right: 30%;
-    --rot-start: 15deg;
-    --rot-end: 25deg;
-    --x-move: -30px;
-    --y-move: 50px;
-    opacity: 0.7;
-    animation-duration: 27s;
-}
-
-
-/* --- INTRO BOX --- */
-.intro-box {
-    margin-bottom: 2rem;
-    padding: 0.8rem 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    backdrop-filter: blur(10px);
-    z-index: 10;
-    text-align: center;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.intro-text {
-    font-family: 'Space Grotesk', sans-serif;
-    color: #aeaeae;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.intro-highlight {
-    color: #fff;
-    font-weight: 700;
-}
-
-
-/* --- MAIN LAYOUT --- */
-
-/* Header / Identity is now replaced/augmented by Intro Box, but we keep main name for brand */
-.identity-container {
-    text-align: center;
-    margin-bottom: 3rem;
-    z-index: 10;
-    mix-blend-mode: difference;
-}
-
-.main-name {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.4rem;
-    color: #666;
-    /* Subtler */
-    text-transform: uppercase;
-}
-
-/* Choice Wrapper */
-.choice-container {
     display: flex;
-    gap: 8vw;
-    z-index: 10;
-    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--c-text-main);
 }
 
-/* --- LINK STYLES --- */
-.choice-link {
-    text-decoration: none;
+.bento-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0px var(--c-dark);
+    z-index: 10;
+}
+
+/* --- SPECIFIC CARDS (4x3 Layout - Phase 9) --- */
+
+/* 1. NAME CARD (Center Top - 2 Cols) */
+.card-name {
+    grid-column: 2 / span 2;
+    /* Middle 2 columns */
+    grid-row: 1 / span 1;
+    background: var(--c-yellow);
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.name-big {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 0.9;
+    text-transform: uppercase;
+    text-align: center;
+    color: #121212;
+}
+
+.role-badge {
+    background: #000;
+    color: #fff;
+    padding: 0.2rem 0.8rem;
+    font-family: var(--f-tech);
+    transform: rotate(-2deg);
+    margin-top: 0.5rem;
+}
+
+/* 2. IMAGE CARD (Center Bottom - 2 Cols x 2 Rows) */
+/* MASSIVE IMAGE */
+.card-image {
+    grid-column: 2 / span 2;
+    /* Middle 2 columns */
+    grid-row: 2 / span 2;
+    /* Bottom 2 rows */
+    background: #000;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    border-radius: 1rem;
+}
+
+.card-image:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.profile-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 1;
+    filter: contrast(130%);
+    /* Slight transparency to let the tech theme bleed through if needed */
+}
+
+.profile-full {
+    height: 100%;
+    width: 100%;
+    /* Fill the 2x2 space */
+    object-fit: cover;
+    border: var(--border-thick);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-hard);
+    background: transparent;
+    filter: grayscale(100%) contrast(140%);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    z-index: 2;
+}
+
+.profile-full:hover {
+    filter: grayscale(0%) contrast(140%);
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0px var(--c-dark);
+    z-index: 15;
+}
+
+/* 3. DESIGN PORTAL (Left Col - 2 Rows) */
+.card-design {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+    background: var(--c-orange);
+    padding: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     position: relative;
 }
 
-/* Shared Button Base (Invisible container) */
-.choice-btn {
+.design-vertical-text {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    font-size: 4rem;
+    font-weight: 900;
+    transition: opacity 0.3s;
+}
+
+.design-cta {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: #000;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.card-design:hover .design-vertical-text {
+    opacity: 0.2;
+}
+
+.card-design:hover .design-cta {
+    opacity: 1;
+}
+
+/* 4. LOCATION (Left Col - Bottom Row) */
+/* 4. LOCATION (Left Col - Bottom Row) */
+.card-location {
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+    background: #0a192f;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 1.2rem;
+    color: #fff;
+    border: 1px solid var(--c-blue);
+}
+
+.river-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%2300FFFF" fill-opacity="0.3" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+    background-size: 50% 100%;
+    animation: flow 10s linear infinite;
+}
+
+.wave:nth-child(2) {
+    bottom: 5px;
+    opacity: 0.5;
+    animation: flow 15s linear infinite reverse;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%230077ff" fill-opacity="0.3" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,112C672,128,768,192,864,202.7C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+}
+
+@keyframes flow {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.location-data {
+    z-index: 2;
+    font-family: var(--f-tech);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.loc-label {
+    font-size: 0.6rem;
+    color: #888;
+    letter-spacing: 1px;
+    margin-bottom: 0.2rem;
+}
+
+.loc-city {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+}
+
+.loc-sub {
+    font-size: 0.6rem;
+    color: #aaa;
+    text-transform: uppercase;
+}
+
+.loc-icon {
+    font-size: 2rem;
+    align-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+}
+
+
+/* 5. TECH PORTAL (Right Col - Top Row) */
+.card-tech {
+    grid-column: 4 / span 1;
+    grid-row: 1 / span 1;
+    background: #0d0d0d;
+    color: #fff;
+    padding: 0;
+    /* Remove padding to flush terminal */
+    font-family: var(--f-tech);
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tech-terminal-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #0d0d0d;
+}
+
+.terminal-header {
+    background: #1a1a1a;
+    padding: 0.4rem 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-bottom: 1px solid #333;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot.red {
+    background: #ff5f56;
+}
+
+.dot.yellow {
+    background: #ffbd2e;
+}
+
+.dot.green {
+    background: #27c93f;
+}
+
+.term-title {
+    margin-left: auto;
+    font-size: 0.5rem;
+    color: #666;
+    font-family: monospace;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 0.8rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    color: #ccc;
+    position: relative;
+    overflow: hidden;
+}
+
+.cmd-arrow {
+    color: #27c93f;
+    margin-right: 0.3rem;
+}
+
+.cmd-path {
+    color: #57c7ff;
+    font-weight: bold;
+    margin-right: 0.3rem;
+}
+
+.cmd-git {
+    color: #666;
+}
+
+.line-completed {
+    opacity: 0.6;
+    margin-bottom: 0.3rem;
+}
+
+.line-active {
+    display: flex;
+    align-items: center;
+}
+
+.output {
+    color: #fff;
+}
+
+.highlight {
+    color: #ffbd2e;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 189, 46, 0.4);
+}
+
+.portal-cta-v2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    letter-spacing: 1px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 10;
+}
+
+.portal-cta-tech {
+    background: #27c93f;
+    color: #000;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.2rem;
+    letter-spacing: 1px;
+}
+
+@keyframes ctaFlash {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: translateX(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(3px);
+    }
+}
+
+.scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+
+/* 6. CYPHER GAME (Right Col - Middle Row) */
+.card-dino {
+    /* Reuse existing grid slot */
+    grid-column: 4 / span 1;
+    grid-row: 2 / span 1;
+    background: #000;
+    /* Dark background for Cyber feel */
+    color: #fff;
+    padding: 0;
+    overflow: hidden;
+    border: 3px solid #333;
+}
+
+/* HIGH-LOW GAME STYLES */
+.game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: #111;
+    color: #fff;
+    font-family: var(--f-tech);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    color: #888;
+}
+
+.game-display {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-/* Typographic Personality */
-
-/* Design: Lowercase, Italic, Serif, Soft */
-.design-btn .choice-title {
-    font-family: 'Italiana', serif;
-    font-size: 6rem;
-    font-weight: 400;
-    font-style: italic;
-    color: #e0e0e0;
-    transition: all 0.4s ease;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.num-box {
+    width: 60px;
+    height: 60px;
+    background: #222;
+    border: 2px solid #444;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
-.design-link:hover .choice-btn {
-    transform: rotate(-5deg) scale(1.1);
+.num-box.next {
+    color: var(--c-yellow);
 }
 
-.design-link:hover .choice-title {
-    color: #ffcbf2;
-    text-shadow: 0 0 30px rgba(255, 203, 242, 0.6), 0 0 60px rgba(255, 203, 242, 0.3);
-    filter: blur(0.5px);
+.num-box.next.win {
+    border-color: #00FF00;
+    color: #00FF00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
-/* Tech: Uppercase, Bold, Sans, Sharp */
-.tech-btn .choice-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: #e0e0e0;
-    transition: all 0.4s ease;
-    letter-spacing: -2px;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.num-box.next.lose {
+    border-color: #FF0055;
+    color: #FF0055;
 }
 
-.tech-link:hover .choice-btn {
-    transform: rotate(3deg) scale(1.1);
+.arrow-indicator {
+    font-size: 1.5rem;
+    color: #555;
 }
 
-.tech-link:hover .choice-title {
-    color: #70e000;
-    text-shadow: 4px 4px 0px #000;
-    -webkit-text-stroke: 1px #70e000;
+.game-status {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    min-height: 1.2rem;
+    font-weight: bold;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-    .choice-container {
-        flex-direction: column;
-        gap: 3rem;
+.game-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.game-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: var(--f-tech);
+    transition: transform 0.1s, opacity 0.2s;
+}
+
+.game-btn:active {
+    transform: scale(0.95);
+}
+
+.game-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.btn-high {
+    background: var(--c-blue);
+    color: #fff;
+}
+
+.btn-low {
+    background: #ff0055;
+    color: #fff;
+}
+
+/* Game Hints */
+.hint-btn {
+    font-size: 0.7rem;
+    color: #888;
+    cursor: pointer;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.hint-btn:hover {
+    opacity: 1;
+    color: #fff;
+}
+
+.hint-text {
+    font-size: 0.7rem;
+    color: var(--c-yellow);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
 
-    .design-btn .choice-title {
-        font-size: 3.5rem;
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* 7. UTILITY STACK (Right Col - Bottom Row) */
+.card-utility {
+    grid-column: 4 / span 1;
+    grid-row: 3 / span 1;
+    background: var(--c-off-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.utility-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--c-green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
     }
 
-    .tech-btn .choice-title {
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.toggle-btn-mini {
+    background: var(--c-dark);
+    color: var(--c-off-white);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+/* --- MOBILE RESPONSIVE (2-Column Bento) --- */
+@media (max-width: 900px) {
+    .landing-page {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding: 1rem;
+    }
+
+    .bento-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+        /* Reset desktop rows */
+        grid-auto-rows: min-content;
+        /* Let content dictate height where possible */
+        gap: 0.4rem;
+        /* Very tight gap for mobile */
+        height: auto;
+        max-height: none;
+        padding-bottom: 3rem;
+    }
+
+    /* --- ORDERING FOR MOBILE --- */
+    /* Strict Reset: Force grid-row auto to prevent desktop placements from interfering */
+
+    /* 1. Name: Order 1 */
+    .card-name {
+        order: 1;
+        grid-column: 1 / -1;
+        grid-row: auto !important;
+        height: auto;
+        padding: 2rem 1rem;
+        aspect-ratio: 2/1;
+    }
+
+    .name-big {
         font-size: 3rem;
     }
 
-    .blob-1,
-    .blob-2 {
-        opacity: 0.4;
+    /* 2. Image: Order 2 */
+    .card-image {
+        order: 2;
+        grid-column: 1 / -1;
+        grid-row: auto !important;
+        height: auto;
+        aspect-ratio: 1/1;
+        padding: 0;
     }
 
-    .img-sticker {
-        opacity: 0.4;
-        width: 150px;
+    /* 3. Design: Order 3 */
+    .card-design {
+        order: 3;
+        grid-column: span 1;
+        grid-row: auto !important;
+        aspect-ratio: 1/1;
+        height: auto;
+        padding: 1rem;
     }
 
-    .intro-box {
-        font-size: 0.8rem;
-        padding: 0.6rem 1.5rem;
+    .design-vertical-text {
+        font-size: 2.5rem;
+    }
+
+    /* 4. Tech: Order 4 */
+    .card-tech {
+        order: 4;
+        grid-column: span 1;
+        grid-row: auto !important;
+        aspect-ratio: 1/1;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .tech-terminal {
+        font-size: 0.7rem;
+        overflow: hidden;
+    }
+
+    .tech-execute-btn {
+        font-size: 0.6rem;
+    }
+
+    /* 5. Dino: Order 5 */
+    .card-dino {
+        order: 5;
+        grid-column: 1 / -1;
+        grid-row: auto !important;
+        height: auto;
+        min-height: 180px;
+        /* Give it room to breathe */
+        padding: 1rem;
+    }
+
+    /* 6. Location: Order 6 */
+    .card-location {
+        order: 6;
+        grid-column: span 1;
+        grid-row: auto !important;
+        /* Fixed: Was missing reset */
+        height: 120px;
+    }
+
+    /* 7. Utility: Order 7 */
+    .card-utility {
+        order: 7;
+        grid-column: span 1;
+        grid-row: auto !important;
+        /* Fixed: Was missing reset */
+        height: 120px;
+        padding: 0.8rem;
+    }
+
+    .utility-row {
+        margin-bottom: 0.5rem;
     }
 }
