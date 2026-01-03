@@ -73,3 +73,17 @@
     transform: translateY(0);
     opacity: 1;
 }
+@media (max-width: 768px) {
+    .card-content {
+        padding: var(--space-sm);
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .card-category {
+        font-size: 0.75rem;
+    }
+}
