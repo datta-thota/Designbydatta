@@ -106,7 +106,7 @@
 }
 
 /* Section Headers - Ultimate Prompt Style */
-.section-header {
+.tech-section-header {
     font-size: 1.5rem;
     margin-bottom: 2.5rem;
     color: var(--tech-primary);
@@ -116,7 +116,7 @@
     font-weight: bold;
 }
 
-.section-header::before {
+.tech-section-header::before {
     content: "root@datta:~$ exec ";
     color: var(--tech-dim);
     margin-right: 0.5rem;

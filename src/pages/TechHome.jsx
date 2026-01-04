@@ -64,7 +64,7 @@ const TechHome = () => {
                 </section>
 
                 <section id="about" className="container tech-section">
-                    <h2 className="section-header">01. About Me</h2>
+                    <h2 className="tech-section-header">01. About Me</h2>
 
                     {/* Removed inline grid styles (your CSS now controls it) */}
                     <div className="tech-about-content">
@@ -104,7 +104,7 @@ const TechHome = () => {
                 <br />
                 {/* Experience Section */}
                 <section id="experience" className="container tech-section tech-experience-section">
-                    <h2 className="section-header">02. Experience</h2>
+                    <h2 className="tech-section-header">02. Experience</h2>
                     <div className="experience-list">
 
                         {/* Personal Projects */}
@@ -135,7 +135,7 @@ const TechHome = () => {
 
                 {/* Tech Projects Grid */}
                 <section id="projects" className="tech-projects container">
-                    <h2 className="section-header " >03. Selected Repositories</h2>
+                    <h2 className="tech-section-header " >03. Selected Repositories</h2>
                     <div className="tech-grid">
                         {techProjects.map((project) => (
                             <Link to={`/tech/project/${project.id}`} key={project.id} className="tech-card-link">
@@ -165,7 +165,7 @@ const TechHome = () => {
                 <br />
                 {/* Contact Section */}
                 <section id="contact" className="container tech-section tech-contact-section">
-                    <h2 className="section-header contact-header">04. Initialize Connection</h2>
+                    <h2 className="tech-section-header contact-header">04. Initialize Connection</h2>
 
                     <div className="tech-contact-wrapper">
                         <form ref={form} onSubmit={sendEmail} className="tech-form">

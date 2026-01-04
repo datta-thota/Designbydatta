@@ -5,71 +5,117 @@ import './LandingPage.css';
 import profileImg from '../assets/image.png';
 import bgImg from '../assets/download.jpg';
 
-const TechTerminal = () => {
-    const skills = [
-        "REACT.JS",
-        "NODE.JS",
-        "EXPRESS.JS",
-        "MONGODB",
-        "MYSQL",
-        "GIT"
-    ];
-
-    const [currentSkill, setCurrentSkill] = useState("");
-    const [skillIndex, setSkillIndex] = useState(0);
-    const [charIndex, setCharIndex] = useState(0);
-    const [isDeleting, setIsDeleting] = useState(false);
-
-    useEffect(() => {
-        const fullText = skills[skillIndex];
-        const typeSpeed = isDeleting ? 50 : 100;
-
-        const timer = setTimeout(() => {
-            if (!isDeleting && charIndex < fullText.length) {
-                // Typing
-                setCurrentSkill(fullText.substring(0, charIndex + 1));
-                setCharIndex(charIndex + 1);
-            } else if (isDeleting && charIndex > 0) {
-                // Deleting
-                setCurrentSkill(fullText.substring(0, charIndex - 1));
-                setCharIndex(charIndex - 1);
-            } else if (!isDeleting && charIndex === fullText.length) {
-                // Determine wait before delete
-                setTimeout(() => setIsDeleting(true), 1500);
-            } else if (isDeleting && charIndex === 0) {
-                // Move to next skill
-                setIsDeleting(false);
-                setSkillIndex((prev) => (prev + 1) % skills.length);
-            }
-        }, typeSpeed);
-
-        return () => clearTimeout(timer);
-    }, [charIndex, isDeleting, skillIndex, skills]);
-
+const MoviePosterUI = () => {
     return (
-        <div className="tech-terminal-wrapper">
-            <div className="terminal-header">
-                <span className="dot red"></span>
-                <span className="dot yellow"></span>
-                <span className="dot green"></span>
-                <span className="term-title">bash --v2.0</span>
+        <div className="movie-poster-wrapper">
+            <div className="movie-vignette"></div>
+            <div className="movie-grain"></div>
+
+            {/* Spotlight / Searchlight Effects */}
+            <div className="searchlight-container">
+                <div className="searchlight beam-1"></div>
+                <div className="searchlight beam-2"></div>
             </div>
-            <div className="portal-cta-tech">CLICK TO SEE WORK ↗</div>
-            <div className="terminal-body">
-                <div className="line-completed">
-                    <span className="cmd-arrow">➜</span>
-                    <span className="cmd-path">~/skills</span>
-                    <span className="cmd-git">(main)</span>
+
+            <div className="movie-content">
+                <div className="movie-top-credits">A DATTA THOTA VISUAL EXPERIENCE</div>
+
+                <div className="movie-main-section">
+                    <div className="movie-tagline">IN A WORLD OF PIXELS</div>
+                    <motion.div
+                        className="movie-title"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.5, ease: "easeOut" }}
+                    >
+                        THE<br />DESIGNER
+                    </motion.div>
                 </div>
-                <div className="line-active">
-                    <span className="cmd-arrow">➜</span>
-                    <span className="output">installing: <span className="highlight">{charIndex === skills[skillIndex].length && !isDeleting ? currentSkill : currentSkill}<span className="cursor">_</span></span></span>
+
+                <div className="movie-billing-block">
+                    PRODUCED BY DATTA THOTA • STARRING CREATIVITY • IMAGINATION • VISUALS <br />
+                    EDITED BY PASSION • MUSIC BY INSPIRATION • COSTUMES BY STYLE <br />
+                    WRITTEN AND DIRECTED BY DATTA THOTA
                 </div>
-                <div className="scanline"></div>
+
+                <div className="movie-footer-action">
+                    <div className="movie-rating-badge">🎨 CREATIVE CONTENT</div>
+                    <motion.div
+                        className="movie-ticket-cta"
+                        whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 77, 0, 0.4)" }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <span className="ticket-edge left"></span>
+                        <span className="ticket-text">ENTER GALLERY NOW</span>
+                        <span className="ticket-edge right"></span>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* Dynamic Light Leaks */}
+            <div className="light-leaks-container">
+                <motion.div
+                    className="leak leak-1"
+                    animate={{
+                        opacity: [0.1, 0.3, 0.1],
+                        scale: [1, 1.2, 1],
+                        x: [-10, 10, -10]
+                    }}
+                    transition={{ duration: 8, repeat: Infinity }}
+                />
+                <motion.div
+                    className="leak leak-2"
+                    animate={{
+                        opacity: [0.1, 0.2, 0.1],
+                        rotate: [0, 45, 0],
+                        y: [-20, 20, -20]
+                    }}
+                    transition={{ duration: 12, repeat: Infinity }}
+                />
             </div>
         </div>
     );
 };
+
+
+
+const WindowsCMD = () => {
+
+    return (
+        <div className="windows-cmd-wrapper">
+            <div className="cmd-header">
+                <div className="cmd-title">
+                    <span className="cmd-icon">🪟</span>
+                    Command Prompt
+                </div>
+                <div className="cmd-controls">
+                    <span className="cmd-btn win-min">─</span>
+                    <span className="cmd-btn win-max">▢</span>
+                    <span className="cmd-btn win-close">✕</span>
+                </div>
+            </div>
+            <div className="cmd-body">
+                <div className="cmd-line">
+                    <span className="cmd-path">C:\Users\Datta&gt;</span>
+                    <span className="cmd-input">open_portfolio.exe</span>
+                </div>
+
+                <div className="cmd-cta-container">
+                    <div className="cmd-cta-text">CLICK TO VIEW DEVELOPMENT WORKS</div>
+                    <div className="cmd-cta-sub">SYSTEM_ID: PORTFOLIO_V2.0.EXE</div>
+                </div>
+
+                <div className="cmd-cursor-line">
+                    <span className="cmd-path">C:\Users\Datta&gt;</span>
+                    <span className="cmd-cursor">█</span>
+                </div>
+                <div className="cmd-scanline"></div>
+            </div>
+        </div>
+    );
+};
+
+
 
 const HighLowGame = () => {
     const [currentNum, setCurrentNum] = useState(generateNum());
@@ -194,9 +240,107 @@ const HighLowGame = () => {
     );
 };
 
+const CinematicViewfinder = () => {
+    const [timecode, setTimecode] = useState("00:00:00:00");
+
+    useEffect(() => {
+        const start = Date.now();
+        const interval = setInterval(() => {
+            const now = Date.now();
+            const diff = now - start;
+            const ms = Math.floor((diff % 1000) / 10).toString().padStart(2, '0');
+            const s = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
+            const m = Math.floor((diff / 60000) % 60).toString().padStart(2, '0');
+            const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
+            setTimecode(`${h}:${m}:${s}:${ms}`);
+        }, 33); // ~30fps for timecode
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div className="viewfinder-wrapper">
+            <div className="viewfinder-overlay">
+                <div className="viewfinder-top">
+                    <div className="rec-group">
+                        <motion.div
+                            className="rec-dot"
+                            animate={{ opacity: [1, 0, 1] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                        ></motion.div>
+                        <span>REC</span>
+                    </div>
+                    <div className="viewfinder-mode">4K 24fps</div>
+                </div>
+
+                <div className="viewfinder-center">
+                    <div className="focus-brackets">
+                        <div className="bracket tl"></div>
+                        <div className="bracket tr"></div>
+                        <div className="bracket bl"></div>
+                        <div className="bracket br"></div>
+                        <div className="crosshair"></div>
+                    </div>
+                </div>
+
+                <div className="viewfinder-bottom">
+                    <div className="viewfinder-timecode">{timecode}</div>
+                    <div className="viewfinder-status">
+                        <div className="battery-box">
+                            <motion.div
+                                className="battery-level"
+                                animate={{ width: ["88%", "85%", "88%"] }}
+                                transition={{ duration: 20, repeat: Infinity }}
+                            />
+                        </div>
+                        <span>88%</span>
+                    </div>
+                </div>
+            </div>
+            <div className="viewfinder-grain"></div>
+        </div>
+    );
+};
+
+
+const SignalStrength = () => {
+    const [isBoosting, setIsBoosting] = useState(false);
+
+    const handleBoost = () => {
+        setIsBoosting(true);
+        setTimeout(() => setIsBoosting(false), 2000);
+    };
+
+    return (
+        <div
+            className={`signal-widget ${isBoosting ? 'boosting' : ''}`}
+            onClick={handleBoost}
+            title="Click to boost signal"
+        >
+            <div className="signal-bars">
+                {[1, 2, 3, 4].map(i => (
+                    <motion.div
+                        key={i}
+                        className="signal-bar"
+                        animate={{
+                            scaleY: isBoosting ? [1, 1.5, 1] : [1, 0.8, 1],
+                            opacity: [0.3, 1, 0.3]
+                        }}
+                        transition={{
+                            duration: isBoosting ? 0.3 : 1.5,
+                            repeat: Infinity,
+                            delay: i * 0.1,
+                            ease: "easeInOut"
+                        }}
+                    />
+                ))}
+            </div>
+            <div className="signal-label">SIGNAL: {isBoosting ? 'MAX' : 'STABLE'}</div>
+        </div>
+    );
+};
+
 const LandingPage = () => {
     const [time, setTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    const [theme, setTheme] = useState('light');
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -205,12 +349,8 @@ const LandingPage = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const toggleTheme = () => {
-        setTheme(prev => prev === 'light' ? 'dark' : 'light');
-    };
-
     return (
-        <div className="landing-page" data-theme={theme}>
+        <div className="landing-page" data-theme="dark">
             <div className="bento-grid">
 
                 {/* 1. DESIGN PORTAL (Left Col - Row 1 & 2) */}
@@ -220,11 +360,11 @@ const LandingPage = () => {
                         whileHover={{ scale: 0.98 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        <div className="design-vertical-text">DESIGN</div>
-                        <div className="design-cta">ENTER<br />GALLERY<br />↗</div>
-                        <div className="portal-cta-v2">CLICK TO SEE WORK ↗</div>
+                        <MoviePosterUI />
+
                     </motion.div>
                 </Link>
+
 
                 {/* 2. NAME CARD (Center Top - Row 1) */}
                 <motion.div
@@ -243,9 +383,17 @@ const LandingPage = () => {
                         whileHover={{ scale: 0.98 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        <TechTerminal />
+                        <WindowsCMD />
                     </motion.div>
+
+
                 </Link>
+
+                {/* NEW: UNIQUE CARD (Mobile Only Split) */}
+                <div className="bento-card card-unique">
+                    <CinematicViewfinder />
+                </div>
+
 
                 {/* 4. LOCATION (Left Col - Bottom Row) */}
                 {/* 4. LOCATION (Left Col - Bottom Row) */}
@@ -280,9 +428,7 @@ const LandingPage = () => {
                             <div className="status-dot"></div>
                             <span>WORK</span>
                         </div>
-                        <div className="toggle-btn-mini" onClick={toggleTheme}>
-                            {theme === 'light' ? '☀' : '☾'}
-                        </div>
+                        <SignalStrength />
                     </div>
                     <div style={{ textAlign: 'right', fontFamily: 'var(--f-tech)', fontSize: '1.2rem', fontWeight: 'bold' }}>
                         {time}
