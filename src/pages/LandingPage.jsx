@@ -106,7 +106,7 @@ const WindowsCMD = () => {
                 </div>
 
                 <div className="cmd-cursor-line">
-                    <span className="cmd-path">C:\Users\Datta&gt;</span>
+                    <span className="cmd-path hide-mobile">C:\Users\Datta&gt;</span>
                     <span className="cmd-cursor">█</span>
                 </div>
                 <div className="cmd-scanline"></div>
@@ -240,66 +240,66 @@ const HighLowGame = () => {
     );
 };
 
-const CinematicViewfinder = () => {
-    const [timecode, setTimecode] = useState("00:00:00:00");
+const RetroTVQuote = () => {
+    const quotes = [
+        { text: "Design is not just what it looks like and feels like. Design is how it works.", author: "Steve Jobs" },
+        { text: "Good design is obvious. Great design is transparent.", author: "Joe Sparano" },
+        { text: "The details are not the details. They make the design.", author: "Charles Eames" },
+        { text: "Digital design is like painting, except the paint never dries.", author: "Neville Brody" },
+        { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
+        { text: "Everything is designed. Few things are designed well.", author: "Brian Reed" },
+        { text: "Creativity is intelligence having fun.", author: "Albert Einstein" },
+        { text: "Content precedes design. Design in the absence of content is not design, it’s decoration.", author: "Jeffrey Zeldman" }
+    ];
+
+    const [quote, setQuote] = useState(quotes[0]);
 
     useEffect(() => {
-        const start = Date.now();
-        const interval = setInterval(() => {
-            const now = Date.now();
-            const diff = now - start;
-            const ms = Math.floor((diff % 1000) / 10).toString().padStart(2, '0');
-            const s = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
-            const m = Math.floor((diff / 60000) % 60).toString().padStart(2, '0');
-            const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
-            setTimecode(`${h}:${m}:${s}:${ms}`);
-        }, 33); // ~30fps for timecode
-        return () => clearInterval(interval);
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        setQuote(randomQuote);
     }, []);
 
     return (
-        <div className="viewfinder-wrapper">
-            <div className="viewfinder-overlay">
-                <div className="viewfinder-top">
-                    <div className="rec-group">
-                        <motion.div
-                            className="rec-dot"
-                            animate={{ opacity: [1, 0, 1] }}
-                            transition={{ duration: 1, repeat: Infinity }}
-                        ></motion.div>
-                        <span>REC</span>
-                    </div>
-                    <div className="viewfinder-mode">4K 24fps</div>
-                </div>
-
-                <div className="viewfinder-center">
-                    <div className="focus-brackets">
-                        <div className="bracket tl"></div>
-                        <div className="bracket tr"></div>
-                        <div className="bracket bl"></div>
-                        <div className="bracket br"></div>
-                        <div className="crosshair"></div>
-                    </div>
-                </div>
-
-                <div className="viewfinder-bottom">
-                    <div className="viewfinder-timecode">{timecode}</div>
-                    <div className="viewfinder-status">
-                        <div className="battery-box">
-                            <motion.div
-                                className="battery-level"
-                                animate={{ width: ["88%", "85%", "88%"] }}
-                                transition={{ duration: 20, repeat: Infinity }}
-                            />
+        <div className="tv-container">
+            <div className="tv-chassis">
+                <div className="tv-bezel">
+                    <div className="tv-screen-area">
+                        <div className="tv-crt-screen">
+                            <div className="crt-overlay"></div>
+                            <div className="crt-scanlines"></div>
+                            <div className="crt-content">
+                                <motion.div
+                                    className="crt-broadcast"
+                                    animate={{
+                                        opacity: [0.9, 1, 0.9, 1, 0.8, 1],
+                                        y: [0, 1, 0, -1, 0]
+                                    }}
+                                    transition={{
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        ease: "linear"
+                                    }}
+                                >
+                                    <p className="tv-quote-text">“{quote.text}”</p>
+                                    <div className="tv-quote-footer">
+                                        <span className="tv-author">— {quote.author}</span>
+                                    </div>
+                                </motion.div>
+                            </div>
                         </div>
-                        <span>88%</span>
+                    </div>
+                    <div className="tv-controls">
+                        <div className="tv-knob"></div>
+                        <div className="tv-knob small"></div>
+                        <div className="tv-speaker"></div>
                     </div>
                 </div>
+                <div className="tv-base"></div>
             </div>
-            <div className="viewfinder-grain"></div>
         </div>
     );
 };
+
 
 
 const SignalStrength = () => {
@@ -391,8 +391,10 @@ const LandingPage = () => {
 
                 {/* NEW: UNIQUE CARD (Mobile Only Split) */}
                 <div className="bento-card card-unique">
-                    <CinematicViewfinder />
+                    <RetroTVQuote />
                 </div>
+
+
 
 
                 {/* 4. LOCATION (Left Col - Bottom Row) */}

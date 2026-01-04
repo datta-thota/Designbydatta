@@ -13,11 +13,12 @@
     --c-off-white: #F4F4F0;
     --c-dark: #121212;
     --c-text-main: #121212;
+    --c-shadow: #121212;
 
     --f-main: 'Space Grotesk', sans-serif;
     --f-tech: 'VT323', monospace;
 
-    --shadow-hard: 6px 6px 0px var(--c-dark);
+    --shadow-hard: 6px 6px 0px var(--c-shadow);
     --border-thick: 3px solid var(--c-dark);
 }
 
@@ -26,9 +27,10 @@
     --c-off-white: #1A1A1A;
     --c-text-main: #F4F4F0;
     --c-dark: #F4F4F0;
-    /* Invert border color */
-    --shadow-hard: 6px 6px 0px #000;
-    /* Shadow stays black or dark grey */
+    /* Invert border/text color */
+    --c-shadow: #000000;
+    /* Fixed dark shadow for dark mode */
+    --shadow-hard: 6px 6px 0px var(--c-shadow);
 }
 
 .landing-page {
@@ -53,7 +55,7 @@
     /* 4 Columns, 3 Rows (12 Slots) */
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 1.2rem;
     width: 100%;
     height: 100%;
     max-width: 1400px;
@@ -77,7 +79,7 @@
 
 .bento-card:hover {
     transform: translate(-3px, -3px);
-    box-shadow: 10px 10px 0px var(--c-dark);
+    box-shadow: 10px 10px 0px var(--c-shadow);
     z-index: 10;
 }
 
@@ -191,7 +193,7 @@
     justify-content: space-between;
     align-items: center;
     color: #fff;
-    padding: 2.5rem 1rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(0.5rem, 2vw, 1.5rem);
     background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
 }
 
@@ -300,8 +302,8 @@
 
 .movie-title {
     font-family: var(--f-display);
-    font-size: 3.2rem;
-    line-height: 0.9;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    line-height: 0.85;
     font-weight: 900;
     letter-spacing: 0.1rem;
     color: #fff;
@@ -310,14 +312,14 @@
 
 .movie-billing-block {
     font-family: 'Inter', sans-serif;
-    font-size: 0.38rem;
-    line-height: 1.4;
-    letter-spacing: 0.12rem;
+    font-size: clamp(0.32rem, 0.8vw, 0.42rem);
+    line-height: 1.3;
+    letter-spacing: 0.1rem;
     color: rgba(255, 255, 255, 0.35);
     text-transform: uppercase;
     transform: scaleY(1.5);
     max-width: 95%;
-    margin: 1.5rem 0;
+    margin: clamp(0.5rem, 2vh, 1.5rem) 0;
 }
 
 .movie-footer-action {
@@ -566,12 +568,12 @@
 
 .cmd-body {
     flex: 1;
-    padding: 10px;
+    padding: clamp(6px, 1.5vw, 12px);
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
     color: #cccccc;
     position: relative;
-    line-height: 1.3;
+    line-height: 1.2;
     overflow: hidden;
 }
 
@@ -599,8 +601,8 @@
 }
 
 .cmd-cta-container {
-    margin: 15px 0;
-    padding: 10px;
+    margin: clamp(10px, 2vh, 20px) 0;
+    padding: clamp(6px, 1.5vw, 12px);
     border: 1px dashed rgba(51, 255, 51, 0.3);
     background: rgba(51, 255, 51, 0.05);
 }
@@ -947,193 +949,246 @@
 }
 
 .signal-widget.boosting .signal-bar {
-    background: #ff3333;
-    /* Flash red on boost */
-    box-shadow: 0 0 5px #ff3333;
+    /* Add boosting styles here if needed */
 }
 
-/* --- UNIQUE CARD (MEDICAL REPORT THEME) --- */
+/* --- VIBRANT RETRO TV CARD (COLOR BREAK) --- */
 .card-unique {
     display: none;
-    background: #050505;
+    /* Split flow on mobile */
+    background: #FF5200;
     position: relative;
     padding: 0 !important;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: none;
+    box-shadow: var(--shadow-hard);
 }
 
-.viewfinder-wrapper {
+.tv-container {
     width: 100%;
     height: 100%;
-    position: relative;
-    overflow: hidden;
-    background: #000;
-}
-
-.viewfinder-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 5;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-family: var(--f-tech);
-    color: #fff;
-}
-
-.viewfinder-top,
-.viewfinder-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-}
-
-.rec-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ff3333;
-    font-weight: bold;
-}
-
-.rec-dot {
-    width: 8px;
-    height: 8px;
-    background: #ff3333;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
-}
-
-.viewfinder-center {
-    flex: 1;
+    background: #0d0d0d;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: clamp(8px, 3vw, 15px);
 }
 
-.focus-brackets {
-    position: relative;
-    width: 60%;
-    height: 60%;
-}
-
-.bracket {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.bracket.tl {
-    top: 0;
-    left: 0;
-    border-right: 0;
-    border-bottom: 0;
-}
-
-.bracket.tr {
-    top: 0;
-    right: 0;
-    border-left: 0;
-    border-bottom: 0;
-}
-
-.bracket.bl {
-    bottom: 0;
-    left: 0;
-    border-right: 0;
-    border-top: 0;
-}
-
-.bracket.br {
-    bottom: 0;
-    right: 0;
-    border-left: 0;
-    border-top: 0;
-}
-
-.crosshair {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    transform: translate(-50%, -50%);
-}
-
-.crosshair::before,
-.crosshair::after {
-    content: '';
-    position: absolute;
-    background: rgba(255, 255, 255, 0.3);
-}
-
-.crosshair::before {
-    top: 50%;
-    left: 0;
+/* TV CHASSIS - VIBRANT RETRO ORANGE */
+.tv-chassis {
     width: 100%;
-    height: 1px;
-}
-
-.crosshair::after {
-    left: 50%;
-    top: 0;
-    width: 1px;
     height: 100%;
+    background: #FF5200;
+    /* Vibrant 70s Orange */
+    border-radius: 12px;
+    padding: clamp(8px, 2vw, 12px);
+    position: relative;
+    box-shadow:
+        inset -2px -2px 10px rgba(0, 0, 0, 0.3),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.2),
+        0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.viewfinder-timecode {
-    font-family: monospace;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.8);
+.tv-bezel {
+    flex: 1;
+    background: #1f1f1f;
+    border-radius: 10px;
+    padding: clamp(8px, 2.5vw, 15px);
+    display: flex;
+    gap: 10px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 1);
+    position: relative;
+    border: 2px solid #333;
 }
 
-.viewfinder-status {
+/* CRT SCREEN AREA */
+.tv-screen-area {
+    flex: 1;
+    background: #000;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 50px rgba(0, 0, 0, 1),
+        0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.tv-crt-screen {
+    width: 100%;
+    height: 100%;
+    background: #111;
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 6px;
-    color: rgba(255, 255, 255, 0.6);
+    justify-content: center;
+    padding: 1.2rem;
+    overflow: hidden;
 }
 
-.battery-box {
-    width: 20px;
-    height: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 1px;
-    position: relative;
-}
-
-.battery-box::after {
-    content: '';
-    position: absolute;
-    right: -3px;
-    top: 2px;
-    width: 2px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-}
-
-.battery-level {
-    height: 100%;
-    background: #4ade80;
-}
-
-.viewfinder-grain {
+/* CRT Effects */
+.crt-overlay {
     position: absolute;
     inset: 0;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.05;
+    background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
     pointer-events: none;
-    z-index: 2;
+    z-index: 5;
 }
 
-.stat-label {
-    font-size: 0.5rem;
-    color: #888;
+.crt-scanlines {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    z-index: 6;
+    pointer-events: none;
+    opacity: 0.25;
 }
+
+.tv-crt-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 16, 16, 0.1);
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+    animation: tv-flicker 0.15s infinite;
+}
+
+@keyframes tv-flicker {
+    0% {
+        opacity: 0.08;
+    }
+
+    50% {
+        opacity: 0.04;
+    }
+
+    100% {
+        opacity: 0.08;
+    }
+}
+
+/* CONTENT BROADCAST */
+.crt-content {
+    position: relative;
+    z-index: 4;
+    text-align: center;
+    width: 100%;
+}
+
+.tv-quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.7rem, 1.3vw, 0.9rem);
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    line-height: 1.5;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    margin-bottom: 0.6rem;
+}
+
+.tv-quote-footer {
+    font-family: var(--f-tech);
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+}
+
+/* TV HARDWARE DETAILS */
+.tv-controls {
+    width: clamp(25px, 7vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.tv-knob {
+    width: 22px;
+    height: 22px;
+    background: #444;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6), inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+    position: relative;
+    border: 1px solid #222;
+}
+
+.tv-knob::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 2px;
+    height: 5px;
+    background: #111;
+    transform: translateX(-50%);
+}
+
+.tv-knob.small {
+    width: 16px;
+    height: 16px;
+}
+
+.tv-speaker {
+    flex: 1;
+    width: 100%;
+    background: repeating-linear-gradient(transparent, transparent 3px,
+            rgba(0, 0, 0, 0.6) 3px, rgba(0, 0, 0, 0.6) 5px);
+    opacity: 0.5;
+}
+
+.tv-base {
+    height: 6px;
+    width: 85%;
+    background: #1a1a1a;
+    margin: -1px auto 0;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* MOBILE ADJUSTMENTS - REFINED PROPORTIONS */
+@media (max-width: 768px) {
+    .tv-container {
+        padding: 10px;
+    }
+
+    .tv-chassis {
+        padding: 8px;
+    }
+
+    .tv-bezel {
+        padding: 8px;
+        gap: 6px;
+    }
+
+    .tv-controls {
+        width: 30px;
+        gap: 8px;
+    }
+
+    .tv-knob {
+        width: 18px;
+        height: 18px;
+    }
+
+    .tv-knob.small {
+        width: 12px;
+        height: 12px;
+    }
+
+    .tv-crt-screen {
+        padding: 0.8rem;
+    }
+}
+
 
 .stat-value {
     font-size: 0.9rem;
@@ -1211,7 +1266,7 @@
         /* Reset desktop rows */
         grid-auto-rows: min-content;
         /* Let content dictate height where possible */
-        gap: 0.4rem;
+        gap: 0.8rem;
         /* Very tight gap for mobile */
         height: auto;
         max-height: none;
@@ -1255,33 +1310,53 @@
         padding: 0 !important;
     }
 
-    .movie-poster-wrapper {
-        padding: 2rem 0.5rem;
-        justify-content: space-between;
+    .cmd-header {
+        height: 28px;
     }
 
-    .movie-top-credits {
-        font-size: 0.45rem;
-        letter-spacing: 0.15rem;
+    .cmd-title {
+        display: none;
+        /* Hide text to prevent overlap on small screens */
+    }
+
+    .cmd-controls {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .cmd-body {
+        padding: 8px;
+    }
+
+    .cmd-cta-container {
+        margin: 8px 0;
+        padding: 8px;
+    }
+
+    /* Hide second path on mobile to save space */
+    .cmd-cursor-line .cmd-path {
+        display: none;
+    }
+
+    .movie-poster-wrapper {
+        padding: 1.5rem 0.5rem;
     }
 
     .movie-title {
-        font-size: 2.8rem;
+        font-size: clamp(1.6rem, 8vw, 2.5rem);
+        line-height: 1;
     }
 
     .movie-billing-block {
-        font-size: 0.32rem;
-        letter-spacing: 0.08rem;
-        margin: 1rem 0;
+        font-size: 0.28rem;
+        letter-spacing: 0.05rem;
+        margin: 0.5rem 0;
+        opacity: 0.5;
     }
 
     .movie-ticket-cta {
-        padding: 6px 20px;
-        font-size: 0.75rem;
-    }
-
-    .movie-footer-action {
-        gap: 0.8rem;
+        padding: 5px 15px;
+        font-size: 0.7rem;
     }
 
 
