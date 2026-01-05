@@ -2,7 +2,7 @@ export const projects = [
     {
         id: 1,
         title: "AUXILIUM Complete Design System and Marketing Creatives",
-        category: "Branding",
+        category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765254826/Instagram_post_-_275_gjonc5.png?auto=format&fit=crop",
         year: "2025",
         role: "Lead Designer",
@@ -43,7 +43,7 @@ export const projects = [
     {
         id: 2,
         title: "Movie Poster Design Portfolio",
-        category: "Poster Design",
+        category: "Graphic & Visual",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765259132/Artboard1_qtwm5u.png?auto=format&fit=crop",
         year: "2023 - Present",
         role: "Graphic Designer",
@@ -60,7 +60,7 @@ export const projects = [
     {
         id: 3,
         title: "30 Days 30 Movie Poster Challenge",
-        category: "Graphic Design",
+        category: "Graphic & Visual",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765260523/Instagram_post_-_284_kmlfi7.png?auto=format&fit=crop", // cover image
         year: "2024",
         role: "Poster Designer",
@@ -78,7 +78,7 @@ export const projects = [
     {
         id: 4,
         title: "Design Dump 2025",
-        category: "Graphic Design",
+        category: "Experimental",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765261902/Instagram_post_-_278_miqmza.png",
         year: "2025",
         role: "Graphic Designer",
@@ -95,7 +95,7 @@ export const projects = [
     {
         id: 5,
         title: "Telugu Design Archive 2025",
-        category: "Graphic Design",
+        category: "Graphic & Visual",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765262356/Instagram_post_-_279_zxkxxo.png",
         year: "2025",
         role: "Designer",
@@ -112,7 +112,7 @@ export const projects = [
     {
         id: 6,
         title: "Time Pass Creations",
-        category: "Creative Exploration",
+        category: "Experimental",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765262741/Instagram_post_-_280_bvwclk.png",
         year: "2025",
         role: "Designer",
@@ -130,7 +130,7 @@ export const projects = [
     {
         id: 7,
         title: "College Event Designs",
-        category: "Event Design",
+        category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765263212/Instagram_post_-_281_uazqoj.png",
         year: "2023",
         role: "Graphic Designer",
@@ -147,7 +147,7 @@ export const projects = [
     {
         id: 8,
         title: "First Steps in Brand Ad Poster Design",
-        category: "Brand Advertising",
+        category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765263826/Instagram_post_-_277_ekntok.png",
         year: "2024",
         role: "Graphic Designer",

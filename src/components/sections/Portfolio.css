@@ -15,21 +15,311 @@
 }
 
 .project-count {
-    font-family: var(--font-body);
     font-size: 1.2rem;
     color: var(--text-dim);
 }
 
-.portfolio-grid {
+.portfolio-folder-system {
+    margin-top: 8vh;
+}
+
+/* Section Heading */
+.portfolio-main-header {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.portfolio-main-title {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 20px;
+}
+
+.portfolio-main-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+}
+
+/* Professional Tab Navigation */
+.folder-tabs-container {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 80px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.folder-tab {
+    position: relative;
+    padding: 20px 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    outline: none;
+    white-space: nowrap;
+}
+
+.folder-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #fff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.folder-tab.active {
+    color: #fff;
+}
+
+.folder-tab.active::after {
+    transform: scaleX(1);
+}
+
+.folder-tab:hover:not(.active) {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Content Area */
+.folder-cabinet {
+    position: relative;
+    min-height: 60vh;
+}
+
+.folder-content {
+    width: 100%;
+    padding: 0;
+    position: relative;
+}
+
+.folder-header-info {
+    margin-bottom: 60px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.folder-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+}
+
+.folder-meta {
+    font-family: var(--f-tech);
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* Project Grid */
+.folder-mosaic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: var(--space-md);
-    row-gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+}
+
+.folder-item {
+    transition: transform 0.4s ease;
+}
+
+.folder-item:hover {
+    transform: translateY(-4px);
+}
+
+/* Motion Design Embeds */
+.motion-design-embeds {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.embed-container {
+    width: 100%;
+}
+
+.embed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.embed-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.embed-link {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.embed-link:hover {
+    color: #fff;
+}
+
+.embed-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+}
+
+.embed-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+.embed-overlay:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.embed-overlay::after {
+    content: 'Click to open in new tab';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    font-size: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.embed-overlay:hover::after {
+    opacity: 1;
+}
+
+.motion-embed {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: #000;
+}
+
+/* Mobile Optimization */
+@media (max-width: 1024px) {
+    .folder-tabs-container {
+        overflow-x: auto;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .folder-tabs-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .folder-mosaic-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+    }
 }
 
 @media (max-width: 768px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+    .portfolio-folder-system {
+        margin-top: 4vh;
+    }
+
+    .portfolio-main-header {
+        margin-bottom: 60px;
+    }
+
+    .portfolio-main-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+
+    .portfolio-main-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .folder-tabs-container {
+        margin-bottom: 50px;
+    }
+
+    .folder-tab {
+        padding: 16px 24px;
+        font-size: 0.75rem;
+    }
+
+    .folder-content {
+        padding: 40px 24px;
+        border-radius: 0 20px 20px 20px;
+    }
+
+    .folder-content::before {
+        left: 20px;
+    }
+
+    .folder-header-info {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+    }
+
+    .folder-title {
+        font-size: clamp(1.75rem, 8vw, 2.5rem);
+    }
+
+    .folder-meta {
+        font-size: 0.65rem;
+    }
+
+    .folder-mosaic-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .motion-design-embeds {
+        gap: 40px;
+    }
+
+    .embed-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .embed-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .embed-iframe-wrapper {
+        height: 60vh;
     }
 }

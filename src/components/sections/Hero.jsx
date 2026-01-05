@@ -1,48 +1,79 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import './Hero.css';
 
 const Hero = () => {
-    const { scrollY } = useScroll();
-    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-    const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-
     return (
-        <section className="hero-section full-screen flex-center">
+        <section className="hero-section movie-poster-hero">
+            {/* Film Grain Overlay */}
+            <div className="film-grain"></div>
+
+            {/* Vignette Effect */}
+            <div className="vignette"></div>
+
+            {/* Spotlight Effects */}
+            <div className="spotlight spotlight-left"></div>
+            <div className="spotlight spotlight-right"></div>
+
             <div className="hero-container">
                 <motion.div
-                    className="hero-content"
-                    initial={{ opacity: 0, y: 100 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="poster-content"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    <motion.h1
-                        className="hero-title"
-                        style={{ y: y1 }}
+                    {/* Top Credits */}
+                    <motion.div
+                        className="poster-credits-top"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
                     >
-                        DATTA THOTA
+                        <span>A VISUAL STORYTELLER PRODUCTION</span>
+                    </motion.div>
+
+                    {/* Main Title */}
+                    <motion.h1
+                        className="poster-title"
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <span className="title-line-1">DATTA</span>
+                        <span className="title-line-2">THOTA</span>
                     </motion.h1>
 
-                    <motion.div
-                        className="hero-subtitle-wrapper"
-                        style={{ y: y2 }}
+                    {/* Tagline */}
+                    <motion.p
+                        className="poster-tagline"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 0.8 }}
+                        transition={{ duration: 1, delay: 1 }}
                     >
-                        <p className="hero-subtitle text-thin">
-                            Graphic Designer crafting visual stories that strike instantly.
-                        </p>
+                        CRAFTING VISUAL STORIES THAT STRIKE INSTANTLY
+                    </motion.p>
+
+                    {/* Bottom Credits */}
+                    <motion.div
+                        className="poster-credits-bottom"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 1.2 }}
+                    >
+                        <div className="credit-line">
+                            <span className="credit-label">STARRING</span>
+                            <span className="credit-value">GRAPHIC DESIGN · MOTION · BRANDING</span>
+                        </div>
+                        <div className="credit-line">
+                            <span className="credit-label">DIRECTED BY</span>
+                            <span className="credit-value">CREATIVE VISION</span>
+                        </div>
                     </motion.div>
                 </motion.div>
             </div>
 
-            <div className="hero-background">
-                <div className="hero-grid"></div>
-
-                <div className="glow-orb orb-1"></div>
-                <div className="glow-orb orb-2"></div>
-            </div>
+            {/* Theatrical Border */}
+            <div className="theatrical-border"></div>
         </section>
     );
 };

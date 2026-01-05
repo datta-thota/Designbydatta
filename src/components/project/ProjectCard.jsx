@@ -27,31 +27,49 @@ const ProjectCard = ({ project }) => {
     const rotateX = useTransform(mouseY, [-0.5, 0.5], [7, -7]);
     const rotateY = useTransform(mouseX, [-0.5, 0.5], [-7, 7]);
 
+    const CardContent = () => (
+        <motion.div
+            ref={ref}
+            className="project-card"
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
+            style={{
+                rotateX,
+                rotateY,
+                transformStyle: "preserve-3d",
+            }}
+        >
+            <div
+                className="card-image"
+                style={{ backgroundImage: `url(${project.image})` }}
+            >
+                <div className="card-overlay"></div>
+            </div>
+
+            <div className="card-content">
+                <h3 className="card-title">{project.title}</h3>
+                <p className="card-category">{project.category}</p>
+            </div>
+        </motion.div>
+    );
+
+    // If project has external link, use anchor tag; otherwise use React Router Link
+    if (project.externalLink) {
+        return (
+            <a
+                href={project.externalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-card-link"
+            >
+                <CardContent />
+            </a>
+        );
+    }
+
     return (
         <Link to={`/design/project/${project.id}`} className="project-card-link">
-            <motion.div
-                ref={ref}
-                className="project-card"
-                onMouseMove={onMouseMove}
-                onMouseLeave={onMouseLeave}
-                style={{
-                    rotateX,
-                    rotateY,
-                    transformStyle: "preserve-3d",
-                }}
-            >
-                <div
-                    className="card-image"
-                    style={{ backgroundImage: `url(${project.image})` }}
-                >
-                    <div className="card-overlay"></div>
-                </div>
-
-                <div className="card-content">
-                    <h3 className="card-title">{project.title}</h3>
-                    <p className="card-category">{project.category}</p>
-                </div>
-            </motion.div>
+            <CardContent />
         </Link>
     );
 };

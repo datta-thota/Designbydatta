@@ -280,7 +280,7 @@ const RetroTVQuote = () => {
                                         ease: "linear"
                                     }}
                                 >
-                                    <p className="tv-quote-text">“{quote.text}”</p>
+                                    <p className={`tv-quote-text ${quote.text.length > 70 ? 'long-quote' : ''}`}>“{quote.text}”</p>
                                     <div className="tv-quote-footer">
                                         <span className="tv-author">— {quote.author}</span>
                                     </div>

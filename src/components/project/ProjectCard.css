@@ -11,6 +11,7 @@
     overflow: hidden;
     background: var(--bg-graphite);
     cursor: pointer;
+    transform-style: preserve-3d;
 }
 
 .card-image {
@@ -18,11 +19,11 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s var(--transition-smooth);
 }
 
 .project-card:hover .card-image {
-    transform: scale(1.1);
+    transform: scale(1.05) rotate(1deg);
 }
 
 .card-overlay {
@@ -31,13 +32,32 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0.5;
+    transition: opacity 0.5s var(--transition-smooth);
 }
 
 .project-card:hover .card-overlay {
-    opacity: 0.8;
+    opacity: 0.9;
+}
+
+/* Playful Border Effect */
+.project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--c-orange, #FF5200);
+    border-radius: 8px;
+    transform: scale(1.1);
+    opacity: 0;
+    transition: all 0.4s var(--transition-smooth);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.project-card:hover::after {
+    transform: scale(0.95);
+    opacity: 1;
 }
 
 .card-content {
@@ -45,45 +65,65 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: var(--space-md);
-    transform: translateZ(20px);
-    /* 3D effect */
+    padding: var(--space-lg) var(--space-md) var(--space-md);
+    z-index: 5;
+    pointer-events: none;
 }
 
 .card-title {
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
     margin-bottom: 0.5rem;
-    transform: translateY(20px);
+    transform: translateY(30px) rotate(-2deg);
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.5s var(--transition-smooth);
+    color: var(--text-white);
+    text-transform: uppercase;
+    line-height: 1.1;
 }
 
 .card-category {
-    font-size: 0.9rem;
-    color: var(--text-dim);
+    font-size: 0.8rem;
+    color: var(--c-orange, #FF5200);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
+    font-weight: 700;
     transform: translateY(20px);
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+    transition: all 0.5s var(--transition-smooth) 0.1s;
+    font-family: var(--f-tech, 'VT323', monospace);
 }
 
-.project-card:hover .card-title,
+.project-card:hover .card-title {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+}
+
 .project-card:hover .card-category {
     transform: translateY(0);
     opacity: 1;
 }
+
 @media (max-width: 768px) {
     .card-content {
-        padding: var(--space-sm);
+        padding: var(--space-md) var(--space-sm);
     }
 
     .card-title {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         margin-bottom: 0.2rem;
+        transform: translateY(0) rotate(0);
+        opacity: 1;
     }
 
     .card-category {
         font-size: 0.75rem;
+        transform: translateY(0);
+        opacity: 0.8;
+    }
+
+    .project-card:hover::after {
+        display: none;
+        /* Hide border effect on touch devices */
     }
 }
