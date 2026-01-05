@@ -216,7 +216,6 @@ const HighLowGame = () => {
             </div>
 
             <div className="game-status">
-                {gameState === 'PLAYING' && (hint ? <span className="hint-text">{hint}</span> : <span className="hint-btn" onClick={() => setHint(getHint())}>💡 NEED HINT?</span>)}
                 {gameState === 'RESULT' && message}
             </div>
 

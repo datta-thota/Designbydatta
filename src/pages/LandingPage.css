@@ -709,6 +709,7 @@
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    min-width: 220px;
     background: #111;
     color: #fff;
     font-family: var(--f-tech);
@@ -770,7 +771,28 @@
     margin-bottom: 0.5rem;
     min-height: 1.2rem;
     font-weight: bold;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    white-space: nowrap;
+    /* ✅ force horizontal */
+    overflow: hidden;
 }
+
+.hint-text {
+    font-size: 0.7rem;
+    color: var(--c-yellow);
+    animation: fadeIn 0.3s ease;
+
+    white-space: nowrap;
+    /* ✅ key line */
+    word-break: keep-all;
+    /* ✅ prevent letter breaking */
+}
+
 
 .game-controls {
     display: flex;
@@ -821,11 +843,7 @@
     color: #fff;
 }
 
-.hint-text {
-    font-size: 0.7rem;
-    color: var(--c-yellow);
-    animation: fadeIn 0.3s ease;
-}
+
 
 @keyframes fadeIn {
     from {
