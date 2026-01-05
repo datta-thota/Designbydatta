@@ -24,7 +24,8 @@ const DesignHome = () => {
                 >
                     CREATIVE PLAYGROUND // NO RULES // DESIGN FIRST
                 </motion.div>
-
+                <br />
+                <br />
                 <LatestDesigns />
 
                 <motion.div style={{ y: y2 }}>
