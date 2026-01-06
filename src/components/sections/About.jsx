@@ -21,8 +21,8 @@ const experience = [
 
 const About = () => {
     return (
-        <section className="about-section container">
-            <div className="about-content">
+        <section className="about-section">
+            <div className="about-content container">
 
                 <div className="about-text">
                     <motion.h2

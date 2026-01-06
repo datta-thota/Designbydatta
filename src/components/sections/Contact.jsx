@@ -31,8 +31,8 @@ const Contact = () => {
     };
 
     return (
-        <section className="contact-section container">
-            <div className="contact-content">
+        <section className="contact-section">
+            <div className="contact-content container">
                 <motion.div
                     className="contact-header"
                     initial={{ opacity: 0, y: 50 }}

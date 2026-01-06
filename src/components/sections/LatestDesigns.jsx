@@ -24,7 +24,7 @@ const LatestDesigns = () => {
     }, []);
 
     return (
-        <section className="latest-designs-section" style={{ marginBottom: 'var(--space-2xl)' }}>
+        <section className="latest-designs-section">
             <div className="portfolio-header container" style={{ marginBottom: '2rem' }}>
                 <div className="header-main">
                     <h2 className="section-title">Latest Explorations</h2>

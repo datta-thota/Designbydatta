@@ -16,7 +16,7 @@ const Portfolio = () => {
     const [activeTab, setActiveTab] = useState(categories[0].id);
 
     return (
-        <section className="portfolio-section" style={{ paddingBottom: 'var(--space-2xl)' }}>
+        <section className="portfolio-section">
             <div className="portfolio-folder-system container">
                 {/* Section Heading */}
                 <div className="portfolio-main-header">

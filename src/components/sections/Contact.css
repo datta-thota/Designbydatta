@@ -1,22 +1,24 @@
 .contact-section {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-2xl);
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+    position: relative;
+    width: 100%;
 }
 
 .contact-content {
     width: 100%;
     max-width: 600px;
+    margin: 0 auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .contact-subtitle {
     font-size: 1.2rem;
     color: var(--text-dim);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
 }
 
 .contact-form {

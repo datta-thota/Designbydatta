@@ -20,13 +20,13 @@
 }
 
 .portfolio-folder-system {
-    margin-top: 8vh;
+    margin-top: 0;
 }
 
 /* Section Heading */
 .portfolio-main-header {
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 40px;
 }
 
 .portfolio-main-title {
@@ -52,7 +52,7 @@
     gap: 0;
     justify-content: center;
     position: relative;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -98,7 +98,7 @@
 /* Content Area */
 .folder-cabinet {
     position: relative;
-    min-height: 60vh;
+    min-height: auto;
 }
 
 .folder-content {
@@ -108,8 +108,8 @@
 }
 
 .folder-header-info {
-    margin-bottom: 60px;
-    padding-bottom: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -149,7 +149,7 @@
 .motion-design-embeds {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 40px;
 }
 
 .embed-container {

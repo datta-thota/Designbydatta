@@ -1,0 +1,18 @@
+.design-home-experimental {
+    position: relative;
+    overflow: hidden;
+}
+
+.chaos-text-bg {
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    font-size: 12vw;
+    font-weight: 900;
+    opacity: 0.03;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    color: var(--text-white);
+    transform: rotate(-5deg);
+}
