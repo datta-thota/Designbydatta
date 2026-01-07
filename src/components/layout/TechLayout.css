@@ -1,19 +1,27 @@
 :root {
-    --tech-bg: #050505;
-    --tech-text-primary: #00ff41;
-    /* Neon Green */
-    --tech-text-secondary: #008f11;
-    /* Dim/Matrix Green */
-    --tech-text-dim: #3b3b3b;
-    --tech-accent: #0ff;
-    /* Cyan */
-    --tech-font: 'Courier New', Courier, monospace;
+    --tech-bg: #0c0c0c;
+    --tech-bg-alt: #1a1a1a;
+    --tech-text-primary: #cccccc;
+    --tech-text-secondary: #ffffff;
+    --tech-text-dim: #767676;
+    --tech-accent: #333333;
+    --tech-font: 'Consolas', 'Lucida Console', 'Courier New', monospace;
+    --tech-border: 1px solid #333333;
+}
+
+.tech-layout-wrapper {
+    background-color: var(--tech-bg);
+    min-height: 100vh;
+    color: #e0e0e0;
+    position: relative;
+    overflow-x: hidden;
 }
 
 body {
     background-color: var(--tech-bg);
     color: var(--tech-text-primary);
     font-family: var(--tech-font);
+    margin: 0;
 }
 
 .scanline-overlay {
@@ -23,14 +31,13 @@ body {
     width: 100%;
     height: 100vh;
     background: repeating-linear-gradient(0deg,
-            rgba(0, 0, 0, 0.15),
-            rgba(0, 0, 0, 0.15) 1px,
+            rgba(255, 255, 255, 0.02),
+            rgba(255, 255, 255, 0.02) 1px,
             transparent 1px,
             transparent 2px);
     z-index: 9999;
     pointer-events: none;
-    animation: scanline 10s linear infinite;
-    opacity: 0.6;
+    opacity: 0.3;
 }
 
 @keyframes scanline {
@@ -50,14 +57,12 @@ body {
 
 ::-webkit-scrollbar-track {
     background: var(--tech-bg);
-    border-left: 1px solid var(--tech-text-dim);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--tech-text-secondary);
-    border: 1px solid var(--tech-text-primary);
+    background: #333;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--tech-text-primary);
+    background: #444;
 }

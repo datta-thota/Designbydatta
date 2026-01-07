@@ -19,61 +19,71 @@ const TechProjectDetails = () => {
         <PageTransition>
             <div className="tech-details-page">
                 <div className="tech-details-container">
-                    <Link to="/tech" className="tech-back-btn">
-                        <span className="cmd-prompt">&gt;</span> cd ..
-                    </Link>
-
-                    <div className="project-header">
-                        <h1 className="tech-details-title">{project.title}</h1>
-                        <div className="tech-tags-large">
-                            {project.tags.map(tag => (
-                                <span key={tag} className="tech-tag-large">{tag}</span>
-                            ))}
+                    <div className="tech-window-header">
+                        <div className="window-title">{project.title.toLowerCase()}.exe</div>
+                        <div className="window-controls">
+                            <span className="win-btn">_</span>
+                            <span className="win-btn">□</span>
+                            <span className="win-btn">×</span>
                         </div>
                     </div>
+                    <Link to="/tech" className="tech-back-btn">
+                        <span className="cmd-prompt">C:\Users\Datta\Projects&gt;</span> cd ..
+                    </Link>
 
-                    <div className="tech-details-grid">
-                        <div className="main-content">
-                            <div className="project-image-large">
-                                <img src={project.image} alt={project.title} />
+                    <div className="tech-details-content-inner">
+                        <div className="project-header">
+                            <h1 className="tech-details-title">{project.title}</h1>
+                            <div className="tech-tags-large">
+                                {project.tags.map(tag => (
+                                    <span key={tag} className="tech-tag-large">{tag}</span>
+                                ))}
                             </div>
-
-                            <section className="section-block">
-                                <h3 className="section-title">Overview</h3>
-                                <p className="section-text">{project.description}</p>
-                            </section>
-
-                            <section className="section-block">
-                                <h3 className="section-title">Key Features</h3>
-                                <ul className="feature-list">
-                                    {project.features.map((feature, i) => (
-                                        <li key={i} className="feature-item">{feature}</li>
-                                    ))}
-                                </ul>
-                            </section>
-
-
                         </div>
 
-                        <div className="sidebar">
-                            <div className="links-card">
-                                <h4 className="links-title">Project Links</h4>
-                                <div className="links-container">
-                                    <a href={project.githubUrl} className="project-link-btn" target="_blank" rel="noopener noreferrer">
-                                        GitHub Repository ↗
-                                    </a>
+                        <div className="tech-details-grid">
+                            <div className="main-content">
+                                <div className="project-image-large">
+                                    <img src={project.image} alt={project.title} />
                                 </div>
+
+                                <section className="section-block">
+                                    <h3 className="section-title">Overview</h3>
+                                    <p className="section-text">{project.description}</p>
+                                </section>
+
+                                <section className="section-block">
+                                    <h3 className="section-title">Key Features</h3>
+                                    <ul className="feature-list">
+                                        {project.features.map((feature, i) => (
+                                            <li key={i} className="feature-item">{feature}</li>
+                                        ))}
+                                    </ul>
+                                </section>
+
+
                             </div>
 
-                            <div className="links-card">
-                                <h4 className="links-title">Tech Stack</h4>
-                                <div className="tech-stack-list">
-                                    {project.techStack.map((stack, i) => (
-                                        <div key={i} className="tech-stack-item">
-                                            <span className="stack-category">{stack.name}</span>
-                                            <span className="stack-tools">{stack.tools}</span>
-                                        </div>
-                                    ))}
+                            <div className="sidebar">
+                                <div className="links-card">
+                                    <h4 className="links-title">Project Links</h4>
+                                    <div className="links-container">
+                                        <a href={project.githubUrl} className="project-link-btn" target="_blank" rel="noopener noreferrer">
+                                            GitHub Repository ↗
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="links-card">
+                                    <h4 className="links-title">Tech Stack</h4>
+                                    <div className="tech-stack-list">
+                                        {project.techStack.map((stack, i) => (
+                                            <div key={i} className="tech-stack-item">
+                                                <span className="stack-category">{stack.name}</span>
+                                                <span className="stack-tools">{stack.tools}</span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>

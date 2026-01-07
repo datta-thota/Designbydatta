@@ -43,9 +43,9 @@ const TechHome = () => {
                         transition={{ duration: 0.8 }}
                     >
                         <h1 className="tech-title">
-                            <span className="code-bracket">&lt;</span>
+                            <span className="code-bracket">C:\Users\Datta&gt;</span>
                             <span className="typewriter-effect" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>Datta Thota</span>
-                            <span className="code-bracket">/&gt;</span>
+                            <span className="cursor-block"></span>
                         </h1>
                         <p className="tech-subtitle">
                             Designing and developing full-stack applications that scale effortlessly.
@@ -64,25 +64,27 @@ const TechHome = () => {
                 </section>
 
                 <section id="about" className="container tech-section">
-                    <h2 className="tech-section-header">01. About Me</h2>
+                    <div className="tech-section-header">C:\Users\Datta&gt; whoami</div>
 
-                    {/* Removed inline grid styles (your CSS now controls it) */}
-                    <div className="tech-about-content">
+                    <div className="tech-about-wrapper">
+                        <div className="about-terminal">
+                            <div className="terminal-output">
+                                <p>
+                                    Hi, I'm <span className="highlight">Datta Thota</span> — a full-stack developer obsessed with building high-performance, scalable web applications.
+                                </p>
+                                <p>
+                                    My expertise lies in the MERN stack, JavaScript, and TypeScript. I thrive on solving complex architectural challenges and writing clean, maintainable code.
+                                </p>
+                            </div>
 
-                        <div className="tech-about-text">
-                            <p>
-                                Hi, I'm <strong>Datta Thota</strong>  a developer who loves building fast, scalable web experiences.
-                            </p>
-                            <p>
-                                I focus on the MERN stack and have strong command over JavaScript & TypeScript. I enjoy system architecture and clean problem solving.
-                            </p>
-
-                            <div className="tech-about-skills">
-                                <h3>Core Technologies</h3>
-
+                            <div className="terminal-line">
+                                <span className="prompt">C:\Users\Datta&gt;</span> <span className="command">dir /skills</span>
+                            </div>
+                            <div className="terminal-output">
                                 <div className="skills-grid">
                                     {[
                                         'JavaScript (ES6+)',
+                                        'TypeScript',
                                         'Python',
                                         'React.js',
                                         'React Native',
@@ -97,14 +99,13 @@ const TechHome = () => {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </section>
                 <br />
                 <br />
                 {/* Experience Section */}
                 <section id="experience" className="container tech-section tech-experience-section">
-                    <h2 className="tech-section-header">02. Experience</h2>
+                    <div className="tech-section-header">C:\Users\Datta\Experience&gt; type history.log</div>
                     <div className="experience-list">
 
                         {/* Personal Projects */}
@@ -135,26 +136,35 @@ const TechHome = () => {
 
                 {/* Tech Projects Grid */}
                 <section id="projects" className="tech-projects container">
-                    <h2 className="tech-section-header " >03. Selected Repositories</h2>
+                    <div className="tech-section-header">C:\Users\Datta\Projects&gt; dir</div>
                     <div className="tech-grid">
                         {techProjects.map((project) => (
                             <Link to={`/tech/project/${project.id}`} key={project.id} className="tech-card-link">
                                 <motion.div
-                                    className="tech-card"
-                                    whileHover={{ y: -5 }}
-                                    transition={{ duration: 0.2 }}
+                                    className="tech-window"
+                                    whileHover={{ y: -8, transition: { duration: 0.2 } }}
                                 >
-                                    <div className="tech-card-image">
-                                        <img src={project.image} alt={project.title} loading="lazy" />
-                                    </div>
-                                    <div className="tech-card-content">
-                                        <div className="tech-tags">
-                                            {project.tags.slice(0, 3).map(tag => (
-                                                <span key={tag} className="tech-tag">{tag}</span>
-                                            ))}
+                                    <div className="tech-window-header">
+                                        <div className="window-title">{project.title.toLowerCase()}.exe</div>
+                                        <div className="window-controls">
+                                            <span className="win-btn">_</span>
+                                            <span className="win-btn">□</span>
+                                            <span className="win-btn">×</span>
                                         </div>
-                                        <h3 className="tech-project-title">{project.title}</h3>
-                                        <p className="tech-project-desc">{project.description}</p>
+                                    </div>
+                                    <div className="tech-window-body">
+                                        <div className="tech-card-image">
+                                            <img src={project.image} alt={project.title} loading="lazy" />
+                                        </div>
+                                        <div className="tech-window-content">
+                                            <div className="tech-tags">
+                                                {project.tags.slice(0, 3).map(tag => (
+                                                    <span key={tag} className="tech-tag">{tag}</span>
+                                                ))}
+                                            </div>
+                                            <h3 className="tech-project-title">&gt; {project.title}</h3>
+                                            <p className="tech-project-desc">{project.description}</p>
+                                        </div>
                                     </div>
                                 </motion.div>
                             </Link>
@@ -165,7 +175,7 @@ const TechHome = () => {
                 <br />
                 {/* Contact Section */}
                 <section id="contact" className="container tech-section tech-contact-section">
-                    <h2 className="tech-section-header contact-header">04. Initialize Connection</h2>
+                    <div className="tech-section-header">C:\Users\Datta\Contact&gt; start mailto:dattathota988@gmail.com</div>
 
                     <div className="tech-contact-wrapper">
                         <form ref={form} onSubmit={sendEmail} className="tech-form">

@@ -1,22 +1,10 @@
-/* Tech Theme Variables & Reset */
-:root {
-    --tech-bg: #050505;
-    --tech-primary: #00ff41;
-    /* Classic Terminal Green */
-    --tech-dim: #008f11;
-    --tech-bg-dim: #0a0a0a;
-    --tech-font: 'Courier New', Courier, monospace;
-    --tech-cursor: #00ff41;
-}
-
+/* Main Tech Home Styles */
 .tech-home {
     background-color: var(--tech-bg);
-    color: var(--tech-primary);
+    color: var(--tech-text-primary);
     min-height: 100vh;
     padding-top: 100px;
     font-family: var(--tech-font);
-    cursor: default;
-    /* Keep default cursor, let hover effects do the work */
 }
 
 /* Base Link Reset for Tech Cards */
@@ -53,114 +41,157 @@
 .typewriter-effect {
     overflow: hidden;
     white-space: nowrap;
-    border-right: 1ch solid var(--tech-primary);
     width: 0;
-    animation: type 2s steps(20, end) forwards, blink 1s step-end infinite;
+    animation: type 2s steps(20, end) forwards;
     display: inline-block;
     vertical-align: bottom;
 }
 
+.cursor-block {
+    display: inline-block;
+    width: 1ch;
+    height: 1.2em;
+    background: var(--tech-text-primary);
+    margin-left: 2px;
+    vertical-align: bottom;
+    animation: blink 1s step-end infinite;
+}
+
 /* Hero Section */
 .tech-hero {
-    padding: 6rem 0;
-    min-height: 80vh;
+    padding: 8rem 0;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-left: 2px solid var(--tech-dim);
-    padding-left: 2rem;
-    margin-left: 2rem;
+    text-align: center;
+    align-items: center;
 }
 
 .tech-title {
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--tech-primary);
-    text-shadow: 0 0 5px var(--tech-dim);
-    /* CRT Glow */
+    margin-bottom: 2rem;
+    color: var(--tech-text-primary);
 }
 
 .code-bracket {
-    color: #fff;
-    opacity: 0.5;
+    color: var(--tech-accent);
+    opacity: 0.4;
 }
 
 .tech-subtitle {
-    font-size: 1.2rem;
-    color: var(--tech-primary);
-    opacity: 0.9;
-    max-width: 800px;
-    margin-bottom: 3rem;
-    line-height: 1.5;
+    font-size: 1.25rem;
+    color: var(--tech-text-secondary);
+    max-width: 700px;
+    margin-bottom: 4rem;
+    line-height: 1.6;
 }
 
 .tech-stack-ticker {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
-    color: var(--tech-dim);
-    font-size: 1rem;
-    border-top: 1px dashed var(--tech-dim);
-    padding-top: 1rem;
+    justify-content: center;
+    gap: 2rem;
+    color: var(--tech-text-dim);
+    font-size: 0.9rem;
+    border-top: 1px dashed var(--tech-text-dim);
+    padding-top: 2rem;
+    width: 100%;
+    max-width: 800px;
 }
 
 /* Section Headers - Ultimate Prompt Style */
 .tech-section-header {
-    font-size: 1.5rem;
-    margin-bottom: 2.5rem;
-    color: var(--tech-primary);
-    display: inline-block;
-    position: relative;
-    border-bottom: none;
-    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    color: var(--tech-text-primary);
+    display: block;
+    background: #333;
+    padding: 0.5rem 1rem;
+    font-weight: normal;
+    text-align: left;
 }
 
 .tech-section-header::before {
-    content: "root@datta:~$ exec ";
-    color: var(--tech-dim);
-    margin-right: 0.5rem;
-    font-weight: normal;
+    content: none;
 }
 
 /* About Section */
-.tech-about-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    text-align: center;
-    max-width: 900px;
+.tech-about-wrapper {
+    max-width: 850px;
     margin: 0 auto;
 }
 
-.tech-about-text p {
-    color: #ccc;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+.about-terminal {
+    background: var(--tech-bg-alt);
+    border: var(--tech-border);
+    padding: 2.5rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
 }
 
-.tech-about-text strong {
-    color: var(--tech-primary);
-    font-weight: normal;
+.about-terminal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--tech-text-dim);
+    opacity: 0.3;
+}
+
+.terminal-line {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.prompt {
+    color: var(--tech-text-secondary);
+    font-weight: bold;
+}
+
+.command {
+    color: #fff;
+    opacity: 0.9;
+}
+
+.terminal-output {
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+}
+
+.terminal-output p {
+    color: #b0b0b0;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+}
+
+.highlight {
+    color: var(--tech-text-primary);
     background: rgba(0, 255, 65, 0.1);
     padding: 0 4px;
 }
 
 .skill-chip {
-    color: var(--tech-primary);
-    border: 1px solid var(--tech-primary);
-    padding: 0.3rem 0.8rem;
-    font-size: 0.9rem;
-    margin: 0.25rem;
+    color: var(--tech-text-primary);
+    border: var(--tech-border);
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    margin: 0.3rem;
     display: inline-block;
+    background: rgba(0, 255, 65, 0.02);
+    transition: all 0.2s;
 }
 
 .skill-chip:hover {
-    background: var(--tech-primary);
+    background: var(--tech-text-primary);
     color: #000;
-    cursor: default;
 }
 
 /* Profile Image */
@@ -193,106 +224,144 @@
     filter: grayscale(100%) contrast(1.2);
 }
 
-/* Experience Log */
 .experience-list {
-    border-left: 2px dashed var(--tech-dim);
+    border-left: 1px dashed var(--tech-text-dim);
     padding-left: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .experience-item {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     position: relative;
+    text-align: left;
 }
 
 .exp-dot {
     position: absolute;
-    left: -2.6rem;
-    top: 0.3rem;
-    width: 1rem;
-    height: 1rem;
-    background: #000;
-    border: 2px solid var(--tech-primary);
+    left: -2.55rem;
+    top: 0.5rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--tech-bg);
+    border: 2px solid var(--tech-text-secondary);
 }
 
 .exp-dot-active {
-    background: var(--tech-primary);
+    border-color: var(--tech-text-secondary);
+    background: var(--tech-text-secondary);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .exp-title {
-    font-size: 1.3rem;
-    color: var(--tech-primary);
-    margin-bottom: 0.2rem;
-}
-
-.exp-date {
-    color: var(--tech-dim);
-    font-size: 0.9rem;
+    font-size: 1.25rem;
+    color: var(--tech-text-primary);
     margin-bottom: 0.5rem;
 }
 
+.exp-date {
+    color: var(--tech-text-dim);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .exp-desc {
-    color: #ccc;
-    line-height: 1.5;
+    color: #b0b0b0;
+    line-height: 1.7;
+    font-size: 0.95rem;
 }
 
-/* Tech Projects Grid - Fixed Layout */
-.tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2rem;
-}
-
-.tech-card {
-    border: 1px solid var(--tech-dim);
-    background: #000;
+.tech-window {
+    border: var(--tech-border);
+    background: var(--tech-bg-alt);
     height: 100%;
     display: flex;
-    /* Make it a flex column to handle height content */
     flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-window:hover {
+    border-color: var(--tech-text-secondary);
+}
+
+.tech-window-header {
+    background: #000;
+    padding: 0 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: var(--tech-border);
+    height: 32px;
+}
+
+.window-controls {
+    display: flex;
+    gap: 0;
+    margin-right: -0.75rem;
+}
+
+.win-btn {
+    width: 46px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tech-text-primary);
+    font-size: 0.8rem;
+    cursor: pointer;
     transition: all 0.2s;
 }
 
-.tech-card:hover {
-    border-color: var(--tech-primary);
-    box-shadow: 6px 6px 0 var(--tech-dim);
-    /* Block shadow */
-    transform: translate(-3px, -3px);
+.win-btn:last-child:hover {
+    background: #e81123;
+    color: #fff;
+}
+
+.win-btn:not(:last-child):hover {
+    background: #333;
+}
+
+.window-title {
+    font-size: 0.75rem;
+    color: var(--tech-text-primary);
+    font-family: var(--tech-font);
+    letter-spacing: 0.5px;
+}
+
+
+
+.tech-window-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .tech-card-image {
-    height: 200px;
+    height: 180px;
     width: 100%;
     overflow: hidden;
-    border-bottom: 1px solid var(--tech-dim);
+    border-bottom: var(--tech-border);
     position: relative;
+    background: #000;
 }
 
 .tech-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Fix Aspect Ratio */
-    filter: grayscale(100%) contrast(1.1);
-    /* Retro TV look */
-    transition: filter 0.3s;
+    filter: grayscale(100%) opacity(0.7);
+    transition: all 0.5s ease;
 }
 
-.tech-card:hover .tech-card-image img {
-    filter: grayscale(0%) contrast(1);
-    /* Color on hover */
+.tech-window:hover .tech-card-image img {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
 }
 
-/* Scanline effect on image */
-.tech-card-image::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
-}
-
-.tech-card-content {
+.tech-window-content {
     padding: 1.5rem;
     flex-grow: 1;
     display: flex;
@@ -307,34 +376,30 @@
 }
 
 .tech-tag {
-    font-size: 0.75rem;
-    color: #000;
-    background: var(--tech-dim);
+    font-size: 0.7rem;
+    color: var(--tech-text-primary);
+    border: 1px solid #444;
     padding: 2px 6px;
-    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .tech-project-title {
-    font-size: 1.2rem;
-    color: var(--tech-primary);
-    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    color: var(--tech-text-secondary);
+    margin-bottom: 0.75rem;
     font-weight: bold;
 }
 
 .tech-project-desc {
-    font-size: 0.95rem;
-    color: #ccc;
-    line-height: 1.5;
-    text-decoration: none !important;
-    /* Force remove underline */
+    font-size: 0.9rem;
+    color: #999;
+    line-height: 1.6;
 }
 
-/* "Ultimate" Hover - Invert Colors on Card Text */
-.tech-card:hover .tech-project-title {
-    background: var(--tech-primary);
-    color: #000;
-    display: inline;
-    padding: 0 4px;
+.tech-window:hover .tech-project-title {
+    color: #fff;
+    text-shadow: none;
+    text-decoration: underline;
 }
 
 /* Contact Form - Command Line Style */
@@ -354,41 +419,50 @@
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--tech-dim);
-    color: var(--tech-primary);
+    border-bottom: 1px solid var(--tech-text-dim);
+    color: var(--tech-text-primary);
     font-family: var(--tech-font);
-    padding: 0.8rem 0;
-    font-size: 1.1rem;
+    padding: 1rem 0;
+    font-size: 1rem;
+    transition: border-color 0.3s;
 }
 
 .tech-input:focus {
     outline: none;
-    border-bottom: 1px solid var(--tech-primary);
-    box-shadow: 0 4px 2px -2px rgba(0, 255, 65, 0.2);
+    border-bottom: 1px solid var(--tech-text-primary);
 }
 
 .tech-input::placeholder {
-    color: var(--tech-dim);
+    color: var(--tech-text-dim);
+    opacity: 0.5;
 }
 
 .tech-submit-btn {
     width: 100%;
     background: transparent;
-    border: 1px solid var(--tech-primary);
-    color: var(--tech-primary);
-    padding: 1rem;
+    border: 1px solid var(--tech-text-primary);
+    color: var(--tech-text-primary);
+    padding: 1.25rem;
     font-family: var(--tech-font);
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
-    transition: all 0.2s;
+    transition: all 0.3s;
+    margin-top: 1rem;
 }
 
-.tech-submit-btn:hover {
-    background: var(--tech-primary);
+.tech-submit-btn:hover:not(:disabled) {
+    background: var(--tech-text-primary);
     color: #000;
-    box-shadow: 0 0 10px var(--tech-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+}
+
+.tech-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: var(--tech-text-dim);
+    color: var(--tech-text-dim);
 }
 
 /* Social Links */
@@ -400,38 +474,48 @@
 }
 
 .tech-social-link {
-    color: var(--tech-dim);
-    font-size: 1.2rem;
+    color: var(--tech-text-dim);
+    font-size: 1.1rem;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: all 0.2s;
 }
 
 .tech-social-link:hover {
-    color: var(--tech-primary);
-    background: rgba(0, 255, 65, 0.1);
+    color: var(--tech-text-secondary);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .tech-hero {
-        padding-left: 0;
-        margin-left: 0;
-        border: none;
-        text-align: left;
-        padding: 4rem 1rem;
+        padding: 6rem 1rem;
+        min-height: 60vh;
     }
 
     .tech-title {
         font-size: 2.5rem;
     }
 
-    .tech-about-content {
-        grid-template-columns: 1fr;
+    .tech-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
     }
 
     .tech-grid {
         grid-template-columns: 1fr;
+    }
+
+    .tech-window-header {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .window-title {
+        font-size: 0.65rem;
+    }
+
+    .tech-form {
+        padding: 1.5rem;
     }
 }
