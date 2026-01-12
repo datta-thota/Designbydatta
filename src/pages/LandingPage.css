@@ -3,7 +3,7 @@
    Theme: Single Page, Widgets, Fixed Layout
 -------------------------------------------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=VT323&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap');
 
 :root {
     --c-yellow: #FFD600;
@@ -115,6 +115,27 @@
     font-family: var(--f-tech);
     transform: rotate(-2deg);
     margin-top: 0.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.click-hint {
+    position: absolute;
+    bottom: 10px;
+    font-family: var(--f-tech);
+    font-size: 0.6rem;
+    color: rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card-name:hover .click-hint {
+    opacity: 1;
+}
+
+.card-name {
+    cursor: pointer;
 }
 
 /* 2. IMAGE CARD (Center Bottom - 2 Cols x 2 Rows) */
@@ -697,106 +718,111 @@
     background: #000;
     /* Dark background for Cyber feel */
     color: #fff;
-    padding: 0;
-    overflow: hidden;
+    padding: 0 !important;
+    /* Let content handle padding */
+    overflow: visible !important;
+    /* Allow stacks to bleed slightly if needed */
     border: 3px solid #333;
 }
 
-/* HIGH-LOW GAME STYLES */
-.game-container {
+/* SNAKE TEASER STYLES */
+.snake-teaser {
     width: 100%;
     height: 100%;
+    position: relative;
+    cursor: pointer;
+    background: #9ead89;
+    /* Nokia LCD color */
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-    min-width: 220px;
-    background: #111;
-    color: #fff;
-    font-family: var(--f-tech);
-}
-
-.game-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-    margin-bottom: 0.5rem;
-    color: #888;
-}
-
-.game-display {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.num-box {
-    width: 60px;
-    height: 60px;
-    background: #222;
-    border: 2px solid #444;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.num-box.next {
-    color: var(--c-yellow);
-}
-
-.num-box.next.win {
-    border-color: #00FF00;
-    color: #00FF00;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-}
-
-.num-box.next.lose {
-    border-color: #FF0055;
-    color: #FF0055;
-}
-
-.arrow-indicator {
-    font-size: 1.5rem;
-    color: #555;
-}
-
-.game-status {
-    text-align: center;
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
-    min-height: 1.2rem;
-    font-weight: bold;
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    white-space: nowrap;
-    /* ✅ force horizontal */
+    padding: 1.5rem;
+    border: 1px solid #2b3024;
     overflow: hidden;
 }
 
-.hint-text {
-    font-size: 0.7rem;
-    color: var(--c-yellow);
-    animation: fadeIn 0.3s ease;
-
-    white-space: nowrap;
-    /* ✅ key line */
-    word-break: keep-all;
-    /* ✅ prevent letter breaking */
+.snake-lcd-bg {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.2;
 }
 
-
-.game-controls {
+.teaser-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
     display: flex;
-    gap: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.teaser-label {
+    font-family: 'VT323', monospace;
+    font-size: 0.8rem;
+    color: #2b3024;
+    letter-spacing: 2px;
+}
+
+.teaser-title {
+    font-family: 'VT323', monospace;
+    font-size: 2.2rem;
+    line-height: 0.9;
+    color: #2b3024;
+    margin-bottom: 0.5rem;
+}
+
+.teaser-desc {
+    font-family: 'VT323', monospace;
+    font-size: 0.9rem;
+    color: rgba(43, 48, 36, 0.7);
+    line-height: 1.2;
+}
+
+.teaser-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.play-btn {
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    color: #2b3024;
+    font-weight: bold;
+}
+
+.teaser-pixels {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 60px;
+    height: 60px;
+    background: #2b3024;
+    opacity: 0.1;
+    transform: rotate(45deg);
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+@media (max-width: 768px) {
+    .teaser-title {
+        font-size: 1.4rem;
+    }
+
+    .teaser-desc {
+        max-width: 100%;
+    }
 }
 
 .game-btn {
@@ -1517,14 +1543,36 @@
     }
 
     /* 7. Dino: Order 8 (Decreased Priority) */
+    /* 7. Snake Card: Order 8 (Decreased Priority on mobile) */
     .card-dino {
         order: 8;
         grid-column: 1 / -1;
         grid-row: auto !important;
         height: auto;
         min-height: 140px;
-        /* More compact */
-        padding: 1rem;
+        padding: 0 !important;
+        background: #9ead89;
+        border: 2px solid #2b3024;
+    }
+
+    .teaser-pixels {
+        display: none !important;
+    }
+
+    .teaser-paper {
+        padding: 1.5rem 1rem !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    .teaser-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .teaser-desc {
+        font-size: 1rem !important;
+        color: #555 !important;
     }
 
     .tech-terminal {

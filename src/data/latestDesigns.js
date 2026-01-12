@@ -113,7 +113,46 @@ export const latestDesigns = [
         "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1767285090/spirit_ipe9z3.png",
         "description": "A bold and intense movie edit capturing the raw energy and emotions of Spirit.",
         "date": "2026"
+    },
+    {
+        "id": 17,
+        "title": "Retro-Style Raja Saab - 2 Days to Release Poster",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768224450/Instagram_post_-_289_z7lgjr.png",
+        "description": "A retro-themed countdown poster for Raja Saab, designed to build hype with vintage aesthetics, dramatic lighting, and cinematic mood.",
+        "date": "2026"
+    },
+
+    {
+        "id": 18,
+        "title": "Jalsa Movie Poster Edit",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768224449/jalsa_nbivud.png",
+        "description": "A cinematic poster inspired by the iconic style and mass appeal of the movie Jalsa.",
+        "date": "2026"
+    },
+    {
+        "id": 19,
+        "title": "Rockstar Movie Cinematic Edit",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768224450/rock_bcs6bn.png",
+        "description": "A cinematic poster edit inspired by the rebellious spirit, music-driven emotion, and raw intensity of the movie Rockstar.",
+        "date": "2026"
     }
+    ,
+    {
+        "id": 20,
+        "title": "Raja Saab Cinematic Edit",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768224450/rs_waigxa.png",
+        "description": "A raw and intense cinematic poster edit emphasizing attitude, contrast, and strong character presence.",
+        "date": "2026"
+    }
+    ,
+    {
+        "id": 21,
+        "title": "Rolex Movie Cinematic Poster",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768224449/rolex_sfzgo6.png",
+        "description": "A cinematic poster edit inspired by the powerful and menacing character Rolex from the LCU.",
+        "date": "2026"
+    }
+
 
 
 

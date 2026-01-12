@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import NokiaSnakeModal from '../components/common/NokiaSnakeModal';
+import NameAnimationModal from '../components/common/NameAnimationModal';
+import BentoInfoModal from '../components/common/BentoInfoModal';
+import SignaturePreloader from '../components/common/SignaturePreloader';
+import { AnimatePresence } from 'framer-motion';
 import './LandingPage.css';
 import profileImg from '../assets/image.png';
 import bgImg from '../assets/download.jpg';
@@ -115,129 +120,28 @@ const WindowsCMD = () => {
     );
 };
 
-
-
-const HighLowGame = () => {
-    const [currentNum, setCurrentNum] = useState(generateNum());
-    const [nextNum, setNextNum] = useState(null); // Revealed after guess
-    const [score, setScore] = useState(0);
-    const [highScore, setHighScore] = useState(0);
-    const [message, setMessage] = useState('HIGHER or LOWER?');
-    const [gameState, setGameState] = useState('PLAYING'); // PLAYING, RESULT
-    const [hint, setHint] = useState(null);
-
-    function generateNum() {
-        return Math.floor(Math.random() * 100) + 1;
-    }
-
-    // Generate accurate probability hint
-    const getHint = () => {
-        const higherChance = 100 - currentNum;
-        const lowerChance = currentNum - 1;
-
-        if (higherChance > lowerChance) {
-            return `Safe Bet: HIGHER (${higherChance}%)`;
-        } else if (lowerChance > higherChance) {
-            return `Safe Bet: LOWER (${lowerChance}%)`;
-        } else {
-            return `Risky! It's a 50/50 split.`;
-        }
-    };
-
-    // Effect to update hint when currentNum changes and game is playing
-    useEffect(() => {
-        if (gameState === 'PLAYING') {
-            setHint(getHint());
-        }
-    }, [currentNum, gameState]);
-
-    const handleGuess = (guess) => {
-        if (gameState === 'RESULT') return;
-
-        setHint(null); // Clear hint on guess
-
-        const newNum = generateNum();
-
-        // Ensure not same number (rare edge case)
-        if (newNum === currentNum) {
-            handleGuess(guess); // Retry
-            return;
-        }
-
-        setNextNum(newNum);
-        setGameState('RESULT');
-
-        const isHigher = newNum > currentNum;
-        const isCorrect = (guess === 'HIGH' && isHigher) || (guess === 'LOW' && !isHigher);
-
-        if (isCorrect) {
-            const newScore = score + 1;
-            setScore(newScore);
-            if (newScore > highScore) setHighScore(newScore);
-            setMessage('CORRECT!');
-
-            // Auto continue after short delay
-            setTimeout(() => {
-                setCurrentNum(newNum);
-                setNextNum(null);
-                setGameState('PLAYING');
-                setMessage('HIGHER or LOWER?');
-            }, 1000);
-        } else {
-            setMessage('GAME OVER!');
-            // Reset delay
-            setTimeout(() => {
-                setScore(0);
-                setCurrentNum(generateNum());
-                setNextNum(null);
-                setGameState('PLAYING');
-                setMessage('TRY AGAIN');
-            }, 2000);
-        }
-    };
-
+const SnakeTeaser = ({ onClick }) => {
     return (
-        <div className="game-container">
-            <div className="game-header">
-                <span style={{ color: '#888' }}>DATA PREDICTOR</span>
-                <span className="game-score">STREAK: {score} <span style={{ opacity: 0.5 }}>(Best: {highScore})</span></span>
-            </div>
-
-            <div className="game-display">
-                <div className="num-box current">
-                    {currentNum}
+        <div className="snake-teaser" onClick={onClick}>
+            <div className="snake-lcd-bg"></div>
+            <div className="teaser-content">
+                <div className="teaser-label">RETRO SYSTEM</div>
+                <div className="teaser-main">
+                    <h3 className="teaser-title">SNAKE<br />GAME</h3>
+                    <p className="teaser-desc">Classic monochrome simulation. Navigate the grid.</p>
                 </div>
-                <div className="arrow-indicator">
-                    {gameState === 'RESULT' ? (nextNum > currentNum ? '▲' : '▼') : '→'}
-                </div>
-                <div className={`num-box next ${gameState === 'RESULT' ? (message === 'CORRECT!' ? 'win' : 'lose') : ''}`}>
-                    {gameState === 'RESULT' ? nextNum : '?'}
+                <div className="teaser-footer">
+                    <span className="play-btn">START GAME →</span>
                 </div>
             </div>
-
-            <div className="game-status">
-                {gameState === 'RESULT' && message}
-            </div>
-
-            <div className="game-controls">
-                <button
-                    className="game-btn btn-high"
-                    onClick={() => handleGuess('HIGH')}
-                    disabled={gameState === 'RESULT'}
-                >
-                    ▲ HIGHER
-                </button>
-                <button
-                    className="game-btn btn-low"
-                    onClick={() => handleGuess('LOW')}
-                    disabled={gameState === 'RESULT'}
-                >
-                    ▼ LOWER
-                </button>
-            </div>
+            <div className="teaser-pixels"></div>
         </div>
     );
 };
+
+
+
+// Retained functionality but moved to modal
 
 const RetroTVQuote = () => {
     const quotes = [
@@ -340,6 +244,10 @@ const SignalStrength = () => {
 
 const LandingPage = () => {
     const [time, setTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    const [isSnakeOpen, setIsSnakeOpen] = useState(false);
+    const [isNameModalOpen, setIsNameModalOpen] = useState(false);
+    const [activeBentoModal, setActiveBentoModal] = useState(null); // 'location', 'image', 'tv', 'utility'
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -349,95 +257,158 @@ const LandingPage = () => {
     }, []);
 
     return (
-        <div className="landing-page" data-theme="dark">
-            <div className="bento-grid">
+        <>
+            <AnimatePresence>
+                {isLoading && (
+                    <SignaturePreloader onLoadingComplete={() => setIsLoading(false)} />
+                )}
+            </AnimatePresence>
 
-                {/* 1. DESIGN PORTAL (Left Col - Row 1 & 2) */}
-                <Link to="/design" style={{ textDecoration: 'none', display: 'contents' }}>
+            <motion.div
+                className="landing-page"
+                data-theme="dark"
+                initial={{ opacity: 0 }}
+                animate={{
+                    opacity: 1,
+                    filter: isLoading ? "brightness(0.6) blur(2px)" : "brightness(1) blur(0px)"
+                }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+            >
+                <div className="bento-grid">
+
+                    {/* 1. DESIGN PORTAL (Left Col - Row 1 & 2) */}
+                    <Link to="/design" style={{ textDecoration: 'none', display: 'contents' }}>
+                        <motion.div
+                            className="bento-card card-design"
+                            whileHover={{ scale: 0.98 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <MoviePosterUI />
+
+                        </motion.div>
+                    </Link>
+
+
+                    {/* 2. NAME CARD (Center Top - Row 1) */}
                     <motion.div
-                        className="bento-card card-design"
+                        className="bento-card card-name"
+                        initial={{ y: -50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
                         whileHover={{ scale: 0.98 }}
                         whileTap={{ scale: 0.95 }}
+                        onClick={() => setIsNameModalOpen(true)}
+                        style={{ cursor: 'pointer' }}
                     >
-                        <MoviePosterUI />
+                        <h1 className="name-big">DATTA<br />THOTA</h1>
+                        <div className="role-badge">VISUAL DESIGNER & DEV</div>
 
+                        {/* Subtle Click Hint */}
+                        <div className="click-hint">CLICK TO EXPLORE</div>
                     </motion.div>
-                </Link>
+
+                    {/* 3. TECH PORTAL (Right Col - Top Row) */}
+                    <Link to="/tech" style={{ textDecoration: 'none', display: 'contents' }}>
+                        <motion.div
+                            className="bento-card card-tech"
+                            whileHover={{ scale: 0.98 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <WindowsCMD />
+                        </motion.div>
 
 
-                {/* 2. NAME CARD (Center Top - Row 1) */}
-                <motion.div
-                    className="bento-card card-name"
-                    initial={{ y: -50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                >
-                    <h1 className="name-big">DATTA<br />THOTA</h1>
-                    <div className="role-badge">VISUAL DESIGNER & DEV</div>
-                </motion.div>
+                    </Link>
 
-                {/* 3. TECH PORTAL (Right Col - Top Row) */}
-                <Link to="/tech" style={{ textDecoration: 'none', display: 'contents' }}>
+                    {/* NEW: UNIQUE CARD (Mobile Only Split) */}
                     <motion.div
-                        className="bento-card card-tech"
+                        className="bento-card card-unique"
                         whileHover={{ scale: 0.98 }}
                         whileTap={{ scale: 0.95 }}
+                        onClick={() => setActiveBentoModal('tv')}
+                        style={{ cursor: 'pointer' }}
                     >
-                        <WindowsCMD />
+                        <RetroTVQuote />
                     </motion.div>
 
 
-                </Link>
-
-                {/* NEW: UNIQUE CARD (Mobile Only Split) */}
-                <div className="bento-card card-unique">
-                    <RetroTVQuote />
-                </div>
 
 
-
-
-                {/* 4. LOCATION (Left Col - Bottom Row) */}
-                {/* 4. LOCATION (Left Col - Bottom Row) */}
-                <div className="bento-card card-location">
-                    <div className="location-data">
-                        <div className="loc-label">CURRENTLY IN</div>
-                        <div className="loc-city">VIJAYAWADA</div>
-                        <div className="loc-sub">ANDHRA PRADESH, INDIA</div>
-                        <div className="loc-icon">🌊</div>
-                    </div>
-                    <div className="river-container">
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                    </div>
-                </div>
-
-                {/* 5. IMAGE CARD (Center - Row 2 & 3 MASSIVE) */}
-                <div className="bento-card card-image">
-                    <img src={bgImg} alt="Background" className="profile-bg" />
-                    <img src={profileImg} alt="Profile" className="profile-full" />
-                </div>
-
-                {/* 6. HIGH-LOW GAME (Right Col - Middle Row) */}
-                <div className="bento-card card-dino">
-                    <HighLowGame />
-                </div>
-
-                {/* 7. UTILITY STACK (Right Col - Bottom Row) */}
-                <div className="bento-card card-utility">
-                    <div className="utility-row">
-                        <div className="status-indicator">
-                            <div className="status-dot"></div>
-                            <span>WORK</span>
+                    {/* 4. LOCATION (Left Col - Bottom Row) */}
+                    <motion.div
+                        className="bento-card card-location"
+                        whileHover={{ scale: 0.98 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setActiveBentoModal('location')}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <div className="location-data">
+                            <div className="loc-label">CURRENTLY IN</div>
+                            <div className="loc-city">VIJAYAWADA</div>
+                            <div className="loc-sub">ANDHRA PRADESH, INDIA</div>
+                            <div className="loc-icon">🌊</div>
                         </div>
-                        <SignalStrength />
-                    </div>
-                    <div style={{ textAlign: 'right', fontFamily: 'var(--f-tech)', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                        {time}
-                    </div>
-                </div>
+                        <div className="river-container">
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                        </div>
+                    </motion.div>
 
-            </div>
-        </div>
+                    {/* 5. IMAGE CARD (Center - Row 2 & 3 MASSIVE) */}
+                    <div className="bento-card card-image">
+                        <img src={bgImg} alt="Background" className="profile-bg" />
+                        <img src={profileImg} alt="Profile" className="profile-full" />
+                    </div>
+
+                    {/* 6. SNAKE TEASER (Right Col - Middle Row) */}
+                    <motion.div
+                        className="bento-card card-dino"
+                        whileHover={{ scale: 0.98 }}
+                        whileTap={{ scale: 0.96 }}
+                    >
+                        <SnakeTeaser onClick={() => setIsSnakeOpen(true)} />
+                    </motion.div>
+
+                    {/* Modal Containers */}
+                    <NokiaSnakeModal
+                        isOpen={isSnakeOpen}
+                        onClose={() => setIsSnakeOpen(false)}
+                    />
+
+                    <NameAnimationModal
+                        isOpen={isNameModalOpen}
+                        onClose={() => setIsNameModalOpen(false)}
+                    />
+
+                    {/* 7. UTILITY STACK (Right Col - Bottom Row) */}
+                    <motion.div
+                        className="bento-card card-utility"
+                        whileHover={{ scale: 0.98 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setActiveBentoModal('utility')}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <div className="utility-row">
+                            <div className="status-indicator">
+                                <div className="status-dot"></div>
+                                <span>WORK</span>
+                            </div>
+                            <SignalStrength />
+                        </div>
+                        <div style={{ textAlign: 'right', fontFamily: 'var(--f-tech)', fontSize: '1.2rem', fontWeight: 'bold' }}>
+                            {time}
+                        </div>
+                    </motion.div>
+
+                    {/* Info Modals */}
+                    <BentoInfoModal
+                        isOpen={!!activeBentoModal}
+                        type={activeBentoModal}
+                        onClose={() => setActiveBentoModal(null)}
+                    />
+
+                </div>
+            </motion.div>
+        </>
     );
 };
 

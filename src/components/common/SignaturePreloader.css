@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+
+@font-face {
+    font-family: 'Bastliga One';
+    src: url('/assets/bastliga-one/Bastliga One.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.signature-preloader {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    /* Lite dim background */
+    backdrop-filter: blur(8px);
+    /* Subtle blur to separate from landing page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.signature-text-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.signature-char {
+    font-family: 'Bastliga One', cursive;
+    font-size: clamp(4rem, 15vw, 10rem);
+    color: #fff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    white-space: pre;
+    letter-spacing: -2px;
+}
+
+/* No light sweep effect removed as requested */
+
+/* Add a subtle fade-out grain effect */
+.signature-preloader::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .signature-container {
+        max-width: 90%;
+        padding: 0 20px;
+    }
+}
