@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './BentoInfoModal.css';
 
-const BentoInfoModal = ({ isOpen, onClose, type }) => {
+const BentoInfoModal = ({ isOpen, onClose, type, tvQuote }) => {
     if (!isOpen) return null;
 
     const renderContent = () => {
@@ -63,17 +63,57 @@ const BentoInfoModal = ({ isOpen, onClose, type }) => {
                 );
             case 'tv':
                 return (
-                    <div className="bento-modal-content tv-theme">
-                        <div className="crt-flicker"></div>
-                        <div className="modal-header">
-                            <span className="modal-tag">BROADCASTING FROM THE VOID</span>
-                            <h2>CINEMA FLUX</h2>
+                    <div className="tv-modal-immersive">
+                        <div className="tv-antenna">
+                            <div className="antenna-rod left"></div>
+                            <div className="antenna-rod right"></div>
                         </div>
-                        <div className="quote-expanded">
-                            <p className="main-quote">“Creativity involves breaking out of established patterns in order to look at things in a different way.”</p>
-                            <span className="quote-author">— Edward de Bono</span>
+                        <div className="tv-chassis-large">
+                            <div className="tv-bezel-large">
+                                <div className="tv-screen-area-large">
+                                    <div className="crt-glow"></div>
+                                    <div className="crt-scanlines-large"></div>
+                                    <div className="crt-noise"></div>
+                                    <div className="tv-crt-screen-large">
+                                        <div className="crt-content-large">
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 1.1 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ duration: 0.5, delay: 0.2 }}
+                                                className="quote-content"
+                                            >
+                                                <p className="main-quote-large">“{tvQuote?.text || "Creativity involves breaking out of established patterns in order to look at things in a different way."}”</p>
+                                                <span className="quote-author-large">— {tvQuote?.author || "Edward de Bono"}</span>
+                                            </motion.div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="tv-controls-large">
+                                    <div className="knob-group">
+                                        <div className="tv-knob-large v-tuning">
+                                            <div className="knob-marker"></div>
+                                        </div>
+                                        <span className="knob-label">TUNE</span>
+                                    </div>
+                                    <div className="knob-group">
+                                        <div className="tv-knob-large volume">
+                                            <div className="knob-marker"></div>
+                                        </div>
+                                        <span className="knob-label">VOL</span>
+                                    </div>
+                                    <div className="tv-speaker-grill">
+                                        {[...Array(8)].map((_, i) => (
+                                            <div key={i} className="speaker-slot"></div>
+                                        ))}
+                                    </div>
+                                    <div className="power-indicator">
+                                        <div className="power-led"></div>
+                                        <span>POWER</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="tv-static-lines"></div>
+                        <div className="tv-base-large"></div>
                     </div>
                 );
             case 'utility':

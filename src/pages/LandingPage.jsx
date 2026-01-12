@@ -143,24 +143,8 @@ const SnakeTeaser = ({ onClick }) => {
 
 // Retained functionality but moved to modal
 
-const RetroTVQuote = () => {
-    const quotes = [
-        { text: "Design is not just what it looks like and feels like. Design is how it works.", author: "Steve Jobs" },
-        { text: "Good design is obvious. Great design is transparent.", author: "Joe Sparano" },
-        { text: "The details are not the details. They make the design.", author: "Charles Eames" },
-        { text: "Digital design is like painting, except the paint never dries.", author: "Neville Brody" },
-        { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
-        { text: "Everything is designed. Few things are designed well.", author: "Brian Reed" },
-        { text: "Creativity is intelligence having fun.", author: "Albert Einstein" },
-        { text: "Content precedes design. Design in the absence of content is not design, it’s decoration.", author: "Jeffrey Zeldman" }
-    ];
-
-    const [quote, setQuote] = useState(quotes[0]);
-
-    useEffect(() => {
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        setQuote(randomQuote);
-    }, []);
+const RetroTVQuote = ({ quote }) => {
+    if (!quote) return null;
 
     return (
         <div className="tv-container">
@@ -243,11 +227,29 @@ const SignalStrength = () => {
 };
 
 const LandingPage = () => {
+    const quotes = [
+        { text: "Design is not just what it looks like and feels like. Design is how it works.", author: "Steve Jobs" },
+        { text: "Good design is obvious. Great design is transparent.", author: "Joe Sparano" },
+        { text: "The details are not the details. They make the design.", author: "Charles Eames" },
+        { text: "Digital design is like painting, except the paint never dries.", author: "Neville Brody" },
+        { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
+        { text: "Everything is designed. Few things are designed well.", author: "Brian Reed" },
+        { text: "Creativity is intelligence having fun.", author: "Albert Einstein" },
+        { text: "Content precedes design. Design in the absence of content is not design, it’s decoration.", author: "Jeffrey Zeldman" },
+        { text: "Creativity involves breaking out of established patterns in order to look at things in a different way.", author: "Edward de Bono" }
+    ];
+
     const [time, setTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
     const [isSnakeOpen, setIsSnakeOpen] = useState(false);
     const [isNameModalOpen, setIsNameModalOpen] = useState(false);
     const [activeBentoModal, setActiveBentoModal] = useState(null); // 'location', 'image', 'tv', 'utility'
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedQuote, setSelectedQuote] = useState(quotes[0]);
+
+    useEffect(() => {
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        setSelectedQuote(randomQuote);
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -327,7 +329,7 @@ const LandingPage = () => {
                         onClick={() => setActiveBentoModal('tv')}
                         style={{ cursor: 'pointer' }}
                     >
-                        <RetroTVQuote />
+                        <RetroTVQuote quote={selectedQuote} />
                     </motion.div>
 
 
@@ -368,17 +370,6 @@ const LandingPage = () => {
                         <SnakeTeaser onClick={() => setIsSnakeOpen(true)} />
                     </motion.div>
 
-                    {/* Modal Containers */}
-                    <NokiaSnakeModal
-                        isOpen={isSnakeOpen}
-                        onClose={() => setIsSnakeOpen(false)}
-                    />
-
-                    <NameAnimationModal
-                        isOpen={isNameModalOpen}
-                        onClose={() => setIsNameModalOpen(false)}
-                    />
-
                     {/* 7. UTILITY STACK (Right Col - Bottom Row) */}
                     <motion.div
                         className="bento-card card-utility"
@@ -399,15 +390,27 @@ const LandingPage = () => {
                         </div>
                     </motion.div>
 
-                    {/* Info Modals */}
-                    <BentoInfoModal
-                        isOpen={!!activeBentoModal}
-                        type={activeBentoModal}
-                        onClose={() => setActiveBentoModal(null)}
-                    />
-
                 </div>
             </motion.div>
+
+            {/* Modal Containers - Moved outside filtered container to fix mobile centering */}
+            <NokiaSnakeModal
+                isOpen={isSnakeOpen}
+                onClose={() => setIsSnakeOpen(false)}
+            />
+
+            <NameAnimationModal
+                isOpen={isNameModalOpen}
+                onClose={() => setIsNameModalOpen(false)}
+            />
+
+            {/* Info Modals */}
+            <BentoInfoModal
+                isOpen={!!activeBentoModal}
+                type={activeBentoModal}
+                tvQuote={selectedQuote}
+                onClose={() => setActiveBentoModal(null)}
+            />
         </>
     );
 };
