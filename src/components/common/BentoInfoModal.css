@@ -430,6 +430,63 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
+
+/* THEME: UTILITY (Terminal) */
+.utility-modal {
+    background: #0a0a0a;
+    color: #00ff00;
+    font-family: 'VT323', monospace;
+    border: 1px solid #333;
+}
+
+.utility-theme .modal-header h2 {
+    color: #fff;
+    font-family: 'VT323', monospace;
+    letter-spacing: 2px;
+}
+
+.utility-theme .modal-tag {
+    color: #555;
+    opacity: 1;
+}
+
+.system-logs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 1px solid #222;
+}
+
+.log-line {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    color: #aaa;
+}
+
+.log-line.blink {
+    color: #00ff00;
+}
+
+.blink::after {
+    content: '_';
+    animation: terminal-cursor 1s infinite;
+}
+
+@keyframes terminal-cursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
 @media (max-width: 800px) {
     .tv-bezel-large {
         grid-template-columns: 1fr;
