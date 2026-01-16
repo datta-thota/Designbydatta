@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
 
-@font-face {
-    font-family: 'Bastliga One';
-    src: url('../../assets/BastligaOne.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
 .signature-preloader {
     position: fixed;
     inset: 0;
@@ -27,16 +20,25 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
 }
 
-.signature-char {
-    font-family: 'Bastliga One', cursive;
-    font-size: clamp(4rem, 15vw, 10rem);
-    color: #fff;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    white-space: pre;
-    letter-spacing: -2px;
+.signature-svg-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
+
+.signature-svg {
+    width: 100%;
+    height: auto;
+    max-width: clamp(300px, 60vw, 500px);
+    filter: brightness(0) invert(1) drop-shadow(0 4px 15px rgba(0, 0, 0, 0.4));
+    /* Force black SVG to be white */
+}
+
 
 /* No light sweep effect removed as requested */
 

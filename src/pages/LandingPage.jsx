@@ -382,14 +382,32 @@ const LandingPage = () => {
                                 </div>
                             </div>
 
-                            <div className="editorial-bottom-metadata">
-                                <div className="editorial-meta-item">
-                                    <span className="label">LOC:</span> AP_IN (16.50° N, 80.64° E)
+                            <div className="editorial-status-hub">
+                                <div className="status-header">
+                                    <motion.div
+                                        className="status-dot-pulse"
+                                        animate={{ opacity: [0.4, 1, 0.4] }}
+                                        transition={{ duration: 1.5, repeat: Infinity }}
+                                    />
+                                    <span className="status-label">SYSTEM_ACTIVE</span>
                                 </div>
-                                <div className="editorial-meta-item">
-                                    <span className="label">POS:</span> VISUAL_LEAD
+                                <div className="data-bars">
+                                    {[1, 2, 3, 4, 5].map(i => (
+                                        <motion.div
+                                            key={i}
+                                            className="data-bar"
+                                            animate={{ height: [`${20 + Math.random() * 60}%`, `${20 + Math.random() * 60}%`] }}
+                                            transition={{ duration: 0.5 + Math.random(), repeat: Infinity, repeatType: "reverse" }}
+                                        />
+                                    ))}
                                 </div>
+                                <div className="hub-footer">
+                                    <span className="access-tag">ACCESS_GRANTED</span>
+                                    <span className="id-code">#DT_98A_VISUAL</span>
+                                </div>
+                                <div className="corner-scanline"></div>
                             </div>
+
 
                             <div className="color-palette-minimal">
                                 <span className="p-dot"></span>

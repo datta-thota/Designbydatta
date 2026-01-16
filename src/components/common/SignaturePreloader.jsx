@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './SignaturePreloader.css';
+import signatureSvg from '../../assets/signature.svg';
 
 const SignaturePreloader = ({ onLoadingComplete }) => {
-    const name = "Datta Thota";
-
     useEffect(() => {
         const timer = setTimeout(() => {
             onLoadingComplete();
@@ -21,7 +20,7 @@ const SignaturePreloader = ({ onLoadingComplete }) => {
         >
             <div className="signature-text-container">
                 <motion.div
-                    className="signature-char"
+                    className="signature-svg-wrapper"
                     initial={{ clipPath: 'inset(0 100% 0 0)' }}
                     animate={{ clipPath: 'inset(0 0% 0 0)' }}
                     transition={{
@@ -29,9 +28,12 @@ const SignaturePreloader = ({ onLoadingComplete }) => {
                         ease: [0.45, 0.05, 0.55, 0.95],
                         delay: 0.1
                     }}
-                    style={{ position: 'relative' }}
                 >
-                    {name}
+                    <img
+                        src={signatureSvg}
+                        alt="Signature"
+                        className="signature-svg"
+                    />
                 </motion.div>
             </div>
         </motion.div>
@@ -39,3 +41,4 @@ const SignaturePreloader = ({ onLoadingComplete }) => {
 };
 
 export default SignaturePreloader;
+

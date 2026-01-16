@@ -340,29 +340,110 @@
     font-weight: bold;
 }
 
-/* Bottom Metadata */
-.editorial-bottom-metadata {
+/* Bottom Status Hub Replacement */
+.editorial-status-hub {
     align-self: flex-end;
     text-align: right;
     font-family: var(--f-tech);
-    font-size: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    border-right: 2px solid var(--c-orange);
+    position: relative;
+    backdrop-filter: blur(2px);
+    width: fit-content;
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot-pulse {
+    width: 6px;
+    height: 6px;
+    background: var(--c-orange);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--c-orange);
+}
+
+.status-label {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    color: var(--c-orange);
+    font-weight: bold;
+}
+
+.data-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 15px;
+    padding-right: 2px;
+}
+
+.data-bar {
+    width: 2px;
+    background: #1a1a1a;
+    opacity: 0.6;
+}
+
+.hub-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.access-tag {
+    font-size: 0.55rem;
     color: #1a1a1a;
-    /* Anchor Dark */
+    background: var(--c-orange);
+    padding: 1px 4px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.id-code {
+    font-size: 0.5rem;
+    opacity: 0.5;
+    color: #1a1a1a;
+}
+
+.corner-scanline {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--c-orange);
+    opacity: 0.3;
+    box-shadow: 0 0 10px var(--c-orange);
+    animation: corner-sweep 2s ease-in-out infinite;
+}
+
+@keyframes corner-sweep {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.1;
+    }
+
+    50% {
+        transform: translateY(-30px);
+        opacity: 0.4;
+    }
 }
 
 .editorial-meta-item {
-    margin-bottom: 2px;
-    opacity: 1;
-    /* Full opacity for visibility */
+    display: none;
+    /* Removed old style */
 }
 
-.editorial-meta-item .label {
-    opacity: 1;
-    color: var(--c-orange);
-    /* High-contrast guide for the eye */
-    font-weight: bold;
-    margin-right: 4px;
-}
 
 /* Palette Minimal */
 .color-palette-minimal {
