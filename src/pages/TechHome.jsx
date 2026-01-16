@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import emailjs from '@emailjs/browser'; // Import emailjs
 import { techProjects } from '../data/techProjects';
 import './TechHome.css';
@@ -34,6 +35,10 @@ const TechHome = () => {
 
     return (
         <PageTransition>
+            <Helmet>
+                <title>Datta Thota | Full Stack Developer</title>
+                <meta name="description" content="MERN Stack Developer specializing in scalable web applications, React, Node.js, and cloud architecture." />
+            </Helmet>
             <div className="tech-home">
                 {/* Tech Hero */}
                 <section id="hero" className="tech-hero container">

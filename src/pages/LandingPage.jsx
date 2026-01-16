@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import NokiaSnakeModal from '../components/common/NokiaSnakeModal';
 import NameAnimationModal from '../components/common/NameAnimationModal';
 import BentoInfoModal from '../components/common/BentoInfoModal';
 import SignaturePreloader from '../components/common/SignaturePreloader';
 import ContactBar from '../components/common/ContactBar';
+import TimeDisplay from '../components/common/TimeDisplay';
 import { AnimatePresence } from 'framer-motion';
 import './LandingPage.css';
-import profileImg from '../assets/image.png';
-import bgImg from '../assets/download.jpg';
+import profileImg from '../assets/image.avif';
+import bgImg from '../assets/download.avif';
 
-const MoviePosterUI = () => {
+const MoviePosterUI = memo(() => {
     return (
         <div className="movie-poster-wrapper">
             <div className="movie-vignette"></div>
@@ -48,8 +50,10 @@ const MoviePosterUI = () => {
                     <div className="movie-rating-badge">🎨 CREATIVE CONTENT</div>
                     <motion.div
                         className="movie-ticket-cta"
-                        whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 77, 0, 0.4)" }}
+                        whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        role="button"
+                        aria-label="Enter Gallery"
                     >
                         <span className="ticket-edge left"></span>
                         <span className="ticket-text">ENTER GALLERY NOW</span>
@@ -69,23 +73,15 @@ const MoviePosterUI = () => {
                     }}
                     transition={{ duration: 8, repeat: Infinity }}
                 />
-                <motion.div
-                    className="leak leak-2"
-                    animate={{
-                        opacity: [0.1, 0.2, 0.1],
-                        rotate: [0, 45, 0],
-                        y: [-20, 20, -20]
-                    }}
-                    transition={{ duration: 12, repeat: Infinity }}
-                />
+                <div className="leak leak-2"></div>
             </div>
         </div>
     );
-};
+});
 
 
 
-const WindowsCMD = () => {
+const WindowsCMD = memo(() => {
 
     return (
         <div className="windows-cmd-wrapper">
@@ -119,11 +115,11 @@ const WindowsCMD = () => {
             </div>
         </div>
     );
-};
+});
 
-const SnakeTeaser = ({ onClick }) => {
+const SnakeTeaser = memo(({ onClick }) => {
     return (
-        <div className="snake-teaser" onClick={onClick}>
+        <button className="snake-teaser" onClick={onClick} aria-label="Play Snake Game">
             <div className="snake-lcd-bg"></div>
             <div className="teaser-content">
                 <div className="teaser-label">RETRO SYSTEM</div>
@@ -136,9 +132,9 @@ const SnakeTeaser = ({ onClick }) => {
                 </div>
             </div>
             <div className="teaser-pixels"></div>
-        </div>
+        </button>
     );
-};
+});
 
 
 
@@ -190,7 +186,7 @@ const RetroTVQuote = ({ quote }) => {
 
 
 
-const SignalStrength = () => {
+const SignalStrength = memo(() => {
     const [isBoosting, setIsBoosting] = useState(false);
 
     const handleBoost = () => {
@@ -203,29 +199,20 @@ const SignalStrength = () => {
             className={`signal-widget ${isBoosting ? 'boosting' : ''}`}
             onClick={handleBoost}
             title="Click to boost signal"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && handleBoost()}
         >
             <div className="signal-bars">
                 {[1, 2, 3, 4].map(i => (
-                    <motion.div
-                        key={i}
-                        className="signal-bar"
-                        animate={{
-                            scaleY: isBoosting ? [1, 1.5, 1] : [1, 0.8, 1],
-                            opacity: [0.3, 1, 0.3]
-                        }}
-                        transition={{
-                            duration: isBoosting ? 0.3 : 1.5,
-                            repeat: Infinity,
-                            delay: i * 0.1,
-                            ease: "easeInOut"
-                        }}
-                    />
+                    // Replaced framer-motion with pure CSS in LandingPage.css
+                    <div key={i} className="signal-bar" />
                 ))}
             </div>
             <div className="signal-label">SIGNAL: {isBoosting ? 'MAX' : 'STABLE'}</div>
         </div>
     );
-};
+});
 
 const LandingPage = () => {
     const quotes = [
@@ -240,7 +227,8 @@ const LandingPage = () => {
         { text: "Creativity involves breaking out of established patterns in order to look at things in a different way.", author: "Edward de Bono" }
     ];
 
-    const [time, setTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+
+    // Removed time state
     const [isSnakeOpen, setIsSnakeOpen] = useState(false);
     const [isNameModalOpen, setIsNameModalOpen] = useState(false);
     const [activeBentoModal, setActiveBentoModal] = useState(null); // 'location', 'image', 'tv', 'utility'
@@ -252,15 +240,14 @@ const LandingPage = () => {
         setSelectedQuote(randomQuote);
     }, []);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
+    // Removed local time state to prevent re-renders -> moved to TimeDisplay.jsx
 
     return (
         <>
+            <Helmet>
+                <title>Datta Thota | Creative Portfolio</title>
+                <meta name="description" content="Visual Designer & Full Stack Developer Portfolio. Exploring the intersection of design, technology, and cinematic visual experiences." />
+            </Helmet>
             <AnimatePresence>
                 {isLoading && (
                     <SignaturePreloader onLoadingComplete={() => setIsLoading(false)} />
@@ -293,21 +280,22 @@ const LandingPage = () => {
 
 
                     {/* 2. NAME CARD (Center Top - Row 1) */}
-                    <motion.div
+                    <motion.button
                         className="bento-card card-name"
                         initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         whileHover={{ scale: 0.98 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsNameModalOpen(true)}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: 'pointer', textAlign: 'initial' }}
+                        aria-label="View Profile"
                     >
                         <h1 className="name-big">DATTA<br />THOTA</h1>
                         <div className="role-badge">VISUAL DESIGNER & DEV</div>
 
                         {/* Subtle Click Hint */}
                         <div className="click-hint">CLICK TO EXPLORE</div>
-                    </motion.div>
+                    </motion.button>
 
                     {/* 3. TECH PORTAL (Right Col - Top Row) */}
                     <Link to="/tech" style={{ textDecoration: 'none', display: 'contents' }}>
@@ -337,12 +325,12 @@ const LandingPage = () => {
 
 
                     {/* 4. LOCATION (Left Col - Bottom Row) */}
-                    <motion.div
+                    <motion.button
                         className="bento-card card-location"
                         whileHover={{ scale: 0.98 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setActiveBentoModal('location')}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: 'pointer', textAlign: 'left' }}
                     >
                         <div className="location-data">
                             <div className="loc-label">CURRENTLY IN</div>
@@ -354,7 +342,7 @@ const LandingPage = () => {
                             <div className="wave"></div>
                             <div className="wave"></div>
                         </div>
-                    </motion.div>
+                    </motion.button>
 
                     {/* 5. IMAGE CARD (Center - Row 2 & 3 MASSIVE) */}
                     <div className="bento-card card-image editorial-layout">
@@ -394,12 +382,7 @@ const LandingPage = () => {
                                 </div>
                                 <div className="data-bars">
                                     {[1, 2, 3, 4, 5].map(i => (
-                                        <motion.div
-                                            key={i}
-                                            className="data-bar"
-                                            animate={{ height: [`${20 + Math.random() * 60}%`, `${20 + Math.random() * 60}%`] }}
-                                            transition={{ duration: 0.5 + Math.random(), repeat: Infinity, repeatType: "reverse" }}
-                                        />
+                                        <div key={i} className="data-bar" />
                                     ))}
                                 </div>
                                 <div className="hub-footer">
@@ -444,7 +427,7 @@ const LandingPage = () => {
                             <SignalStrength />
                         </div>
                         <div style={{ textAlign: 'right', fontFamily: 'var(--f-tech)', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                            {time}
+                            <TimeDisplay />
                         </div>
                     </motion.div>
 

@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Layout from './components/layout/Layout';
 import TechLayout from './components/layout/TechLayout';
+import LoadingSpinner from './components/common/LoadingSpinner';
 
-// Pages
-import LandingPage from './pages/LandingPage';
-import DesignHome from './pages/DesignHome';
-import ProjectDetails from './pages/ProjectDetails';
-import DesignDetails from './pages/DesignDetails';
-import TechHome from './pages/TechHome';
-import TechProjectDetails from './pages/TechProjectDetails';
-import About from './pages/About';
-import Contact from './pages/Contact';
+// Lazy Load Pages for Performance (Code Splitting)
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const DesignHome = lazy(() => import('./pages/DesignHome'));
+const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
+const DesignDetails = lazy(() => import('./pages/DesignDetails'));
+const TechHome = lazy(() => import('./pages/TechHome'));
+const TechProjectDetails = lazy(() => import('./pages/TechProjectDetails'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
 
 import ScrollToTop from './components/common/ScrollToTop';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import Hero from '../components/sections/Hero';
 import Portfolio from '../components/sections/Portfolio';
 import LatestDesigns from '../components/sections/LatestDesigns';
@@ -15,6 +16,10 @@ const DesignHome = () => {
     return (
         <PageTransition>
             <div className="design-home-experimental">
+                <Helmet>
+                    <title>Datta Thota | Visual & Product Designer</title>
+                    <meta name="description" content="Visual Design Portfolio featuring editorial layouts, brand systems, and immersive digital experiences." />
+                </Helmet>
                 <Hero />
 
                 {/* Intentional Chaos Decorative Element */}
