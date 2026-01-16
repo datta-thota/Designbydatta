@@ -245,7 +245,7 @@ const LandingPage = () => {
     return (
         <>
             <Helmet>
-                <title>Datta Thota | Creative Portfolio</title>
+                <title>Datta Thota | Portfolio</title>
                 <meta name="description" content="Visual Designer & Full Stack Developer Portfolio. Exploring the intersection of design, technology, and cinematic visual experiences." />
             </Helmet>
             <AnimatePresence>
