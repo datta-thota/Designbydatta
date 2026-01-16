@@ -12,6 +12,7 @@ import { AnimatePresence } from 'framer-motion';
 import './LandingPage.css';
 import profileImg from '../assets/image.avif';
 import bgImg from '../assets/download.avif';
+import uniqueVideo from '../assets/RAY DSIGN (1).mp4';
 
 const MoviePosterUI = memo(() => {
     return (
@@ -140,50 +141,6 @@ const SnakeTeaser = memo(({ onClick }) => {
 
 // Retained functionality but moved to modal
 
-const RetroTVQuote = ({ quote }) => {
-    if (!quote) return null;
-
-    return (
-        <div className="tv-container">
-            <div className="tv-chassis">
-                <div className="tv-bezel">
-                    <div className="tv-screen-area">
-                        <div className="tv-crt-screen">
-                            <div className="crt-overlay"></div>
-                            <div className="crt-scanlines"></div>
-                            <div className="crt-content">
-                                <motion.div
-                                    className="crt-broadcast"
-                                    animate={{
-                                        opacity: [0.9, 1, 0.9, 1, 0.8, 1],
-                                        y: [0, 1, 0, -1, 0]
-                                    }}
-                                    transition={{
-                                        duration: 4,
-                                        repeat: Infinity,
-                                        ease: "linear"
-                                    }}
-                                >
-                                    <p className={`tv-quote-text ${quote.text.length > 70 ? 'long-quote' : ''}`}>“{quote.text}”</p>
-                                    <div className="tv-quote-footer">
-                                        <span className="tv-author">— {quote.author}</span>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="tv-controls">
-                        <div className="tv-knob"></div>
-                        <div className="tv-knob small"></div>
-                        <div className="tv-speaker"></div>
-                    </div>
-                </div>
-                <div className="tv-base"></div>
-            </div>
-        </div>
-    );
-};
-
 
 
 const SignalStrength = memo(() => {
@@ -245,8 +202,9 @@ const LandingPage = () => {
     return (
         <>
             <Helmet>
-                <title>Datta Thota | Creative Portfolio</title>
+                <title>Datta Thota | Portfolio</title>
                 <meta name="description" content="Visual Designer & Full Stack Developer Portfolio. Exploring the intersection of design, technology, and cinematic visual experiences." />
+                <link rel="preload" as="video" href={uniqueVideo} type="video/mp4" />
             </Helmet>
             <AnimatePresence>
                 {isLoading && (
@@ -315,10 +273,20 @@ const LandingPage = () => {
                         className="bento-card card-unique"
                         whileHover={{ scale: 0.98 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => setActiveBentoModal('tv')}
+                        onClick={() => window.open('https://instagram.com/the_raydsign', '_blank')}
                         style={{ cursor: 'pointer' }}
+                        role="link"
+                        aria-label="Visit Instagram Profile"
                     >
-                        <RetroTVQuote quote={selectedQuote} />
+                        <video
+                            src={uniqueVideo}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="auto"
+                            className="bento-video"
+                        />
                     </motion.div>
 
 
