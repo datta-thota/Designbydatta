@@ -356,9 +356,48 @@ const LandingPage = () => {
                     </motion.div>
 
                     {/* 5. IMAGE CARD (Center - Row 2 & 3 MASSIVE) */}
-                    <div className="bento-card card-image">
-                        <img src={bgImg} alt="Background" className="profile-bg" />
+                    <div className="bento-card card-image editorial-layout">
+                        <div className="editorial-bg-text">DESIGN</div>
+                        <div className="aesthetic-solid-bg"></div>
+                        <div className="editorial-grain"></div>
+                        <div className="sun-flare"></div>
+
                         <img src={profileImg} alt="Profile" className="profile-full" />
+
+                        {/* Editorial Overlays */}
+                        <div className="editorial-overlay">
+                            <div className="editorial-left-bar">
+                                <div className="vertical-tag">CREATIVE PORTFOLIO 2025</div>
+                                <div className="bar-separator"></div>
+                                <div className="meta-minimal">
+                                    <span>ISSUE_01</span>
+                                    <span>VOL_2.0</span>
+                                </div>
+                            </div>
+
+                            <div className="editorial-top-right">
+                                <div className="verified-seal">
+                                    <div className="seal-circle"></div>
+                                    <span className="seal-text">DT_CERTIFIED</span>
+                                </div>
+                            </div>
+
+                            <div className="editorial-bottom-metadata">
+                                <div className="editorial-meta-item">
+                                    <span className="label">LOC:</span> AP_IN (16.50° N, 80.64° E)
+                                </div>
+                                <div className="editorial-meta-item">
+                                    <span className="label">POS:</span> VISUAL_LEAD
+                                </div>
+                            </div>
+
+                            <div className="color-palette-minimal">
+                                <span className="p-dot"></span>
+                                <span className="p-dot"></span>
+                                <span className="p-dot"></span>
+                                <span className="p-dot"></span>
+                            </div>
+                        </div>
                     </div>
 
                     {/* 6. SNAKE TEASER (Right Col - Middle Row) */}

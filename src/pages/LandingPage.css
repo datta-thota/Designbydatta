@@ -3,7 +3,7 @@
    Theme: Single Page, Widgets, Fixed Layout
 -------------------------------------------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=VT323&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=VT323&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Caveat:wght@400;700&display=swap');
 
 :root {
     --c-yellow: #FFD600;
@@ -19,7 +19,9 @@
     --f-tech: 'VT323', monospace;
 
     --shadow-hard: 6px 6px 0px var(--c-shadow);
-    --border-thick: 3px solid var(--c-dark);
+    --border-thick: 2px solid var(--c-dark);
+    --card-radius: 1rem;
+    --card-padding: 1.5rem;
 }
 
 /* DARK MODE OVERRIDES */
@@ -67,7 +69,7 @@
     position: relative;
     background: var(--c-off-white);
     border: var(--border-thick);
-    border-radius: 1rem;
+    border-radius: var(--card-radius);
     box-shadow: var(--shadow-hard);
     transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.2s;
     overflow: hidden !important;
@@ -81,7 +83,7 @@
 }
 
 .bento-card:hover {
-    transform: translate(-3px, -3px);
+    transform: translate(-4px, -4px);
     box-shadow: 10px 10px 0px var(--c-shadow);
     z-index: 10;
 }
@@ -146,20 +148,37 @@
     grid-row: 2 / span 2;
     /* Bottom 2 rows */
     background: #000;
-    border: none;
-    box-shadow: none;
+    border: var(--border-thick);
+    box-shadow: var(--shadow-hard);
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
-    border-radius: 1rem;
+    border-radius: var(--card-radius);
 }
 
 .card-image:hover {
-    transform: none;
-    box-shadow: none;
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0px var(--c-shadow);
+}
+
+.aesthetic-solid-bg {
+    position: absolute;
+    inset: 0;
+    background: #f8f8f5;
+    /* Premium off-white */
+    z-index: 0;
+}
+
+.paper-texture {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    opacity: 0.15;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .profile-bg {
@@ -177,23 +196,193 @@
 .profile-full {
     height: 100%;
     width: 100%;
-    /* Fill the 2x2 space */
     object-fit: cover;
-    border: var(--border-thick);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-hard);
-    background: transparent;
-    filter: grayscale(100%) contrast(140%);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    mix-blend-mode: multiply;
+    /* Silhouette effect */
+    filter: grayscale(100%) contrast(150%) brightness(1.1);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     z-index: 2;
 }
 
 .profile-full:hover {
-    filter: grayscale(0%) contrast(140%);
-    transform: translate(-3px, -3px);
-    box-shadow: 10px 10px 0px var(--c-dark);
+    filter: grayscale(0%) contrast(110%) brightness(1);
+    mix-blend-mode: normal;
+    transform: scale(1.02);
     z-index: 15;
+}
+
+/* --- EDITORIAL LAYOUT --- */
+.editorial-layout {
+    background: #fdfdfb !important;
+    /* Magazine-white */
+}
+
+.editorial-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.05);
+    /* Subdued slightly to stay in background */
+    font-family: var(--f-main);
+    letter-spacing: -0.05em;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.editorial-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    opacity: 0.1;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.sun-flare {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.15) 0%, transparent 70%);
+    filter: blur(40px);
+    z-index: 4;
+    pointer-events: none;
+}
+
+.editorial-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+/* Left Sidebar */
+.editorial-left-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.vertical-tag {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--f-tech);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #1a1a1a;
+    /* Anchor Dark */
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.bar-separator {
+    width: 2px;
+    height: 40px;
+    background: var(--c-orange);
+    margin-bottom: 1rem;
+}
+
+.meta-minimal {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--f-tech);
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    opacity: 1;
+    color: #333;
+    /* Soft Anchor Dark */
+}
+
+/* Top Right Seal */
+.editorial-top-right {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+
+.verified-seal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1a1a1a;
+    /* Strong anchor background */
+    padding: 6px 14px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.seal-circle {
+    width: 8px;
+    height: 8px;
+    background: var(--c-orange);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--c-orange);
+}
+
+.seal-text {
+    font-family: var(--f-tech);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    color: #fff;
+    /* High contrast on dark seal */
+    font-weight: bold;
+}
+
+/* Bottom Metadata */
+.editorial-bottom-metadata {
+    align-self: flex-end;
+    text-align: right;
+    font-family: var(--f-tech);
+    font-size: 0.7rem;
+    color: #1a1a1a;
+    /* Anchor Dark */
+}
+
+.editorial-meta-item {
+    margin-bottom: 2px;
+    opacity: 1;
+    /* Full opacity for visibility */
+}
+
+.editorial-meta-item .label {
+    opacity: 1;
+    color: var(--c-orange);
+    /* High-contrast guide for the eye */
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+/* Palette Minimal */
+.color-palette-minimal {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    display: flex;
+    gap: 4px;
+}
+
+.p-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-dark);
+    opacity: 0.1;
+}
+
+.card-image:hover .p-dot {
+    opacity: 0.4;
 }
 
 /* --- DESIGN CARD (CINEMATIC MOVIE POSTER 2.0) --- */
@@ -204,7 +393,8 @@
     padding: 0 !important;
     overflow: hidden;
     position: relative;
-    border: none;
+    border: var(--border-thick);
+    border-radius: var(--card-radius);
     box-shadow: var(--shadow-hard);
 }
 
@@ -439,9 +629,9 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 1.2rem;
+    padding: var(--card-padding);
     color: #fff;
-    border: 1px solid var(--c-blue);
+    border: var(--border-thick);
 }
 
 .river-container {
@@ -530,7 +720,9 @@
     background: #000;
     padding: 0 !important;
     overflow: hidden;
-    border: 2px solid #333;
+    border: var(--border-thick);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-hard);
     position: relative;
 }
 
@@ -890,7 +1082,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1rem;
+    padding: var(--card-padding);
 }
 
 .utility-row {
@@ -1005,7 +1197,8 @@
     position: relative;
     padding: 0 !important;
     overflow: hidden;
-    border: none;
+    border: var(--border-thick);
+    border-radius: var(--card-radius);
     box-shadow: var(--shadow-hard);
 }
 
@@ -1520,7 +1713,7 @@
         grid-column: 2 / span 1;
         grid-row: auto !important;
         height: 120px;
-        padding: 0.6rem;
+        padding: 1rem;
         /* Tighter padding for mobile */
     }
 
@@ -1552,7 +1745,8 @@
         min-height: 140px;
         padding: 0 !important;
         background: #9ead89;
-        border: 2px solid #2b3024;
+        border: var(--border-thick);
+        border-radius: var(--card-radius);
     }
 
     .teaser-pixels {

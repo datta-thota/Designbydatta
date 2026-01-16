@@ -103,7 +103,7 @@ export const projects = [
         process: "Built through continuous experimentation, typography studies, and visual storytelling rooted in cultural expression. Each piece represents growth, curiosity, and the joy of creating without boundaries.",
         gallery: [
             {
-                image: "/assets/telugu.png",
+                image: "/assets/telugu.avif",
                 caption: "Telugu Design Archive"
             }
         ]
@@ -120,7 +120,7 @@ export const projects = [
         process: "Built through spontaneous creation and visual experimentation, focusing on colour play, composition, and storytelling. Each piece is driven by curiosity and the joy of designing purely for fun.",
         gallery: [
             {
-                image: "/assets/timepass.png",
+                image: "/assets/timepass.avif",
                 caption: "Time Pass Creations"
             }
 
@@ -138,7 +138,7 @@ export const projects = [
         process: "Developed through collaboration, rapid iterations, and creative problem-solving to visually bring event themes to life in a meaningful way.",
         gallery: [
             {
-                image: "/assets/college.png",
+                image: "/assets/college.avif",
                 caption: "College Event Designs"
             }
         ]
@@ -155,7 +155,7 @@ export const projects = [
         process: "Experimenting with composition, typography, and brand tone to communicate ideas clearly and creatively.",
         gallery: [
             {
-                image: "/assets/brand.png",
+                image: "/assets/brand.avif",
                 caption: "First Steps in Brand Ad Poster Design"
             }
         ]
