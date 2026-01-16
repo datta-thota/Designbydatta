@@ -151,7 +151,29 @@ export const latestDesigns = [
         "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768224449/rolex_sfzgo6.png",
         "description": "A cinematic poster edit inspired by the powerful and menacing character Rolex from the LCU.",
         "date": "2026"
+    },
+    {
+        "id": 22,
+        "title": "Mega Star Chiranjeevi as Sherlock Holmes",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768548230/new_mega_rbifx4.png",
+        "description": "A creative cinematic edit portraying Mega Star Chiranjeevi in a Sherlock Holmes-inspired avatar with dramatic lighting and mystery aesthetics.",
+        "date": "2026"
+    },
+    {
+        "id": 23,
+        "title": "Pawan Kalyan Aesthetic Music Edit",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768548230/music_ke7wyf.png",
+        "description": "An aesthetic poster edit of Pawan Kalyan themed around music, mood, and stylish visual rhythm.",
+        "date": "2026"
+    },
+    {
+        "id": 24,
+        "title": "Mahesh Babu - BOB Mode Activated",
+        "image": "https://res.cloudinary.com/dl75qwr19/image/upload/v1768548230/bob_smedl8.png",
+        "description": "A high-energy cinematic edit of Mahesh Babu in BOB mode, emphasizing attitude, power, and modern poster styling.",
+        "date": "2026"
     }
+
 
 
 

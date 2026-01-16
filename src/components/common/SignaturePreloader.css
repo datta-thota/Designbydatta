@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Bastliga One';
-    src: url('/assets/bastliga-one/Bastliga One.otf') format('opentype');
+    src: url('../../assets/BastligaOne.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
