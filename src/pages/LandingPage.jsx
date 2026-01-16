@@ -5,6 +5,7 @@ import NokiaSnakeModal from '../components/common/NokiaSnakeModal';
 import NameAnimationModal from '../components/common/NameAnimationModal';
 import BentoInfoModal from '../components/common/BentoInfoModal';
 import SignaturePreloader from '../components/common/SignaturePreloader';
+import ContactBar from '../components/common/ContactBar';
 import { AnimatePresence } from 'framer-motion';
 import './LandingPage.css';
 import profileImg from '../assets/image.png';
@@ -468,6 +469,8 @@ const LandingPage = () => {
                 tvQuote={selectedQuote}
                 onClose={() => setActiveBentoModal(null)}
             />
+
+            <ContactBar />
         </>
     );
 };
