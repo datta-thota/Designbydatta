@@ -41,7 +41,6 @@ const Contact = () => {
                 <div className="section-header-block">
                     <div className="header-content">
                         <h2 className="section-title">Contact</h2>
-                        <span className="section-count">(03)</span>
                     </div>
                 </div>
 
