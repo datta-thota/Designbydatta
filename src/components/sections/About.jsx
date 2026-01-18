@@ -11,7 +11,6 @@ const About = () => {
                 <div className="section-header-block">
                     <div className="header-content">
                         <h2 className="section-title">Profile</h2>
-                        <span className="section-count">(01)</span>
                     </div>
                 </div>
 
