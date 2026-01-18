@@ -1,106 +1,184 @@
+/* Contact Section - Communication Line */
 .contact-section {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-xl);
-    position: relative;
-    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    min-height: 80vh;
+    /* Slightly shorter than full height is fine */
 }
 
-.contact-content {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
+.contact-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 80px;
 }
 
-.contact-subtitle {
-    font-size: 1.2rem;
-    color: var(--text-dim);
-    margin-bottom: var(--space-md);
+/* reused .section-header-block from About/Global in theory, 
+   but since css modules aren't used, we rely on duplicate or global.
+   I'll assume global/duplicate for safety as planned. */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
 }
 
-.contact-form {
+/* Socials List */
+.socials-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-    margin-bottom: var(--space-lg);
 }
 
-.form-input {
+.list-label {
+    font-family: var(--f-tech);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.social-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.socials-list:hover .social-row {
+    opacity: 0.3;
+}
+
+.socials-list:hover .social-row:hover {
+    opacity: 1;
+}
+
+.social-id {
+    font-family: var(--f-tech);
+    color: var(--c-orange);
+    font-size: 0.8rem;
+    width: 40px;
+}
+
+.social-name {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+    flex: 1;
+}
+
+.social-arrow {
+    font-size: 1.5rem;
+    color: #fff;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.social-row:hover .social-arrow {
+    transform: rotate(45deg);
+    color: var(--c-orange);
+}
+
+/* Minimal Form */
+.form-block {
     width: 100%;
-    padding: 1rem;
+}
+
+.minimal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.minimal-input {
+    width: 100%;
+    padding: 15px 0;
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--glass-border);
-    color: var(--text-white);
-    font-family: var(--font-body);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-family: var(--f-tech);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    border-radius: 0;
+    /* Remove iOS border radius */
 }
 
-.form-input:focus {
+.minimal-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.minimal-input:focus {
     outline: none;
-    border-bottom-color: var(--text-white);
+    border-bottom-color: var(--c-orange);
+    color: var(--c-orange);
 }
 
-.form-textarea {
-    min-height: 150px;
+.minimal-textarea {
+    min-height: 100px;
     resize: vertical;
 }
 
-.submit-btn {
-    padding: 1.2rem;
-    background: var(--text-white);
-    color: var(--bg-black);
+.minimal-submit-btn {
+    background: transparent;
     border: none;
-    font-family: var(--font-body);
-    font-weight: 600;
+    padding: 20px 0;
+    text-align: left;
+    font-family: var(--f-tech);
+    font-size: 1rem;
+    color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.submit-btn:hover {
-    background: var(--text-highlight);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-md);
-}
-
-.social-link {
-    color: var(--text-dim);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
     transition: color 0.3s ease;
+    width: fit-content;
 }
 
-.social-link:hover {
-    color: var(--text-white);
-    text-shadow: 0 0 10px var(--accent-glow);
+.minimal-submit-btn:hover {
+    color: var(--c-orange);
 }
 
-.submit-btn.success {
-    background: #4CAF50;
-    color: white;
-    border-color: #4CAF50;
-}
-
-.submit-btn.error {
-    background: #f44336;
-    color: white;
-    border-color: #f44336;
-}
-
-.submit-btn:disabled {
-    opacity: 0.7;
+.minimal-submit-btn:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-section {
+        padding-top: 40px;
+        padding-bottom: 60px;
+        /* Little more space at very bottom */
+        min-height: auto;
+    }
+
+    .contact-container {
+        gap: 50px;
+    }
+
+    .social-name {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
 }

@@ -1,7 +1,11 @@
+import war1 from '../assets/war1.png';
+import war2 from '../assets/war2.png';
+import eltor from '../assets/eltor.png';
+
 export const projects = [
     {
         id: 1,
-        title: "AUXILIUM Complete Design System and Marketing Creatives",
+        title: "AUXILIUM Design & Marketing Assets",
         category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765254826/Instagram_post_-_275_gjonc5.png?auto=format&fit=crop",
         year: "2025",
@@ -158,6 +162,45 @@ export const projects = [
                 image: "/assets/brand.avif",
                 caption: "First Steps in Brand Ad Poster Design"
             }
+        ]
+    },
+    {
+        id: 9,
+        title: "WARDROBE - 2026 Calendar Concept",
+        category: "Brand Systems",
+        image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1768730342/wardp_mrkjit.png",
+        year: "2026",
+        role: "Graphic Designer",
+        concept: "This project explores fashion as a part of everyday life rather than a seasonal statement. Designed as a brand-first editorial calendar for WARDROBE, the concept presents each month as a curated fashion spread that reflects daily moods, lifestyles, and occasions. The visual system focuses on calm, modern aesthetics inspired by fashion editorials. Clean compositions, thoughtful typography, and a neutral color palette allow clothing, textures, and silhouettes to take center stage. The design balances visual richness with clarity, ensuring the calendar remains both engaging and practical for daily use. The calendar is developed in multiple formats, maintaining a consistent design language across sizes while adapting layouts for desk and wall display. Subtle brand integration keeps the experience editorial rather than promotional, positioning WARDROBE as a daily fashion companion. This project is a self-initiated concept created for portfolio and exploration purposes.",
+        process: "Designed a flexible grid system to balance editorial imagery with functional calendar dates. The layout prioritizes white space and typography to creating a calm, daily visual experience that aligns with the brand's minimalist fashion aesthetic.",
+        gallery: [
+            {
+                image: war1,
+                caption: "WARDROBE - 2026 Calendar Concept"
+            },
+            {
+                image: war2,
+                caption: ""
+            },
+
+        ]
+    },
+    {
+        id: 10,
+        title: "ELTOR | Modern Menswear Brand Identity",
+        category: "Brand Systems",
+        image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1768730342/nn_g06cp1.png",
+        year: "2026",
+        role: "Graphic Designer",
+        concept: "ELTOR is a modern menswear brand concept focused on confidence simplicity and strong visual presence. This project explores logo design typography colour system and real world mock-ups to build a bold identity for a men only clothing label with a minimal and contemporary tone.",
+        process: "The brand identity balances strong typography with clean layouts and a sophisticated colour palette. The logo combines bold letterforms with a subtle geometric element reflecting both structure and style. Supporting visuals use high quality photography with minimal retouching to keep the focus on the clothing. The overall system is designed to feel premium approachable and distinctly masculine.",
+        gallery: [
+            {
+                image: eltor,
+                caption: "ELTOR | Modern Menswear Brand Identity"
+            },
+
+
         ]
     },
 

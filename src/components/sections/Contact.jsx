@@ -3,28 +3,31 @@ import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import './Contact.css';
 
+const socials = [
+    { name: "Instagram", url: "https://instagram.com/the_raydsign", id: "IG" },
+    { name: "Behance", url: "https://behance.net/dattathota", id: "BE" },
+    { name: "Dribbble", url: "https://dribbble.com/datta-thota", id: "DR" },
+    { name: "LinkedIn", url: "https://linkedin.com/in/purushothama-datta", id: "LN" }
+];
+
 const Contact = () => {
     const form = useRef();
-    const [status, setStatus] = useState('idle'); // idle, sending, success, error
+    const [status, setStatus] = useState('idle');
 
     const sendEmail = (e) => {
         e.preventDefault();
         setStatus('sending');
-
         // REPLACE THESE WITH YOUR ACTUAL EMAILJS IDS
-        // Sign up at https://www.emailjs.com/
         const SERVICE_ID = 'service_q7hjb42';
         const TEMPLATE_ID = 'template_ctws4t6';
         const PUBLIC_KEY = 'ZasqFXAN0wKIctmTM';
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
             .then((result) => {
-                console.log(result.text);
                 setStatus('success');
                 form.current.reset();
                 setTimeout(() => setStatus('idle'), 5000);
             }, (error) => {
-                console.log(error.text);
                 setStatus('error');
                 setTimeout(() => setStatus('idle'), 5000);
             });
@@ -32,62 +35,63 @@ const Contact = () => {
 
     return (
         <section className="contact-section">
-            <div className="contact-content container">
-                <motion.div
-                    className="contact-header"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h2 className="section-title">Let's Talk</h2>
-                    <p className="contact-subtitle">Have a project in mind? Let's create something extraordinary.</p>
-                </motion.div>
+            <div className="contact-container container">
 
-                <form ref={form} onSubmit={sendEmail} className="contact-form">
-                    <div className="form-group">
-                        <input type="text" name="user_name" placeholder="Name" className="form-input" required />
+                {/* Header */}
+                <div className="section-header-block">
+                    <div className="header-content">
+                        <h2 className="section-title">Contact</h2>
+                        <span className="section-count">(03)</span>
                     </div>
-                    <div className="form-group">
-                        <input type="email" name="user_email" placeholder="Email" className="form-input" required />
-                    </div>
-                    <div className="form-group">
-                        <textarea name="message" placeholder="Message" className="form-input form-textarea" required></textarea>
-                    </div>
-
-                    <motion.button
-                        className={`submit-btn ${status}`}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        disabled={status === 'sending' || status === 'success'}
-                    >
-                        {status === 'idle' && 'Send Message'}
-                        {status === 'sending' && 'Sending...'}
-                        {status === 'success' && 'Message Sent!'}
-                        {status === 'error' && 'Error. Try Again.'}
-                    </motion.button>
-                </form>
-
-                <div className="social-links">
-                    {[
-                        { name: "Instagram", url: "https://instagram.com/the_raydsign" },
-                        { name: "Behance", url: "https://behance.net/dattathota" },
-                        { name: "Dribbble", url: "https://dribbble.com/datta-thota" },
-                        { name: "LinkedIn", url: "https://linkedin.com/in/purushothama-datta" },
-
-                    ].map((social) => (
-                        <a
-                            key={social.name}
-                            href={social.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="social-link"
-                        >
-                            {social.name}
-                        </a>
-                    ))}
                 </div>
 
+                {/* Main Grid */}
+                <div className="contact-grid">
+
+                    {/* Left: Socials List */}
+                    <div className="socials-list">
+                        <h3 className="list-label">SOCIALS</h3>
+                        {socials.map((item) => (
+                            <a
+                                key={item.id}
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="social-row"
+                            >
+                                <span className="social-id">{item.id}</span>
+                                <span className="social-name">{item.name}</span>
+                                <span className="social-arrow">↗</span>
+                            </a>
+                        ))}
+                    </div>
+
+                    {/* Right: Form */}
+                    <div className="form-block">
+                        <h3 className="list-label">SEND A MESSAGE</h3>
+                        <form ref={form} onSubmit={sendEmail} className="minimal-form">
+                            <div className="form-group">
+                                <input type="text" name="user_name" placeholder="NAME" className="minimal-input" required />
+                            </div>
+                            <div className="form-group">
+                                <input type="email" name="user_email" placeholder="EMAIL" className="minimal-input" required />
+                            </div>
+                            <div className="form-group">
+                                <textarea name="message" placeholder="MESSAGE" className="minimal-input minimal-textarea" required></textarea>
+                            </div>
+                            <button
+                                className={`minimal-submit-btn ${status}`}
+                                disabled={status === 'sending' || status === 'success'}
+                            >
+                                {status === 'idle' && 'SEND MESSAGE ➔'}
+                                {status === 'sending' && 'SENDING...'}
+                                {status === 'success' && 'SENT SEAMLESSLY'}
+                                {status === 'error' && 'ERROR'}
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </section>
     );

@@ -1,145 +1,187 @@
+/* About Section - Uniform with Portfolio */
 .about-section {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-lg);
-    position: relative;
-    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    min-height: 100vh;
 }
 
-.about-content {
+.about-container {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-    align-items: center;
-    text-align: center;
+    gap: 80px;
 }
 
-.about-image-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3/4;
-    max-width: 500px;
-}
-
-.about-image {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    filter: grayscale(100%) contrast(1.2);
-    transition: filter 0.5s ease;
-}
-
-.about-image-wrapper:hover .about-image {
-    filter: grayscale(0%) contrast(1);
-}
-
-.glowing-frame {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 100%;
-    height: 100%;
-    border: 1px solid var(--text-white);
-    z-index: -1;
-    opacity: 0.3;
-    transition: transform 0.5s ease;
-}
-
-.about-image-wrapper:hover .glowing-frame {
-    transform: translate(10px, 10px);
-    opacity: 0.6;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-.about-bio {
-    font-size: 1.2rem;
-    color: var(--text-highlight);
-    margin-bottom: var(--space-xs);
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.skills-list {
+/* Header (Shared Style) */
+.section-header-block {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    justify-content: center;
-    margin-bottom: var(--space-sm);
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.skill-tag {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--glass-border);
-    border-radius: 50px;
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    transition: all 0.3s ease;
+.section-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1;
+    margin: 0;
 }
 
-.skill-tag:hover {
-    border-color: var(--text-white);
-    color: var(--text-white);
-    background: var(--glass-bg);
-    box-shadow: 0 0 10px var(--accent-glow);
-}
-
-.experience-timeline {
-    margin-bottom: var(--space-sm);
-    border-left: 1px solid var(--glass-border);
-    padding-left: var(--space-md);
-    text-align: left;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.timeline-item {
-    margin-bottom: var(--space-sm);
-    display: flex;
-    flex-direction: column;
-}
-
-.year {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    margin-bottom: 0.2rem;
-}
-
-.role {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-white);
-}
-
-.company {
+.section-count {
+    font-family: var(--f-tech);
+    color: var(--c-orange);
     font-size: 1rem;
-    color: var(--text-highlight);
 }
 
-.download-btn {
-    padding: 1rem 2rem;
-    background: transparent;
-    border: 1px solid var(--text-white);
-    color: var(--text-white);
-    font-family: var(--font-body);
+/* Bio Block */
+.bio-block {
+    max-width: 800px;
+    margin-bottom: 80px;
+}
+
+.bio-text {
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.4;
+    color: #fff;
+    margin-bottom: 40px;
+}
+
+.skills-text {
+    font-family: var(--f-tech);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 40px;
+    border-left: 2px solid var(--c-orange);
+    padding-left: 20px;
+}
+
+.skills-text .label {
+    display: block;
+    color: var(--c-orange);
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.resume-link {
+    font-family: var(--f-tech);
+    font-size: 1rem;
+    color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-.download-btn:hover {
-    background: var(--text-white);
-    color: var(--bg-black);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+.resume-link:hover {
+    color: var(--c-orange);
+    border-color: var(--c-orange);
 }
 
+/* Experience List */
+.experience-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-label {
+    font-family: var(--f-tech);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.experience-row {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    align-items: baseline;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: opacity 0.3s ease;
+    cursor: default;
+}
+
+.experience-list:hover .experience-row {
+    opacity: 0.3;
+}
+
+.experience-list:hover .experience-row:hover {
+    opacity: 1;
+}
+
+.row-index {
+    font-family: var(--f-tech);
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+}
+
+.row-role {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    line-height: 0.9;
+}
+
+.row-meta {
+    display: flex;
+    gap: 30px;
+    text-align: right;
+}
+
+.row-company,
+.row-year {
+    font-family: var(--f-tech);
+    font-size: 0.75rem;
+    color: var(--c-orange) !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .about-content {
+    .about-section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        min-height: auto;
+    }
+
+    .about-container {
+        gap: 40px;
+    }
+
+    .bio-block {
+        margin-bottom: 40px;
+    }
+
+    .experience-row {
         grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .row-index {
+        display: none;
+    }
+
+    .row-meta {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+        margin-top: 5px;
+    }
+
+    .bio-text {
+        font-size: 1.2rem;
     }
 }

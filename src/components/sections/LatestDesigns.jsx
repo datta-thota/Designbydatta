@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, useTransform } from 'framer-motion';
 import { latestDesigns } from '../../data/latestDesigns';
 import './LatestDesigns.css';
 
@@ -8,7 +8,9 @@ import { useRef, useState, useEffect } from 'react';
 
 const LatestDesigns = () => {
     const containerRef = useRef(null);
+    const percentageRef = useRef(null);
     const { scrollXProgress } = useScroll({ container: containerRef });
+    const scaleWidth = useTransform(scrollXProgress, [0, 1], ["0%", "100%"]);
     const [hasScrolled, setHasScrolled] = useState(false);
 
     useEffect(() => {
@@ -22,6 +24,12 @@ const LatestDesigns = () => {
         el.addEventListener('scroll', handleScroll);
         return () => el.removeEventListener('scroll', handleScroll);
     }, []);
+
+    useMotionValueEvent(scrollXProgress, "change", (latest) => {
+        if (percentageRef.current) {
+            percentageRef.current.textContent = `${Math.round(latest * 100)}%`;
+        }
+    });
 
     return (
         <section className="latest-designs-section">
@@ -83,20 +91,23 @@ const LatestDesigns = () => {
                 <div className="discovery-gauge-container container">
                     <div className="gauge-label">
                         <span>EXPLORATION DEPTH</span>
-                        <motion.span className="gauge-percentage">
-                            {/* Will be driven by CSS variable for simplicity or framer value */}
+                        <motion.span ref={percentageRef} className="gauge-percentage">
+                            0%
                         </motion.span>
                     </div>
                     <div className="gauge-track">
                         <motion.div
                             className="gauge-fill"
-                            style={{ scaleX: scrollXProgress }}
+                            style={{
+                                width: scaleWidth,
+                                background: '#ff4d00' // Explicit inline fallback
+                            }}
                         />
                     </div>
                     <div className="gauge-markers">
-                        <span>0%</span>
-                        <span>50%</span>
-                        <span>100%</span>
+                        <span>start</span>
+                        <span>halfway</span>
+                        <span>complete</span>
                     </div>
                 </div>
             </div>

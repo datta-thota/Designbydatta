@@ -1,159 +1,262 @@
+/* Portfolio Section */
 .portfolio-section {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-xl);
+    padding-top: 60px;
+    padding-bottom: 60px;
+    min-height: 100vh;
+    position: relative;
+    /* Ensure cursor tracking works */
 }
 
-.portfolio-header {
+.portfolio-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+/* Header & Filter Bar */
+.portfolio-header-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-content {
     display: flex;
     align-items: baseline;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-lg);
+    gap: 15px;
 }
 
-.section-title {
+.portfolio-title {
     font-size: clamp(2rem, 5vw, 4rem);
-}
-
-.project-count {
-    font-size: 1.2rem;
-    color: var(--text-dim);
-}
-
-.portfolio-folder-system {
-    margin-top: 0;
-}
-
-/* Section Heading */
-.portfolio-main-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.portfolio-main-title {
-    font-size: clamp(4rem, 10vw, 8rem);
-    font-weight: 900;
+    font-weight: 800;
     text-transform: uppercase;
     color: #fff;
     line-height: 1;
-    letter-spacing: -0.04em;
-    margin-bottom: 20px;
+    margin: 0;
 }
 
-.portfolio-main-subtitle {
+.archive-count {
+    font-family: var(--f-tech);
+    color: var(--c-orange);
     font-size: 1rem;
-    letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.4);
-    font-weight: 300;
 }
 
-/* Professional Tab Navigation */
-.folder-tabs-container {
+/* Filter Bar */
+.filter-bar {
     display: flex;
-    gap: 0;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
-.folder-tab {
+.filter-pill {
     position: relative;
-    padding: 20px 40px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
     font-weight: 500;
+    text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.4);
-    transition: all 0.3s ease;
-    outline: none;
-    white-space: nowrap;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    z-index: 1;
 }
 
-.folder-tab::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: #fff;
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.folder-tab.active {
+.filter-pill:hover {
     color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-.folder-tab.active::after {
-    transform: scaleX(1);
-}
-
-.folder-tab:hover:not(.active) {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* Content Area */
-.folder-cabinet {
-    position: relative;
-    min-height: auto;
-}
-
-.folder-content {
-    width: 100%;
-    padding: 0;
-    position: relative;
-}
-
-.folder-header-info {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.folder-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+.filter-pill.active {
+    color: #000;
+    border-color: transparent;
     font-weight: 700;
-    color: #fff;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin-bottom: 10px;
 }
 
-.folder-meta {
+.pill-bg {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    border-radius: 100px;
+    z-index: -1;
+}
+
+/* ARCHIVE LIST (The Kinetic List) */
+.portfolio-archive {
+    position: relative;
+    width: 100%;
+}
+
+.archive-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.archive-row-wrapper {
+    display: block;
+    /* Ensure it takes width */
+}
+
+.archive-row {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    /* Index | Title | Meta */
+    align-items: baseline;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: #fff !important;
+    /* Force white text by default for the link */
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    /* Remove blue tap highlight */
+}
+
+/* Hover Effect on Siblings (Desktop) */
+@media (min-width: 1025px) {
+    .archive-list:hover .archive-row {
+        opacity: 0.3;
+        /* Dim all rows */
+    }
+
+    .archive-list:hover .archive-row:hover {
+        opacity: 1;
+        /* Highlight hovered row */
+    }
+}
+
+.row-index {
     font-family: var(--f-tech);
     color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+}
+
+.row-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.row-title {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 400;
+    /* Editorial Style */
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 0.9;
+    margin: 0;
+    transition: transform 0.3s var(--transition-smooth);
+    letter-spacing: -0.02em;
+}
+
+.archive-row:hover .row-title {
+    transform: translateX(20px);
+    font-weight: 500;
+    /* Subtle weight shift */
+}
+
+.mobile-only-arrow {
+    display: none;
+    font-size: 0.5em;
+    vertical-align: top;
+    margin-left: 10px;
+    color: var(--c-orange);
+}
+
+.row-meta {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    height: 0;
+    /* Hidden by default for cleaner look, reveal on hover? Or just keep hidden */
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* Reveal Meta on Hover */
+.archive-row:hover .row-meta {
+    height: auto;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+.row-category,
+.row-year {
+    font-family: var(--f-tech);
     font-size: 0.75rem;
-    letter-spacing: 0.2em;
+    color: #ff4d00 !important;
+    /* Force Orange */
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
-/* Project Grid */
-.folder-mosaic-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 30px;
+/* Mobile Image (Hidden on Desktop) */
+.mobile-card-image {
+    display: none;
 }
 
-.folder-item {
-    transition: transform 0.4s ease;
+
+/* FLOATING PREVIEW (Desktop) */
+.floating-preview-stage {
+    position: fixed;
+    z-index: 100;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    /* Centered on cursor */
+    /* Mix blend mode for cool effect? Maybe too risky for legibility */
 }
 
-.folder-item:hover {
-    transform: translateY(-4px);
+.preview-card {
+    width: 400px;
+    aspect-ratio: 16/10;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
-/* Motion Design Embeds */
+.preview-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-meta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: #fff;
+    font-family: var(--f-tech);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+/* MOBILE CINEMATIC BACKGROUND */
+.mobile-cinematic-bg {
+    display: none;
+    /* Hidden on desktop */
+}
+
+
+/* EMBEDS (Motion Design) */
 .motion-design-embeds {
     display: flex;
     flex-direction: column;
-    gap: 40px;
-}
-
-.embed-container {
-    width: 100%;
+    gap: 60px;
 }
 
 .embed-header {
@@ -182,144 +285,222 @@
     color: #fff;
 }
 
+/* MOBILE FLOATING THUMBNAIL */
+.mobile-floating-thumb {
+    display: none;
+    /* Hidden on desktop */
+}
+
+@media (max-width: 1024px) {
+    .mobile-floating-thumb {
+        display: block;
+        position: fixed;
+        bottom: 30px;
+        right: 20px;
+        width: 140px;
+        aspect-ratio: 16/9;
+
+        background: #111;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        z-index: 100;
+        pointer-events: none;
+    }
+
+    .mobile-floating-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
 .embed-iframe-wrapper {
+    width: 100%;
+    height: 70vh;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-    width: 100%;
-    height: 80vh;
-}
-
-.embed-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    cursor: pointer;
-    background: transparent;
-    transition: background 0.3s ease;
-}
-
-.embed-overlay:hover {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.embed-overlay::after {
-    content: 'Click to open in new tab';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: #fff;
-    padding: 20px 40px;
-    border-radius: 8px;
-    font-size: 1rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-}
-
-.embed-overlay:hover::after {
-    opacity: 1;
+    border-radius: 12px;
 }
 
 .motion-embed {
     width: 100%;
     height: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    background: #000;
+    border: none;
 }
 
-/* Mobile Optimization */
+.embed-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+.embed-overlay:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.embed-overlay::after {
+    content: 'Open Interactive Experience ↗';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 16px 30px;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.embed-overlay:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* MOBILE ACCORDION (Interactive Menu) */
+.mobile-accordion-image {
+    display: none;
+    /* Hidden on desktop */
+}
+
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-    .folder-tabs-container {
-        overflow-x: auto;
-        justify-content: flex-start;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
+    .mobile-accordion-image {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        /* Animation handled by Framer Motion */
     }
 
-    .folder-tabs-container::-webkit-scrollbar {
-        display: none;
+    .mobile-accordion-image img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        border-radius: 8px;
+        display: block;
     }
 
-    .folder-mosaic-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 24px;
+    .mobile-cta-label {
+        margin-top: 10px;
+        font-family: var(--f-tech);
+        font-size: 0.75rem;
+        color: #ff4d00;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .floating-preview-stage {
+        display: none !important;
+        /* Disable cursor follow on touch/tablet */
+    }
+
+    .portfolio-archive {
+        z-index: 2;
+        /* Content above background */
+    }
+
+    /* Make list items transparent to show background */
+    .archive-row {
+        background: transparent;
+        text-shadow: none;
+        /* Readability */
+    }
+
+    .archive-row:hover .row-title {
+        transform: none;
+    }
+
+    /* Reveal meta when expanded or hovered on tablet */
+    .archive-row:hover .row-meta,
+    .archive-row.expanded .row-meta {
+        height: auto;
+        opacity: 1;
+        margin-top: 5px;
+    }
+
+    .archive-list:hover .archive-row {
+        opacity: 1;
     }
 }
 
 @media (max-width: 768px) {
-    .portfolio-folder-system {
-        margin-top: 4vh;
+    .portfolio-section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        min-height: auto;
     }
 
-    .portfolio-main-header {
-        margin-bottom: 60px;
-    }
-
-    .portfolio-main-title {
-        font-size: clamp(2.5rem, 12vw, 4rem);
-    }
-
-    .portfolio-main-subtitle {
-        font-size: 0.85rem;
-    }
-
-    .folder-tabs-container {
-        margin-bottom: 50px;
-    }
-
-    .folder-tab {
-        padding: 16px 24px;
-        font-size: 0.75rem;
-    }
-
-    .folder-content {
-        padding: 40px 24px;
-        border-radius: 0 20px 20px 20px;
-    }
-
-    .folder-content::before {
-        left: 20px;
-    }
-
-    .folder-header-info {
-        margin-bottom: 40px;
-        padding-bottom: 20px;
-    }
-
-    .folder-title {
-        font-size: clamp(1.75rem, 8vw, 2.5rem);
-    }
-
-    .folder-meta {
-        font-size: 0.65rem;
-    }
-
-    .folder-mosaic-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .motion-design-embeds {
+    .portfolio-container {
         gap: 40px;
     }
 
-    .embed-header {
+    .portfolio-header-block {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        border-bottom: none;
+        position: static;
+        /* Above bg */
+        text-shadow: none;
     }
 
-    .embed-header h3 {
-        font-size: 1.2rem;
+    .filter-bar {
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 10px;
+        flex-wrap: nowrap;
+    }
+
+    .archive-row {
+        grid-template-columns: 1fr;
+        /* Stack layout */
+        padding: 30px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 0;
+        /* Reset margin as padding handles spacing */
+        gap: 15px;
+    }
+
+    .row-index {
+        display: none;
+    }
+
+    .row-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+    }
+
+    .mobile-only-arrow {
+        display: inline-block;
+    }
+
+    .row-meta {
+        height: auto;
+        opacity: 1;
+        margin-top: 5px;
+        display: flex;
+        /* Show meta always on mobile */
+    }
+
+    /* Important: Hide the inline image we previously added */
+    .mobile-card-image {
+        display: none !important;
     }
 
     .embed-iframe-wrapper {
-        height: 60vh;
+        height: 50vh;
     }
 }
