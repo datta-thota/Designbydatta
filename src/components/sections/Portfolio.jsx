@@ -75,7 +75,7 @@ const Portfolio = () => {
                 <div className="portfolio-header-block">
                     <div className="header-content">
                         <h2 className="portfolio-title">Selected Works</h2>
-                        <span className="archive-count">({filteredProjects.length})</span>
+                        <span className="archive-count">({activeFilter === 'motion' ? 2 : filteredProjects.length})</span>
                     </div>
 
                     <div className="filter-bar">
