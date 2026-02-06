@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { projects } from '../data/projects';
 import PageTransition from '../components/common/PageTransition';
+import BehanceProjectLayout from '../components/project/BehanceProjectLayout';
+import ShareButton from '../components/common/ShareButton'; // Import ShareButton
 import './ProjectDetails.css';
 
 const ProjectDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const project = projects.find(p => p.id === parseInt(id));
+
+    // Find project by slug (string) or ID (numeric)
+    const project = projects.find(p =>
+        (p.slug && p.slug === id) ||
+        p.id === parseInt(id)
+    );
 
     const { scrollY } = useScroll();
     const heroScale = useTransform(scrollY, [0, 500], [1, 1.1]);
@@ -18,11 +26,49 @@ const ProjectDetails = () => {
         return <div className="container flex-center full-screen">Project not found</div>;
     }
 
-    const nextProject = projects.find(p => p.id === parseInt(id) + 1) || projects[0];
-    const prevProject = projects.find(p => p.id === parseInt(id) - 1) || projects[projects.length - 1];
+    const currentIndex = projects.indexOf(project);
+    const nextProject = projects[(currentIndex + 1) % projects.length];
+    const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+
+    if ((project.layout === 'flexible' || project.id === 11) && project.content) {
+        return (
+            <PageTransition>
+                <Helmet>
+                    <title>{project.title} | Datta Thota</title>
+                    <meta name="description" content={project.concept ? project.concept.substring(0, 150) + "..." : "View this project by Datta Thota."} />
+                    <meta property="og:title" content={project.title} />
+                    <meta property="og:description" content={project.concept ? project.concept.substring(0, 150) + "..." : "View this project by Datta Thota."} />
+                    <meta property="og:image" content={project.image} />
+                    <meta property="og:type" content="article" />
+                    <meta name="twitter:card" content="summary_large_image" />
+                </Helmet>
+                <BehanceProjectLayout project={project} />
+                <div className="project-navigation container">
+                    {/* Navigation logic reused or adapted */}
+                    <Link to={`/design/project/${prevProject.slug || prevProject.id}`} className="nav-btn prev">
+                        <span className="nav-label">Previous Project</span>
+                        <span className="nav-title">{prevProject.title}</span>
+                    </Link>
+                    <Link to={`/design/project/${nextProject.slug || nextProject.id}`} className="nav-btn next">
+                        <span className="nav-label">Next Project</span>
+                        <span className="nav-title">{nextProject.title}</span>
+                    </Link>
+                </div>
+            </PageTransition>
+        );
+    }
 
     return (
         <PageTransition>
+            <Helmet>
+                <title>{project.title} | Datta Thota</title>
+                <meta name="description" content={project.concept ? project.concept.substring(0, 150) + "..." : "View this project by Datta Thota."} />
+                <meta property="og:title" content={project.title} />
+                <meta property="og:description" content={project.concept ? project.concept.substring(0, 150) + "..." : "View this project by Datta Thota."} />
+                <meta property="og:image" content={project.image} />
+                <meta property="og:type" content="article" />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Helmet>
             <div className="project-details">
                 <motion.div
                     className="project-hero"
@@ -64,6 +110,9 @@ const ProjectDetails = () => {
                             <div className="meta-item">
                                 <span className="label">Role</span>
                                 <span className="value">{project.role || "Lead Designer"}</span>
+                            </div>
+                            <div className="meta-item">
+                                <ShareButton title={`${project.title} | Datta Thota`} />
                             </div>
                         </motion.div>
                     </div>
@@ -114,11 +163,11 @@ const ProjectDetails = () => {
                 </div>
 
                 <div className="project-navigation container">
-                    <Link to={`/design/project/${prevProject.id}`} className="nav-btn prev">
+                    <Link to={`/design/project/${prevProject.slug || prevProject.id}`} className="nav-btn prev">
                         <span className="nav-label">Previous Project</span>
                         <span className="nav-title">{prevProject.title}</span>
                     </Link>
-                    <Link to={`/design/project/${nextProject.id}`} className="nav-btn next">
+                    <Link to={`/design/project/${nextProject.slug || nextProject.id}`} className="nav-btn next">
                         <span className="nav-label">Next Project</span>
                         <span className="nav-title">{nextProject.title}</span>
                     </Link>

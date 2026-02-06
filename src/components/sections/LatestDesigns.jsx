@@ -45,7 +45,7 @@ const LatestDesigns = () => {
                     <div className="designs-scroll-track">
                         {[...latestDesigns].reverse().map((design, index) => (
                             <div key={design.id} className="design-stage-item">
-                                <Link to={`/design/${design.id}`} className="design-stage-link">
+                                <Link to={`/design/${design.slug || design.id}`} className="design-stage-link">
                                     <motion.div
                                         className="design-stage-card"
                                         initial={{ opacity: 0, scale: 0.95 }}

@@ -45,8 +45,17 @@ const Portfolio = () => {
             return 0;
         };
 
-        // Sort: Curated Weight -> Newest Year -> Newest ID
+        // Sort: New Projects (ID >= 11) First -> Then Curated Weight -> Newest Year -> Newest ID
         return result.sort((a, b) => {
+            // Priority for new projects (ID >= 11)
+            const isNewA = a.id >= 11;
+            const isNewB = b.id >= 11;
+
+            if (isNewA && !isNewB) return -1;
+            if (!isNewA && isNewB) return 1;
+            if (isNewA && isNewB) return b.id - a.id; // Sort new projects by ID desc
+
+            // Legacy Sorting for ID < 11
             const weightA = getWeight(a.category);
             const weightB = getWeight(b.category);
 
@@ -185,7 +194,7 @@ const ArchiveRow = ({ project, index, setHoveredProject, expandedProjectId, setE
     return (
         <div className="archive-row-wrapper">
             <Link
-                to={project.externalLink || `/design/project/${project.id}`}
+                to={project.externalLink || `/design/project/${project.slug || project.id}`}
                 className={`archive-row ${isExpanded ? 'expanded' : ''}`}
                 onMouseEnter={() => {
                     // Desktop Only: Hover logic
@@ -194,7 +203,7 @@ const ArchiveRow = ({ project, index, setHoveredProject, expandedProjectId, setE
                 onClick={handleClick}
                 target={project.externalLink ? "_blank" : "_self"}
             >
-                <div className="row-index">0{index + 1}</div>
+                <div className="row-index">{(index + 1).toString().padStart(2, '0')}</div>
                 <div className="row-content">
                     <h3 className="row-title">
                         {project.title}

@@ -1,0 +1,183 @@
+.behance-layout {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--color-bg, #0a0a0a);
+    /* Default to dark */
+    color: var(--color-text, #ffffff);
+    padding-bottom: 100px;
+}
+
+.behance-header {
+    padding-top: 120px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+.behance-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.behance-meta {
+    font-size: 1rem;
+    opacity: 0.6;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.behance-meta .separator {
+    font-size: 0.5rem;
+    opacity: 0.5;
+}
+
+/* Blocks */
+.behance-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    /* Behance often has joined images, but we can add utility gaps */
+}
+
+.behance-block {
+    margin-bottom: 10px;
+    /* Default tight spacing */
+}
+
+.behance-block.image-block img {
+    width: auto;
+    max-width: 100%;
+    display: block;
+    border-radius: 4px;
+    margin: 0 auto;
+    /* Center if smaller than container */
+}
+
+.behance-block.full-width {
+    width: 95%;
+    max-width: 1400px;
+    /* Constraint width */
+    margin: 0 auto 0 auto;
+    /* Tight spacing */
+    /* Center aligned */
+    padding: 0;
+    display: flex;
+    /* Center inner image */
+    justify-content: center;
+}
+
+.behance-block.full-width img {
+    border-radius: 8px;
+    /* Restore crisp edges */
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+.behance-block.text-block {
+    max-width: 800px;
+    /* Readable line length */
+    margin: 40px auto;
+    /* Keep text separation */
+    padding: 0 20px;
+}
+
+.text-content {
+    text-align: center;
+}
+
+.text-content h2,
+.text-content h3 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+.behance-block.grid-block {
+    display: grid;
+    gap: 10px;
+    /* Tight grid gap */
+    margin: 0 auto;
+}
+
+.grid-block.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-block.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+}
+
+.behance-block .caption {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.behance-block.video-block video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.behance-footer {
+    text-align: center;
+    margin-top: 80px;
+    padding: 60px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .behance-title {
+        font-size: 2.2rem;
+    }
+
+    .behance-header {
+        padding-top: 80px;
+    }
+
+    /* Only collapse if explicitly requested, otherwise keep grid */
+    .grid-block.stack-mobile {
+        grid-template-columns: 1fr;
+    }
+
+    .behance-block.mobile-contained img {
+        width: 85% !important;
+        /* Neatly in middle */
+        margin: 0 auto;
+        border-radius: 8px;
+        /* Add some radius for card look */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        /* Lift it off background */
+    }
+
+    .behance-block.mobile-contained.full-width {
+        padding: 0 20px;
+        /* Ensure generic container padding */
+    }
+}

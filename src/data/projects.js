@@ -5,6 +5,7 @@ import eltor from '../assets/eltor.png';
 export const projects = [
     {
         id: 1,
+        slug: "auxilium-design-marketing",
         title: "AUXILIUM Design & Marketing Assets",
         category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765254826/Instagram_post_-_275_gjonc5.png?auto=format&fit=crop",
@@ -46,6 +47,7 @@ export const projects = [
     },
     {
         id: 2,
+        slug: "movie-poster-portfolio",
         title: "Movie Poster Design Portfolio",
         category: "Graphic & Visual",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765259132/Artboard1_qtwm5u.png?auto=format&fit=crop",
@@ -63,6 +65,7 @@ export const projects = [
 
     {
         id: 3,
+        slug: "30-days-30-movie-posters",
         title: "30 Days 30 Movie Poster Challenge",
         category: "Graphic & Visual",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765260523/Instagram_post_-_284_kmlfi7.png?auto=format&fit=crop", // cover image
@@ -81,6 +84,7 @@ export const projects = [
 
     {
         id: 4,
+        slug: "design-dump-2025",
         title: "Design Dump 2025",
         category: "Experimental",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765261902/Instagram_post_-_278_miqmza.png",
@@ -98,6 +102,7 @@ export const projects = [
 
     {
         id: 5,
+        slug: "telugu-design-archive",
         title: "Telugu Design Archive 2025",
         category: "Graphic & Visual",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765262356/Instagram_post_-_279_zxkxxo.png",
@@ -115,6 +120,7 @@ export const projects = [
 
     {
         id: 6,
+        slug: "time-pass-creations",
         title: "Time Pass Creations",
         category: "Experimental",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765262741/Instagram_post_-_280_bvwclk.png",
@@ -133,6 +139,7 @@ export const projects = [
 
     {
         id: 7,
+        slug: "college-event-designs",
         title: "College Event Designs",
         category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765263212/Instagram_post_-_281_uazqoj.png",
@@ -150,6 +157,7 @@ export const projects = [
 
     {
         id: 8,
+        slug: "first-steps-brand-posters",
         title: "First Steps in Brand Ad Poster Design",
         category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1765263826/Instagram_post_-_277_ekntok.png",
@@ -166,6 +174,7 @@ export const projects = [
     },
     {
         id: 9,
+        slug: "wardrobe-calendar-concept",
         title: "WARDROBE - 2026 Calendar Concept",
         category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1768730342/wardp_mrkjit.png",
@@ -187,6 +196,7 @@ export const projects = [
     },
     {
         id: 10,
+        slug: "eltor-menswear-identity",
         title: "ELTOR | Modern Menswear Brand Identity",
         category: "Brand Systems",
         image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1768730342/nn_g06cp1.png",
@@ -203,5 +213,84 @@ export const projects = [
 
         ]
     },
+    {
+        id: 11,
+        slug: "auralis-tws-headset",
+        title: "Auralis - TWS Headset Brand and UI Design",
+        category: "Showcase",
+        image: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357501/Artboard6_ah5zfa.png",
+        year: "2026",
+        layout: "flexible",
+        role: "Graphic Designer",
+        content: [
+            {
+                type: "rich-text",
+                html: "<h2>AURALIS - CRAFTED FOR SOUND</h2><p>Auralis is a premium headset brand that merges cutting-edge audio technology, immersive design, and modern aesthetics to deliver listening experiences that are as powerful as they are personal. Specializing in sleek, ergonomic headsets, Auralis caters to the tech-savvy individual who values clarity, style, and innovation. Every product is designed with precision, comfort, and timeless elegance, making Auralis a leader in the personal audio experience.​​​​​​​</p>",
+                spacing: 10
+            },
+            {
+                type: "image",
+                src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357542/sixth_ccwbnq.png",
+                fullWidth: true,
+                spacing: 10
+            },
+            {
+                type: "rich-text",
+                html: "<h3>Campaigns That Speak Louder Than Words</h3>",
+                spacing: 10
+            },
+            {
+                type: "grid",
+                columns: 2,
+                items: [
+                    { src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357517/second_opntwl.png" },
+                    { src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357532/third_lrumnz.png" }
+                ],
+                spacing: 10
+            },
+            {
+                type: "grid",
+                columns: 2,
+                items: [
+                    { src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357518/fourth_pmdbiw.png" },
+                    { src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357513/one_jmqkhl.png" }
+                ],
+                spacing: 10
+            },
+            {
+                type: "grid",
+                columns: 3,
+                items: [
+                    { src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357515/71_gujski.png" },
+                    { src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357492/72_qwubjt.png" },
+                    { src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357501/73_fdqbpl.png" }
+                ],
+                spacing: 10
+            },
+            {
+                type: "rich-text",
+                html: "<h3>Desktop Design in The Royal Noir Theme</h3>",
+                spacing: 10
+            },
+            {
+                type: "image",
+                src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357784/seventh_q0tlrm.png",
+                fullWidth: true,
+                spacing: 10
+            },
+            {
+                type: "rich-text",
+                html: "<h3>Sleek Mobile UI - Simplicity in Action</h3>",
+                spacing: 10
+            },
+            {
+                type: "image",
+                src: "https://res.cloudinary.com/dl75qwr19/image/upload/v1770357514/PDP_fhonzs.png",
+                fullWidth: true,
+                mobileContained: true,
+                spacing: 10
+            },
+        ]
+    }
 
 ];

@@ -5,20 +5,26 @@ import { latestDesigns } from '../data/latestDesigns';
 import PageTransition from '../components/common/PageTransition';
 import ImageModal from '../components/common/ImageModal';
 import { Maximize2 } from 'lucide-react';
+import ShareButton from '../components/common/ShareButton';
 import './DesignDetails.css';
 
 const DesignDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [selectedImage, setSelectedImage] = useState(null);
-    const design = latestDesigns.find(d => d.id === parseInt(id));
+    const design = latestDesigns.find(d =>
+        (d.slug && d.slug === id) ||
+        d.id === parseInt(id)
+    );
 
     if (!design) {
         return <div className="container flex-center full-screen">Design not found</div>;
     }
 
-    const nextDesign = latestDesigns.find(d => d.id === parseInt(id) + 1) || latestDesigns[0];
-    const prevDesign = latestDesigns.find(d => d.id === parseInt(id) - 1) || latestDesigns[latestDesigns.length - 1];
+    const currentIndex = latestDesigns.indexOf(design);
+    const nextDesign = latestDesigns[(currentIndex + 1) % latestDesigns.length];
+    const prevDesign = latestDesigns[(currentIndex - 1 + latestDesigns.length) % latestDesigns.length];
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -51,8 +57,9 @@ const DesignDetails = () => {
                             {design.title}
                         </h1>
 
-                        <div className="design-meta" style={{ marginBottom: '3rem', color: 'var(--text-secondary)' }}>
+                        <div className="design-meta" style={{ marginBottom: '3rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '2rem' }}>
                             <span>{design.date}</span>
+                            <ShareButton title={`${design.title} | Datta Thota`} url={window.location.href} />
                         </div>
 
                         <div
@@ -83,7 +90,26 @@ const DesignDetails = () => {
                         }}>
                             <p>{design.description}</p>
                         </div>
-                    </motion.div>
+
+                        {/* Gallery Grid for Multiple Images */}
+                        {design.gallery && design.gallery.length > 0 && (
+                            <div className="design-gallery">
+                                {design.gallery.filter(img => img !== design.image).map((img, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className="gallery-item"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.1 }}
+                                        onClick={() => setSelectedImage(img)}
+                                    >
+                                        <img src={img} alt={`${design.title} detail ${index + 1}`} loading="lazy" />
+                                    </motion.div>
+                                ))}
+                            </div>
+                        )}
+                    </motion.div >
 
                     <div className="project-navigation" style={{
                         marginTop: '5rem',
@@ -92,18 +118,18 @@ const DesignDetails = () => {
                         display: 'flex',
                         justifyContent: 'space-between'
                     }}>
-                        <Link to={`/design/${prevDesign.id}`} className="nav-btn prev" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link to={`/design/${prevDesign.slug || prevDesign.id}`} className="nav-btn prev" style={{ textDecoration: 'none', color: 'inherit' }}>
                             <span className="nav-label" style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Previous</span>
                             <span className="nav-title" style={{ fontSize: '1.1rem' }}>{prevDesign.title}</span>
                         </Link>
-                        <Link to={`/design/${nextDesign.id}`} className="nav-btn next" style={{ textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
+                        <Link to={`/design/${nextDesign.slug || nextDesign.id}`} className="nav-btn next" style={{ textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
                             <span className="nav-label" style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Next</span>
                             <span className="nav-title" style={{ fontSize: '1.1rem' }}>{nextDesign.title}</span>
                         </Link>
                     </div>
-                </div>
-            </div>
-        </PageTransition>
+                </div >
+            </div >
+        </PageTransition >
     );
 };
 
