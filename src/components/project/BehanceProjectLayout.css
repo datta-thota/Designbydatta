@@ -7,6 +7,77 @@
     padding-bottom: 100px;
 }
 
+/* Hero Section Styling for Behance Layout */
+.behance-layout .project-hero {
+    position: relative;
+    height: 80vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: var(--space-lg);
+}
+
+.behance-layout .project-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+/* Normal overlay for Behance layout - balanced visibility */
+.behance-layout .project-hero-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, var(--bg-black) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+.behance-layout .project-hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.behance-layout .project-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin-bottom: var(--space-md);
+}
+
+.behance-layout .project-meta {
+    display: flex;
+    gap: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+    padding-top: var(--space-md);
+}
+
+.behance-layout .meta-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.behance-layout .label {
+    font-size: 0.8rem;
+    color: #FF6B35;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.behance-layout .value {
+    font-size: 1.1rem;
+    color: var(--text-white);
+}
+
+
 .behance-header {
     padding-top: 120px;
     padding-bottom: 60px;
@@ -159,6 +230,31 @@
 
     .behance-header {
         padding-top: 80px;
+    }
+
+    /* Behance Layout Hero Mobile Styles */
+    .behance-layout .project-hero {
+        height: 60vh;
+    }
+
+    .behance-layout .project-title {
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    .behance-layout .project-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        row-gap: 2rem;
+    }
+
+    .behance-layout .meta-item:nth-child(3) {
+        grid-column: 1 / -1;
+    }
+
+    .behance-layout .meta-item:nth-child(4) {
+        grid-column: 1 / -1;
+        margin-top: 0.5rem;
     }
 
     /* Only collapse if explicitly requested, otherwise keep grid */
