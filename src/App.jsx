@@ -14,6 +14,7 @@ const TechHome = lazy(() => import('./pages/TechHome'));
 const TechProjectDetails = lazy(() => import('./pages/TechProjectDetails'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
+const AdminPortal = lazy(() => import('./pages/AdminPortal'));
 
 import ScrollToTop from './components/common/ScrollToTop';
 
@@ -87,6 +88,8 @@ const AnimatedRoutes = () => {
           </Layout>
         } />
 
+        <Route path="/admin" element={<AdminPortal />} />
+
       </Routes>
     </AnimatePresence>
   );
@@ -96,7 +99,9 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <AnimatedRoutes />
+      <Suspense fallback={<LoadingSpinner />}>
+        <AnimatedRoutes />
+      </Suspense>
     </Router>
   );
 }
