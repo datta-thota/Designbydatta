@@ -18,8 +18,8 @@ import './AdminPortal.css';
 
 const STORAGE_KEY = 'datta-portfolio-admin-data';
 const GITHUB_SETTINGS_KEY = 'datta-portfolio-github-settings';
-const ADMIN_PASSPHRASE_HASH = '03df498e940e8e4ed4a268b7240007c0edd5c583465389fb441fd42bbda8b01e';
-const MAX_UNLOCK_ATTEMPTS = 5;
+const ADMIN_PASSPHRASE_HASH = '756f6d7251c34c2a3abef7c80f3ce0ca7fd13ff49c4470eb2dfae5be08709165';
+const MAX_UNLOCK_ATTEMPTS = 10;
 
 const defaultGithubSettings = {
     owner: 'datta-thota',
